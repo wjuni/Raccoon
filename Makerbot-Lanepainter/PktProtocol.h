@@ -21,6 +21,8 @@ typedef struct {
     uint16_t crc;
 }  __attribute__((packed)) PktArduino;
 
+// mode bit : Bit 8 = Raspi Boot Complete Broadcast
+
 typedef struct {
     uint8_t preamble;
     uint8_t _reserved;

@@ -279,6 +279,16 @@ void read_vid(){
 
 int main(int argc, const char * argv[]) {
     uart.begin(9600);
+    // notify boot complete
+    PktArduino pkt;
+    pkt.mode = (1<<8);
+    pkt.head_degree = 0;
+    pkt.x_deviation = 0;
+    pkt.y_deviation = 0;
+    PktArduino_prepare_packet(&pkt);
+    uart.write(&pkt, sizeof(PktArduino));
+    
+
 /*    read_vid(); */
     read_img();
     return 0;
