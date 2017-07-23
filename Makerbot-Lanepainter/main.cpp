@@ -12,13 +12,18 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/core/core.hpp>
-#include "PktArduino.h"
+#include "PktProtocol.h"
+#include "UART.h"
 
 #ifdef RASPBERRY_PI
 #define TEST_FFMPEG_PATH "ffmpeg/"
 #else
 #define TEST_FFMPEG_PATH "/Users/wjuni/ffmpeg/"
 #endif
+
+
+UART uart("/dev/ttyAMA0");
+
 
 const int NUM_CORE = 4;
 const int MAX_DEV_PIX = 150;
@@ -209,8 +214,9 @@ bool process(cv::Mat *pim, bool toRotate, string path, string filename){
     pkt.head_degree = act_deg * PKTARDUINO_MULTIPLIER;
     pkt.x_deviation = deviation * cos(act_deg * M_PI / 180) * PKTARDUINO_MULTIPLIER;
     pkt.y_deviation = -deviation * sin(act_deg * M_PI / 180) * PKTARDUINO_MULTIPLIER;
-    prepare_packet(&pkt);
-    printf("%d %d\n", pkt.x_deviation, pkt.y_deviation);
+    PktArduino_prepare_packet(&pkt);
+//    printf("%d %d\n", pkt.x_deviation, pkt.y_deviation);
+    uart.write(&pkt, sizeof(PktArduino));
 
     
     
@@ -272,6 +278,7 @@ void read_vid(){
 }
 
 int main(int argc, const char * argv[]) {
+    uart.begin(9600);
 /*    read_vid(); */
     read_img();
     return 0;
