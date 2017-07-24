@@ -68,6 +68,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6162ECC91F26019000285566 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PktProtocol.cpp; sourceTree = "<group>"; };
 		6190800E1F2514BC002B8DD1 /* PktProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PktProtocol.h; sourceTree = "<group>"; };
 		619080101F25159C002B8DD1 /* UART.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UART.cpp; sourceTree = "<group>"; };
@@ -193,6 +194,7 @@
 		619EA8531F127497003F6510 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6162ECC91F26019000285566 /* json.hpp */,
 				6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */,
 				6190800E1F2514BC002B8DD1 /* PktProtocol.h */,
 				619EA85B1F127543003F6510 /* main.cpp */,
