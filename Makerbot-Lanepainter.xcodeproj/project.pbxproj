@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6162ECCB1F2601C600285566 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 6162ECCA1F2601C600285566 /* Makefile */; };
 		6190800F1F2514BC002B8DD1 /* PktProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */; };
 		619080121F25159C002B8DD1 /* UART.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619080101F25159C002B8DD1 /* UART.cpp */; };
 		619EA85E1F127543003F6510 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619EA85B1F127543003F6510 /* main.cpp */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		6162ECC91F26019000285566 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
+		6162ECCA1F2601C600285566 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PktProtocol.cpp; sourceTree = "<group>"; };
 		6190800E1F2514BC002B8DD1 /* PktProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PktProtocol.h; sourceTree = "<group>"; };
 		619080101F25159C002B8DD1 /* UART.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UART.cpp; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 		619EA8481F127497003F6510 = {
 			isa = PBXGroup;
 			children = (
+				6162ECCA1F2601C600285566 /* Makefile */,
 				619EA8601F1275E6003F6510 /* Framework */,
 				619EA8531F127497003F6510 /* Sources */,
 				619EA8521F127497003F6510 /* Products */,
@@ -315,6 +318,7 @@
 			files = (
 				619080121F25159C002B8DD1 /* UART.cpp in Sources */,
 				619EA85E1F127543003F6510 /* main.cpp in Sources */,
+				6162ECCB1F2601C600285566 /* Makefile in Sources */,
 				6190800F1F2514BC002B8DD1 /* PktProtocol.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
