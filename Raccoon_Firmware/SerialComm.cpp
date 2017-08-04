@@ -8,12 +8,12 @@ SerialComm::SerialComm(HardwareSerial *ser) {
   this->buffer_len = 0;
 }
 
-void SerialComm::read(void (*handler)(PktArduino *)){
+void SerialComm::read(void (*handler)(PktArduinoV2 *)){
   if (this->serial->available() && BUFFER_SIZE > this->buffer_len) {
     buffer_len += this->serial->readBytes(this->serial_buffer + this->buffer_len, BUFFER_SIZE - this->buffer_len);
   }
   if(this->buffer_len >= BUFFER_SIZE) {
-    if(PktArduino_parse_packet(serial_buffer, buffer_len, &(this->received_packet))){
+    if(PktArduinoV2_parse_packet(serial_buffer, buffer_len, &(this->received_packet))){
       // on Packet Received Successful
       (*handler)(&(this->received_packet));
     }

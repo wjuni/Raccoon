@@ -46,7 +46,7 @@ void loop() {
   epoch++;
 }
 
-void packet_handler(PktArduino * pkt) {
+void packet_handler(PktArduinoV2 * pkt) {
   // do something
   // e.g.  pkt->head_degree
   //       pkt->x_deviation
