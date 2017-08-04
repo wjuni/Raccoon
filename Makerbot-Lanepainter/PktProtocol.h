@@ -21,6 +21,17 @@ typedef struct {
     uint16_t crc;
 }  __attribute__((packed)) PktArduino;
 
+typedef struct {
+    uint8_t preamble;
+    uint8_t _reserved;
+    uint16_t mode;
+    int8_t motor_1_spd;
+    int8_t motor_2_spd;
+    int8_t motor_3_spd;
+    int8_t motor_4_spd;
+    uint16_t crc;
+}  __attribute__((packed)) PktArduinoV2;
+
 // mode bit : Bit 8 = Raspi Boot Complete Broadcast
 
 typedef struct {
@@ -37,6 +48,8 @@ typedef struct {
 }  __attribute__((packed)) PktRaspi;
 
 int PktArduino_parse_packet(const char* buf, unsigned long len, PktArduino *target);
+int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *target);
 void PktArduino_prepare_packet(PktArduino *target);
+void PktArduinoV2_prepare_packet(PktArduinoV2 *target);
 void PktRaspi_prepare_packet(PktRaspi *target);
 #endif /* PktArduino_h */

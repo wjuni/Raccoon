@@ -70,10 +70,36 @@ int PktArduino_parse_packet(const char* buf, unsigned long len, PktArduino *targ
     return 1;
 }
 
+int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *target) {
+    PktArduinoV2 *pkt = (PktArduinoV2 *)buf;
+    
+    //length check
+    if(len > sizeof(PktArduino))
+        return 0;
+    
+    //header check
+    if(pkt->preamble != PKTARDUINO_PREAMBLE)
+        return 0;
+    
+    //crc check
+    if(gen_crc16((uint8_t *)buf, sizeof(PktArduino)-sizeof(uint16_t)) != pkt->crc)
+        return 0;
+    
+    memcpy(target, buf, sizeof(PktArduinoV2));
+    return 1;
+}
+
 void PktArduino_prepare_packet(PktArduino *target) {
     target->preamble = PKTARDUINO_PREAMBLE;
     target->_reserved = 0;
     target->crc = gen_crc16((uint8_t *)target, sizeof(PktArduino)-sizeof(uint16_t));
+}
+
+
+void PktArduinoV2_prepare_packet(PktArduinoV2 *target) {
+    target->preamble = PKTARDUINO_PREAMBLE;
+    target->_reserved = 0;
+    target->crc = gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
 }
 
 void PktRaspi_prepare_packet(PktRaspi *target) {
