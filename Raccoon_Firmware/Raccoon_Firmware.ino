@@ -9,6 +9,7 @@
 #define LED_OUT1 32
 #define LED_OUT2 33
 
+#define abs(x) ((x)>0 ? (x) : -(x))
 
 /* GLOBAL */
 SerialComm raspicomm(&Serial1);
@@ -54,6 +55,9 @@ void packet_handler(PktArduinoV2 * pkt) {
     // Boot Complete Broadcast
     digitalWrite(LED_OUT1, HIGH);
   }
+  
+
+  
   // expected to call StepMotor_move(int motor, int speed); here
 }
 

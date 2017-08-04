@@ -83,6 +83,14 @@ void StepMotor_move(int motor, int speed) {
   StepMotor_changeperiod(motor, scaled_period);
 }
 
+
+void StepMotor_direction(int motor, int dir) {
+  if(dir)
+    PORTK |= (1 << (motor+4));
+  else
+    PORTK &= ~(1 << (motor+4));
+}
+
 void StepMotor_enable(){
   PORTC |= 1<<6;
 }

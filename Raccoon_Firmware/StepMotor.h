@@ -8,6 +8,7 @@
 
 void StepMotor_initialize();
 void StepMotor_move(int motor, int speed); // range 0 - 100
+void StepMotor_direction(int motor, int dir);
 void StepMotor_enable();
 void StepMotor_disable();
 void StepMotor_start(int motor);
