@@ -48,16 +48,23 @@ void loop() {
 }
 
 void packet_handler(PktArduinoV2 * pkt) {
-  // do something
-  // e.g.  pkt->head_degree
-  //       pkt->x_deviation
   if(pkt->mode & (1<<8)) {
     // Boot Complete Broadcast
     digitalWrite(LED_OUT1, HIGH);
   }
+  if(pkt->mode & (1<<9)) {
+    // Network Complete Broadcast
+    digitalWrite(LED_OUT2, HIGH);
+  }
   
-
+  StepMotor_move(1, abs(pkt->motor_1_spd));
+  StepMotor_move(2, abs(pkt->motor_2_spd));
+  StepMotor_move(3, abs(pkt->motor_3_spd));
+  StepMotor_move(4, abs(pkt->motor_4_spd));
   
-  // expected to call StepMotor_move(int motor, int speed); here
+  StepMotor_direction(1, pkt->motor_1_spd >=0);
+  StepMotor_direction(2, pkt->motor_2_spd >=0);
+  StepMotor_direction(3, pkt->motor_3_spd >=0);
+  StepMotor_direction(4, pkt->motor_4_spd >=0);
 }
 
