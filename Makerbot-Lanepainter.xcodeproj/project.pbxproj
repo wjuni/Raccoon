@@ -69,6 +69,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6141AA631F34CF9F004C5BE7 /* Adafruit_GPS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Adafruit_GPS.cpp; sourceTree = "<group>"; };
+		6141AA641F34CF9F004C5BE7 /* Adafruit_GPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Adafruit_GPS.h; sourceTree = "<group>"; };
+		6141AA651F34CF9F004C5BE7 /* Compass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Compass.cpp; sourceTree = "<group>"; };
+		6141AA661F34CF9F004C5BE7 /* Compass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Compass.h; sourceTree = "<group>"; };
+		6141AA671F34CF9F004C5BE7 /* GpsModule.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GpsModule.cpp; sourceTree = "<group>"; };
+		6141AA681F34CF9F004C5BE7 /* GpsModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GpsModule.h; sourceTree = "<group>"; };
+		6141AA691F34CF9F004C5BE7 /* HMC5883L.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HMC5883L.cpp; sourceTree = "<group>"; };
+		6141AA6A1F34CF9F004C5BE7 /* HMC5883L.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HMC5883L.h; sourceTree = "<group>"; };
+		6141AA6B1F34CF9F004C5BE7 /* PktProtocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PktProtocol.cpp; sourceTree = "<group>"; };
+		6141AA6C1F34CF9F004C5BE7 /* PktProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PktProtocol.h; sourceTree = "<group>"; };
+		6141AA6D1F34CF9F004C5BE7 /* Raccoon_Firmware.ino */ = {isa = PBXFileReference; lastKnownFileType = text; path = Raccoon_Firmware.ino; sourceTree = "<group>"; };
+		6141AA6E1F34CF9F004C5BE7 /* SerialComm.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SerialComm.cpp; sourceTree = "<group>"; };
+		6141AA6F1F34CF9F004C5BE7 /* SerialComm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SerialComm.h; sourceTree = "<group>"; };
+		6141AA701F34CF9F004C5BE7 /* StepMotor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StepMotor.cpp; sourceTree = "<group>"; };
+		6141AA711F34CF9F004C5BE7 /* StepMotor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepMotor.h; sourceTree = "<group>"; };
 		6162ECC91F26019000285566 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 		6162ECCA1F2601C600285566 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PktProtocol.cpp; sourceTree = "<group>"; };
@@ -176,9 +191,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6141AA501F34CEE1004C5BE7 /* Arduino */ = {
+			isa = PBXGroup;
+			children = (
+				6141AA621F34CF9F004C5BE7 /* Raccoon_Firmware */,
+			);
+			name = Arduino;
+			sourceTree = "<group>";
+		};
+		6141AA621F34CF9F004C5BE7 /* Raccoon_Firmware */ = {
+			isa = PBXGroup;
+			children = (
+				6141AA631F34CF9F004C5BE7 /* Adafruit_GPS.cpp */,
+				6141AA641F34CF9F004C5BE7 /* Adafruit_GPS.h */,
+				6141AA651F34CF9F004C5BE7 /* Compass.cpp */,
+				6141AA661F34CF9F004C5BE7 /* Compass.h */,
+				6141AA671F34CF9F004C5BE7 /* GpsModule.cpp */,
+				6141AA681F34CF9F004C5BE7 /* GpsModule.h */,
+				6141AA691F34CF9F004C5BE7 /* HMC5883L.cpp */,
+				6141AA6A1F34CF9F004C5BE7 /* HMC5883L.h */,
+				6141AA6B1F34CF9F004C5BE7 /* PktProtocol.cpp */,
+				6141AA6C1F34CF9F004C5BE7 /* PktProtocol.h */,
+				6141AA6D1F34CF9F004C5BE7 /* Raccoon_Firmware.ino */,
+				6141AA6E1F34CF9F004C5BE7 /* SerialComm.cpp */,
+				6141AA6F1F34CF9F004C5BE7 /* SerialComm.h */,
+				6141AA701F34CF9F004C5BE7 /* StepMotor.cpp */,
+				6141AA711F34CF9F004C5BE7 /* StepMotor.h */,
+			);
+			path = Raccoon_Firmware;
+			sourceTree = "<group>";
+		};
 		619EA8481F127497003F6510 = {
 			isa = PBXGroup;
 			children = (
+				6141AA501F34CEE1004C5BE7 /* Arduino */,
 				6162ECCA1F2601C600285566 /* Makefile */,
 				619EA8601F1275E6003F6510 /* Framework */,
 				619EA8531F127497003F6510 /* Sources */,
