@@ -25,7 +25,7 @@ typedef struct {
     uint8_t preamble;
     uint8_t _reserved;
     uint16_t mode;
-    int8_t 속ㄷ;
+    int8_t motor_1_spd;
     int8_t motor_2_spd;
     int8_t motor_3_spd;
     int8_t motor_4_spd;
