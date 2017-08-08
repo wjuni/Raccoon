@@ -251,7 +251,7 @@
 				619080111F25159C002B8DD1 /* UART.h */,
 			);
 			name = Sources;
-			path = Raccoon_Raspi;
+			path = raspi;
 			sourceTree = "<group>";
 		};
 		619EA8601F1275E6003F6510 /* Framework */ = {
