@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3654165b-c465-4905-99cf-b26534467f1c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/bootstrap/LICENSE" afterPath="$PROJECT_DIR$/../server/bootstrap/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/css/animate.css" afterPath="$PROJECT_DIR$/../server/css/animate.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/css/icons/linea-icons/linea.css" afterPath="$PROJECT_DIR$/../server/css/icons/linea-icons/linea.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/css/icons/material-design-iconic-font/css/material-design-iconic-font.css" afterPath="$PROJECT_DIR$/../server/css/icons/material-design-iconic-font/css/material-design-iconic-font.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.svg" afterPath="$PROJECT_DIR$/../server/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/css/spinners.css" afterPath="$PROJECT_DIR$/../server/css/spinners.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/index.html" afterPath="$PROJECT_DIR$/../server/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/js/dashboard1.js" afterPath="$PROJECT_DIR$/../server/js/dashboard1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/js/morris-data.js" afterPath="$PROJECT_DIR$/../server/js/morris-data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/js/toastr.js" afterPath="$PROJECT_DIR$/../server/js/toastr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/plugins/bower_components/counterup/jquery.counterup.min.js" afterPath="$PROJECT_DIR$/../server/plugins/bower_components/counterup/jquery.counterup.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js" afterPath="$PROJECT_DIR$/../server/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js" />
-    </list>
+    <list default="true" id="3654165b-c465-4905-99cf-b26534467f1c" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,8 +23,8 @@
       <file leaf-file-name="opencv_demo_0701.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opencv_demo_0701.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2340">
-              <caret line="156" column="32" lean-forward="true" selection-start-line="156" selection-start-column="32" selection-end-line="156" selection-end-column="32" />
+            <state relative-caret-position="30">
+              <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
               </folding>
@@ -355,6 +342,9 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -680,8 +670,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opencv_demo_0701.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
-          <caret line="156" column="32" lean-forward="true" selection-start-line="156" selection-start-column="32" selection-end-line="156" selection-end-column="32" />
+        <state relative-caret-position="30">
+          <caret line="2" column="0" lean-forward="true" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
           </folding>

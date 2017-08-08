@@ -9,6 +9,10 @@ void StepMotor_initialize(){
   PORTK &= ~0x0f;
   DDRK |= 0x0f;
   
+  // enable global motor output
+  DDRC |= 1<<6;
+  StepMotor_global_enable();
+  
   for(int i=0;i<4;i++){
     motor_enable[i] = false;
     motor_tick[i] = 0;
@@ -91,11 +95,11 @@ void StepMotor_direction(int motor, int dir) {
     PORTK &= ~(1 << (motor+4));
 }
 
-void StepMotor_enable(){
+void StepMotor_global_enable(){
   PORTC |= 1<<6;
 }
 
-void StepMotor_disable(){
+void StepMotor_global_disable(){
   PORTC &= ~(1<<6);
 }
 
