@@ -85,7 +85,7 @@
 		6141AA701F34CF9F004C5BE7 /* StepMotor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StepMotor.cpp; sourceTree = "<group>"; };
 		6141AA711F34CF9F004C5BE7 /* StepMotor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StepMotor.h; sourceTree = "<group>"; };
 		6162ECC91F26019000285566 /* json.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
-		6162ECCA1F2601C600285566 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		6162ECCA1F2601C600285566 /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
 		6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PktProtocol.cpp; sourceTree = "<group>"; };
 		6190800E1F2514BC002B8DD1 /* PktProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PktProtocol.h; sourceTree = "<group>"; };
 		619080101F25159C002B8DD1 /* UART.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UART.cpp; sourceTree = "<group>"; };
@@ -251,7 +251,6 @@
 				619080111F25159C002B8DD1 /* UART.h */,
 			);
 			name = Sources;
-			path = raspi;
 			sourceTree = "<group>";
 		};
 		619EA8601F1275E6003F6510 /* Framework */ = {
