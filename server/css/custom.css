@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Doppio+One');
+
+.logo-text {
+    font-family: 'Doppio One', sans-serif;
+    color: #666666;
+    font-size: 24px;
+    margin-left: 5px;
+    text-transform: none;
+}
