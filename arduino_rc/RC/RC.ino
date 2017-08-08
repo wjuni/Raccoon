@@ -1,6 +1,12 @@
 //    L1       R1
 //
 //    L2       R2
+// map L1, R1, L2, R2 as motor 1, 2, 3, 4
+#define L1 motor_1_spd
+#define R1 motor_2_spd
+#define L2 motor_3_spd
+#define R2 motor_4_spd
+#include "PktProtocol.h"
 
 #define sbi(reg, x) reg |= (0x01 << x)
 #define cbi(reg, x) reg &= ~(0x01 << x)
@@ -10,6 +16,7 @@ int vel;
 //int stopper;
 volatile long time_rise[4];
 volatile long time_pulse[4];
+PktArduinoV2 pkt;
 
 void setup() {
   // put your setup code here, to run once:
@@ -24,6 +31,13 @@ void setup() {
   sbi(PCMSK2, PCINT20);
   sbi(PCMSK2, PCINT21);
   sbi(PCMSK2, PCINT22);
+
+  pkt.L1 = 0;
+  pkt.L2 = 0;
+  pkt.R1 = 0;
+  pkt.R2 = 0;
+  pkt.mode = (1<<8);
+  pkt._reserved = 0;  
 }
 
 void loop() {
@@ -39,7 +53,10 @@ void loop() {
 
     if (time_pulse[0]<1200){
       //left
-
+      pkt.L1 = vel;
+      pkt.L2 = -vel;
+      pkt.R1 = -vel;
+      pkt.R2 = vel;
       //L1 : vel
       //L2 : -vel
       //R1 : -vel
@@ -48,7 +65,10 @@ void loop() {
     }
     else if (time_pulse[0]>1700){
       //right
-
+      pkt.L1 = -vel;
+      pkt.L2 = vel;
+      pkt.R1 = vel;
+      pkt.R2 = -vel;
       //L1 : -vel
       //L2 : vel
       //R1 : vel
@@ -59,7 +79,10 @@ void loop() {
       //front or retrieve
       if (time_pulse[2]<1200){
         //front 
-
+        pkt.L1 = vel;
+        pkt.L2 = vel;
+        pkt.R1 = vel;
+        pkt.R2 = vel;
         //L1 : vel
         //L2 : vel
         //R1 : vel
@@ -67,7 +90,10 @@ void loop() {
       }
       else if (time_pulse[2]>1700){
         //retrieve 
-
+        pkt.L1 = -vel;
+        pkt.L2 = -vel;
+        pkt.R1 = -vel;
+        pkt.R2 = -vel;
         //L1 : -vel
         //L2 : -vel
         //R1 : -vel
@@ -75,23 +101,30 @@ void loop() {
       }
       else{
         //neutral
-
+        pkt.L1 = 0;
+        pkt.L2 = 0;
+        pkt.R1 = 0;
+        pkt.R2 = 0;
         //L1 : 0
         //L2 : 0
         //R1 : 0
         //R2 : 0
       }
-
-
   }
   else{
     //all stop
-
+    pkt.L1 = 0;
+    pkt.L2 = 0;
+    pkt.R1 = 0;
+    pkt.R2 = 0;
     //L1 : 0
     //L2 : 0
     //R1 : 0
     //R2 : 0
   }
+  PktArduinoV2_prepare_packet(&pkt);
+  Serial.write((char *)&pkt, sizeof(pkt));
+  delay(50);
 }
 
 ISR(PCINT2_vect){
