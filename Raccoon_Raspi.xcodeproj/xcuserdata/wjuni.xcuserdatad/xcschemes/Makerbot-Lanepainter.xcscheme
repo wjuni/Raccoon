@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "619EA8501F127497003F6510"
-               BuildableName = "Makerbot-Lanepainter"
-               BlueprintName = "Makerbot-Lanepainter"
-               ReferencedContainer = "container:Makerbot-Lanepainter.xcodeproj">
+               BuildableName = "Raccoon_Raspi"
+               BlueprintName = "Raccoon_Raspi"
+               ReferencedContainer = "container:Raccoon_Raspi.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "619EA8501F127497003F6510"
-            BuildableName = "Makerbot-Lanepainter"
-            BlueprintName = "Makerbot-Lanepainter"
-            ReferencedContainer = "container:Makerbot-Lanepainter.xcodeproj">
+            BuildableName = "Raccoon_Raspi"
+            BlueprintName = "Raccoon_Raspi"
+            ReferencedContainer = "container:Raccoon_Raspi.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "619EA8501F127497003F6510"
-            BuildableName = "Makerbot-Lanepainter"
-            BlueprintName = "Makerbot-Lanepainter"
-            ReferencedContainer = "container:Makerbot-Lanepainter.xcodeproj">
+            BuildableName = "Raccoon_Raspi"
+            BlueprintName = "Raccoon_Raspi"
+            ReferencedContainer = "container:Raccoon_Raspi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "619EA8501F127497003F6510"
-            BuildableName = "Makerbot-Lanepainter"
-            BlueprintName = "Makerbot-Lanepainter"
-            ReferencedContainer = "container:Makerbot-Lanepainter.xcodeproj">
+            BuildableName = "Raccoon_Raspi"
+            BlueprintName = "Raccoon_Raspi"
+            ReferencedContainer = "container:Raccoon_Raspi.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

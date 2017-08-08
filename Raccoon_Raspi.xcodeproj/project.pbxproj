@@ -90,7 +90,7 @@
 		6190800E1F2514BC002B8DD1 /* PktProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PktProtocol.h; sourceTree = "<group>"; };
 		619080101F25159C002B8DD1 /* UART.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UART.cpp; sourceTree = "<group>"; };
 		619080111F25159C002B8DD1 /* UART.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UART.h; sourceTree = "<group>"; };
-		619EA8511F127497003F6510 /* Makerbot-Lanepainter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Makerbot-Lanepainter"; sourceTree = BUILT_PRODUCTS_DIR; };
+		619EA8511F127497003F6510 /* Raccoon_Raspi */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Raccoon_Raspi; sourceTree = BUILT_PRODUCTS_DIR; };
 		619EA85B1F127543003F6510 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		619EA8611F1275F2003F6510 /* libopencv_imgproc.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_imgproc.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_imgproc.3.2.0.dylib; sourceTree = "<group>"; };
 		619EA8621F1275F2003F6510 /* libopencv_core.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_core.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_core.3.2.0.dylib; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		619EA8521F127497003F6510 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				619EA8511F127497003F6510 /* Makerbot-Lanepainter */,
+				619EA8511F127497003F6510 /* Raccoon_Raspi */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 				619080111F25159C002B8DD1 /* UART.h */,
 			);
 			name = Sources;
-			path = "Makerbot-Lanepainter";
+			path = Raccoon_Raspi;
 			sourceTree = "<group>";
 		};
 		619EA8601F1275E6003F6510 /* Framework */ = {
@@ -307,9 +307,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		619EA8501F127497003F6510 /* Makerbot-Lanepainter */ = {
+		619EA8501F127497003F6510 /* Raccoon_Raspi */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 619EA8581F127497003F6510 /* Build configuration list for PBXNativeTarget "Makerbot-Lanepainter" */;
+			buildConfigurationList = 619EA8581F127497003F6510 /* Build configuration list for PBXNativeTarget "Raccoon_Raspi" */;
 			buildPhases = (
 				619EA84D1F127497003F6510 /* Sources */,
 				619EA84E1F127497003F6510 /* Frameworks */,
@@ -319,9 +319,9 @@
 			);
 			dependencies = (
 			);
-			name = "Makerbot-Lanepainter";
+			name = Raccoon_Raspi;
 			productName = "Makerbot-Lanepainter";
-			productReference = 619EA8511F127497003F6510 /* Makerbot-Lanepainter */;
+			productReference = 619EA8511F127497003F6510 /* Raccoon_Raspi */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -340,7 +340,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 619EA84C1F127497003F6510 /* Build configuration list for PBXProject "Makerbot-Lanepainter" */;
+			buildConfigurationList = 619EA84C1F127497003F6510 /* Build configuration list for PBXProject "Raccoon_Raspi" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -352,7 +352,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				619EA8501F127497003F6510 /* Makerbot-Lanepainter */,
+				619EA8501F127497003F6510 /* Raccoon_Raspi */,
 			);
 		};
 /* End PBXProject section */
@@ -500,7 +500,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		619EA84C1F127497003F6510 /* Build configuration list for PBXProject "Makerbot-Lanepainter" */ = {
+		619EA84C1F127497003F6510 /* Build configuration list for PBXProject "Raccoon_Raspi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				619EA8561F127497003F6510 /* Debug */,
@@ -509,7 +509,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		619EA8581F127497003F6510 /* Build configuration list for PBXNativeTarget "Makerbot-Lanepainter" */ = {
+		619EA8581F127497003F6510 /* Build configuration list for PBXNativeTarget "Raccoon_Raspi" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				619EA8591F127497003F6510 /* Debug */,
