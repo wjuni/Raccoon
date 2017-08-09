@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6105D1F21F3B47610082EB92 /* PythonHttpsRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */; };
+		6105D1F51F3B501C0082EB92 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6105D1F41F3B501C0082EB92 /* Python.framework */; };
 		6162ECCB1F2601C600285566 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 6162ECCA1F2601C600285566 /* Makefile */; };
 		6190800F1F2514BC002B8DD1 /* PktProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */; };
 		619080121F25159C002B8DD1 /* UART.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619080101F25159C002B8DD1 /* UART.cpp */; };
@@ -69,6 +71,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonHttpsRequest.cpp; sourceTree = "<group>"; };
+		6105D1F11F3B47610082EB92 /* PythonHttpsRequest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PythonHttpsRequest.hpp; sourceTree = "<group>"; };
+		6105D1F41F3B501C0082EB92 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
 		6141AA631F34CF9F004C5BE7 /* Adafruit_GPS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Adafruit_GPS.cpp; sourceTree = "<group>"; };
 		6141AA641F34CF9F004C5BE7 /* Adafruit_GPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Adafruit_GPS.h; sourceTree = "<group>"; };
 		6141AA651F34CF9F004C5BE7 /* Compass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Compass.cpp; sourceTree = "<group>"; };
@@ -142,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6105D1F51F3B501C0082EB92 /* Python.framework in Frameworks */,
 				619EA89E1F1275F2003F6510 /* libopencv_optflow.3.2.0.dylib in Frameworks */,
 				619EA8AD1F1275F2003F6510 /* libopencv_reg.3.2.0.dylib in Frameworks */,
 				619EA8A11F1275F2003F6510 /* libopencv_datasets.3.2.0.dylib in Frameworks */,
@@ -191,69 +197,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6141AA501F34CEE1004C5BE7 /* Arduino */ = {
-			isa = PBXGroup;
-			children = (
-				6141AA621F34CF9F004C5BE7 /* Raccoon_Firmware */,
-			);
-			name = Arduino;
-			sourceTree = "<group>";
-		};
-		6141AA621F34CF9F004C5BE7 /* Raccoon_Firmware */ = {
-			isa = PBXGroup;
-			children = (
-				6141AA631F34CF9F004C5BE7 /* Adafruit_GPS.cpp */,
-				6141AA641F34CF9F004C5BE7 /* Adafruit_GPS.h */,
-				6141AA651F34CF9F004C5BE7 /* Compass.cpp */,
-				6141AA661F34CF9F004C5BE7 /* Compass.h */,
-				6141AA671F34CF9F004C5BE7 /* GpsModule.cpp */,
-				6141AA681F34CF9F004C5BE7 /* GpsModule.h */,
-				6141AA691F34CF9F004C5BE7 /* HMC5883L.cpp */,
-				6141AA6A1F34CF9F004C5BE7 /* HMC5883L.h */,
-				6141AA6B1F34CF9F004C5BE7 /* PktProtocol.cpp */,
-				6141AA6C1F34CF9F004C5BE7 /* PktProtocol.h */,
-				6141AA6D1F34CF9F004C5BE7 /* Raccoon_Firmware.ino */,
-				6141AA6E1F34CF9F004C5BE7 /* SerialComm.cpp */,
-				6141AA6F1F34CF9F004C5BE7 /* SerialComm.h */,
-				6141AA701F34CF9F004C5BE7 /* StepMotor.cpp */,
-				6141AA711F34CF9F004C5BE7 /* StepMotor.h */,
-			);
-			path = Raccoon_Firmware;
-			sourceTree = "<group>";
-		};
-		619EA8481F127497003F6510 = {
-			isa = PBXGroup;
-			children = (
-				6141AA501F34CEE1004C5BE7 /* Arduino */,
-				6162ECCA1F2601C600285566 /* Makefile */,
-				619EA8601F1275E6003F6510 /* Framework */,
-				619EA8531F127497003F6510 /* Sources */,
-				619EA8521F127497003F6510 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		619EA8521F127497003F6510 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				619EA8511F127497003F6510 /* Raccoon_Raspi */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		619EA8531F127497003F6510 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				6162ECC91F26019000285566 /* json.hpp */,
-				6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */,
-				6190800E1F2514BC002B8DD1 /* PktProtocol.h */,
-				619EA85B1F127543003F6510 /* main.cpp */,
-				619080101F25159C002B8DD1 /* UART.cpp */,
-				619080111F25159C002B8DD1 /* UART.h */,
-			);
-			name = Sources;
-			sourceTree = "<group>";
-		};
-		619EA8601F1275E6003F6510 /* Framework */ = {
+		6105D1F31F3B501C0082EB92 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				619EA8611F1275F2003F6510 /* libopencv_imgproc.3.2.0.dylib */,
@@ -299,8 +243,73 @@
 				619EA8891F1275F2003F6510 /* libopencv_bgsegm.3.2.0.dylib */,
 				619EA88A1F1275F2003F6510 /* libopencv_plot.3.2.0.dylib */,
 				619EA88B1F1275F2003F6510 /* libopencv_phase_unwrapping.3.2.0.dylib */,
+				6105D1F41F3B501C0082EB92 /* Python.framework */,
 			);
-			name = Framework;
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6141AA501F34CEE1004C5BE7 /* Arduino */ = {
+			isa = PBXGroup;
+			children = (
+				6141AA621F34CF9F004C5BE7 /* Raccoon_Firmware */,
+			);
+			name = Arduino;
+			sourceTree = "<group>";
+		};
+		6141AA621F34CF9F004C5BE7 /* Raccoon_Firmware */ = {
+			isa = PBXGroup;
+			children = (
+				6141AA631F34CF9F004C5BE7 /* Adafruit_GPS.cpp */,
+				6141AA641F34CF9F004C5BE7 /* Adafruit_GPS.h */,
+				6141AA651F34CF9F004C5BE7 /* Compass.cpp */,
+				6141AA661F34CF9F004C5BE7 /* Compass.h */,
+				6141AA671F34CF9F004C5BE7 /* GpsModule.cpp */,
+				6141AA681F34CF9F004C5BE7 /* GpsModule.h */,
+				6141AA691F34CF9F004C5BE7 /* HMC5883L.cpp */,
+				6141AA6A1F34CF9F004C5BE7 /* HMC5883L.h */,
+				6141AA6B1F34CF9F004C5BE7 /* PktProtocol.cpp */,
+				6141AA6C1F34CF9F004C5BE7 /* PktProtocol.h */,
+				6141AA6D1F34CF9F004C5BE7 /* Raccoon_Firmware.ino */,
+				6141AA6E1F34CF9F004C5BE7 /* SerialComm.cpp */,
+				6141AA6F1F34CF9F004C5BE7 /* SerialComm.h */,
+				6141AA701F34CF9F004C5BE7 /* StepMotor.cpp */,
+				6141AA711F34CF9F004C5BE7 /* StepMotor.h */,
+			);
+			path = Raccoon_Firmware;
+			sourceTree = "<group>";
+		};
+		619EA8481F127497003F6510 = {
+			isa = PBXGroup;
+			children = (
+				6141AA501F34CEE1004C5BE7 /* Arduino */,
+				6162ECCA1F2601C600285566 /* Makefile */,
+				619EA8531F127497003F6510 /* Sources */,
+				619EA8521F127497003F6510 /* Products */,
+				6105D1F31F3B501C0082EB92 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		619EA8521F127497003F6510 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				619EA8511F127497003F6510 /* Raccoon_Raspi */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		619EA8531F127497003F6510 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6162ECC91F26019000285566 /* json.hpp */,
+				6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */,
+				6190800E1F2514BC002B8DD1 /* PktProtocol.h */,
+				619EA85B1F127543003F6510 /* main.cpp */,
+				619080101F25159C002B8DD1 /* UART.cpp */,
+				619080111F25159C002B8DD1 /* UART.h */,
+				6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */,
+				6105D1F11F3B47610082EB92 /* PythonHttpsRequest.hpp */,
+			);
+			name = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6105D1F21F3B47610082EB92 /* PythonHttpsRequest.cpp in Sources */,
 				619080121F25159C002B8DD1 /* UART.cpp in Sources */,
 				619EA85E1F127543003F6510 /* main.cpp in Sources */,
 				6162ECCB1F2601C600285566 /* Makefile in Sources */,

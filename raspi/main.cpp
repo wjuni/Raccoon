@@ -14,6 +14,8 @@
 #include <opencv2/core/core.hpp>
 #include "PktProtocol.h"
 #include "UART.h"
+#include "PythonHttpsRequest.hpp"
+#include "json.hpp"
 
 #ifdef RASPBERRY_PI
 #define TEST_FFMPEG_PATH "ffmpeg/"
@@ -23,7 +25,7 @@
 
 
 UART uart("/dev/ttyAMA0");
-
+PythonHttpsRequest https("https://raccoon.wjuni.com/ajax/report.php");
 
 const int NUM_CORE = 4;
 const int MAX_DEV_PIX = 150;
