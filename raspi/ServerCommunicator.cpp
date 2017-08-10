@@ -55,6 +55,7 @@ void ServerCommunicator::handleTransmission(void *communicator) {
         j["bat"] = scc->bot_battery;
         j["rep"] = scc->repair_module;
         j["spd"] = scc->bot_speed;
+        j["ver"] = scc->bot_version;
         phr->sendData(&j);
         usleep(750*1000);
     }

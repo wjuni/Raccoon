@@ -298,6 +298,7 @@ int main(int argc, const char * argv[]) {
     context.bot_speed = 637;
     context.bot_battery = 95;
     context.acc_distance = 239;
+    context.bot_version = 11;
     server.start(&context);
     
 /*    read_vid(); */
