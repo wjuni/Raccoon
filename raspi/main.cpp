@@ -18,7 +18,7 @@
 #include "ServerCommunicator.hpp"
 
 #ifdef RASPBERRY_PI
-#define TEST_FFMPEG_PATH "ffmpeg/"
+#define TEST_FFMPEG_PATH "/home/wjuni/opencvtest/ffmpeg/"
 #else
 #define TEST_FFMPEG_PATH "/Users/wjuni/ffmpeg/"
 #endif
@@ -299,7 +299,6 @@ int main(int argc, const char * argv[]) {
     context.bot_battery = 95;
     context.acc_distance = 239;
     server.start(&context);
-    
     
 /*    read_vid(); */
     read_img();

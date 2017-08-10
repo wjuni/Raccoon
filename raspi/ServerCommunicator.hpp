@@ -15,7 +15,7 @@
 
 typedef struct {
     int bot_id, record_time, bot_status, damage_ratio, acc_distance, task_id, gps_lat, gps_lon, bot_battery, bot_speed;
-    std::string repair_module;
+    char repair_module[8];  // have a segfault issue on Raspberry Pi with std::string
 } ServerCommContext;
 
 class ServerCommunicator {
