@@ -228,8 +228,8 @@ bool process(cv::Mat *pim, bool toRotate, string path, string filename){
     // cv::imwrite(path + filename + '_out2.jpg', best_fit_est_mask)
     // cv::imwrite(path + filename + '_out1.jpg', best_fit_filest)
     cv::imwrite(path + "detect_" + filename, im);
-    cv::imshow("Demo", im);
-    cv::waitKey(15);
+//    cv::imshow("Demo", im);
+//    cv::waitKey(15);
     cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
     fps_sum += 1./t;
     proc_count ++;
