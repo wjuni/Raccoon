@@ -21,7 +21,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
     g++ $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 dirs:
-    @mkdir -p $(OBJDIR)
+	@mkdir -p $(OBJDIR)
 
 clean:
-    rm ../$(TARGET) obj/*.o
+	rm ../$(TARGET) obj/*.o
+
