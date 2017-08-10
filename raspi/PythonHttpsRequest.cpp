@@ -13,7 +13,8 @@
 #include <Python.h>
 #endif
 
-static std::string code_send ="\nresponse = urllib2.urlopen(urllib2.Request(url, urllib.urlencode(values)))\n";
+static std::string code_send ="\nresponse = urllib2.urlopen(urllib2.Request(url, urllib.urlencode(values)))\n"; //"print(response.read())\n";
+
 
 PythonHttpsRequest::PythonHttpsRequest(std::string uri) {
     this->_uri = uri;
@@ -35,8 +36,9 @@ std::string PythonHttpsRequest::buildPythonCode(json *data){
     std::ostringstream stringStream;
     stringStream << "url = '";
     stringStream << _uri;
-    stringStream << "'\nvalues = ";
+    stringStream << "'\nvalues = {'data' : '";
     stringStream << data->dump();
+    stringStream << "'}\n";
     stringStream << code_send;
     return stringStream.str();
 }

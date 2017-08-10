@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		6105D1F21F3B47610082EB92 /* PythonHttpsRequest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */; };
 		6105D1F51F3B501C0082EB92 /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6105D1F41F3B501C0082EB92 /* Python.framework */; };
-		6162ECCB1F2601C600285566 /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 6162ECCA1F2601C600285566 /* Makefile */; };
+		6105D1F81F3CAD600082EB92 /* ServerCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6105D1F61F3CAD600082EB92 /* ServerCommunicator.cpp */; };
 		6190800F1F2514BC002B8DD1 /* PktProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */; };
 		619080121F25159C002B8DD1 /* UART.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619080101F25159C002B8DD1 /* UART.cpp */; };
 		619EA85E1F127543003F6510 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 619EA85B1F127543003F6510 /* main.cpp */; };
@@ -74,6 +74,8 @@
 		6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PythonHttpsRequest.cpp; sourceTree = "<group>"; };
 		6105D1F11F3B47610082EB92 /* PythonHttpsRequest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PythonHttpsRequest.hpp; sourceTree = "<group>"; };
 		6105D1F41F3B501C0082EB92 /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = System/Library/Frameworks/Python.framework; sourceTree = SDKROOT; };
+		6105D1F61F3CAD600082EB92 /* ServerCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerCommunicator.cpp; sourceTree = "<group>"; };
+		6105D1F71F3CAD600082EB92 /* ServerCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ServerCommunicator.hpp; sourceTree = "<group>"; };
 		6141AA631F34CF9F004C5BE7 /* Adafruit_GPS.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Adafruit_GPS.cpp; sourceTree = "<group>"; };
 		6141AA641F34CF9F004C5BE7 /* Adafruit_GPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Adafruit_GPS.h; sourceTree = "<group>"; };
 		6141AA651F34CF9F004C5BE7 /* Compass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Compass.cpp; sourceTree = "<group>"; };
@@ -308,6 +310,8 @@
 				619080111F25159C002B8DD1 /* UART.h */,
 				6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */,
 				6105D1F11F3B47610082EB92 /* PythonHttpsRequest.hpp */,
+				6105D1F61F3CAD600082EB92 /* ServerCommunicator.cpp */,
+				6105D1F71F3CAD600082EB92 /* ServerCommunicator.hpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -371,9 +375,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6105D1F21F3B47610082EB92 /* PythonHttpsRequest.cpp in Sources */,
+				6105D1F81F3CAD600082EB92 /* ServerCommunicator.cpp in Sources */,
 				619080121F25159C002B8DD1 /* UART.cpp in Sources */,
 				619EA85E1F127543003F6510 /* main.cpp in Sources */,
-				6162ECCB1F2601C600285566 /* Makefile in Sources */,
 				6190800F1F2514BC002B8DD1 /* PktProtocol.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

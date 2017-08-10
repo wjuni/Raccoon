@@ -8,14 +8,14 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <cstring>
 #include <thread>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/core/core.hpp>
 #include "PktProtocol.h"
 #include "UART.h"
-#include "PythonHttpsRequest.hpp"
-#include "json.hpp"
+#include "ServerCommunicator.hpp"
 
 #ifdef RASPBERRY_PI
 #define TEST_FFMPEG_PATH "ffmpeg/"
@@ -23,13 +23,14 @@
 #define TEST_FFMPEG_PATH "/Users/wjuni/ffmpeg/"
 #endif
 
-
-UART uart("/dev/ttyAMA0");
-PythonHttpsRequest https("https://raccoon.wjuni.com/ajax/report.php");
-
 const int NUM_CORE = 4;
 const int MAX_DEV_PIX = 150;
 const int DEV_PIX_SENS = 4;
+const std::string SERVER_ADDR = "https://raccoon.wjuni.com/ajax/report.php";
+
+UART uart("/dev/ttyAMA0");
+ServerCommunicator server(SERVER_ADDR);
+ServerCommContext context;
 
 using namespace std;
 typedef struct {
@@ -280,17 +281,26 @@ void read_vid(){
 }
 
 int main(int argc, const char * argv[]) {
+    
+    /* UART */
     uart.begin(9600);
-    // notify boot complete
     PktArduino pkt;
     pkt.mode = (1<<8);
     pkt.head_degree = 0;
     pkt.x_deviation = 0;
     pkt.y_deviation = 0;
     PktArduino_prepare_packet(&pkt);
-    uart.write(&pkt, sizeof(PktArduino));
+    uart.write(&pkt, sizeof(PktArduino)); // notify boot complete
     
-
+    /* Server */
+    memset(&context, 0, sizeof(ServerCommContext));
+    context.bot_id = 1;
+    context.bot_speed = 637;
+    context.bot_battery = 95;
+    context.acc_distance = 239;
+    server.start(&context);
+    
+    
 /*    read_vid(); */
     read_img();
     return 0;

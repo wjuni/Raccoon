@@ -2,26 +2,15 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/bootstrap/js/tooltip.min.js" />
         <item url="file://$PROJECT_DIR$/js/dashboard1.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/transition.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/dist/js/npm.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/button.min.js" />
-        <item url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scripts/chartist-plugin-tooltip.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/dropdown.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/alert.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/collapse.min.js" />
-        <item url="file://$PROJECT_DIR$/js/main.min.js" />
-        <item url="file://$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.min.js" />
         <item url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/tab.min.js" />
-        <item url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/spec/spec-tooltip.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/affix.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/scrollspy.min.js" />
+        <item url="file://$PROJECT_DIR$/bootstrap/dist/js/npm.min.js" />
+        <item url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scripts/chartist-plugin-tooltip.min.js" />
         <item url="file://$PROJECT_DIR$/bootstrap/dist/js/bootstrap.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/carousel.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/popover.min.js" />
-        <item url="file://$PROJECT_DIR$/bootstrap/js/modal.min.js" />
+        <item url="file://$PROJECT_DIR$/js/main.min.js" />
+        <item url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/spec/spec-tooltip.min.js" />
+        <item url="file://$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.min.js" />
+        <item url="file://$PROJECT_DIR$/bootstrap/dist/js/bootstrap.min.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
@@ -38,25 +27,26 @@
       <root url="file://$PROJECT_DIR$/bootstrap/js/popover.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/modal.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/tooltip.min.js" />
-      <root url="file://$PROJECT_DIR$/js/dashboard1.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/transition.min.js" />
-      <root url="file://$PROJECT_DIR$/bootstrap/dist/js/npm.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/button.min.js" />
-      <root url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scripts/chartist-plugin-tooltip.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/dropdown.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/alert.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/collapse.min.js" />
-      <root url="file://$PROJECT_DIR$/js/main.min.js" />
-      <root url="file://$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.min.js" />
-      <root url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/tab.min.js" />
-      <root url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/spec/spec-tooltip.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/affix.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/scrollspy.min.js" />
-      <root url="file://$PROJECT_DIR$/bootstrap/dist/js/bootstrap.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/carousel.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/popover.min.js" />
       <root url="file://$PROJECT_DIR$/bootstrap/js/modal.min.js" />
+      <root url="file://$PROJECT_DIR$/js/dashboard1.min.js" />
+      <root url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js" />
+      <root url="file://$PROJECT_DIR$/bootstrap/dist/js/npm.min.js" />
+      <root url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scripts/chartist-plugin-tooltip.min.js" />
+      <root url="file://$PROJECT_DIR$/bootstrap/dist/js/bootstrap.min.js" />
+      <root url="file://$PROJECT_DIR$/js/main.min.js" />
+      <root url="file://$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/spec/spec-tooltip.min.js" />
+      <root url="file://$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.min.js" />
+      <root url="file://$PROJECT_DIR$/bootstrap/dist/js/bootstrap.min.js" />
     </CLASSES>
     <SOURCES />
   </library>
