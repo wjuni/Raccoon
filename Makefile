@@ -15,10 +15,10 @@ LIBS = -lopencv_stitching -lopencv_superres -lopencv_videostab -lopencv_aruco -l
 all: dirs $(TARGET)
 
 $(TARGET): $(OBJS)
-    $(CC) $(CFLAGS) -o ../$@ $(LFLAGS) $(LIBS) $^
+	$(CC) $(CFLAGS) -o ../$@ $(LFLAGS) $(LIBS) $^
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-    g++ $(CFLAGS) $(INCLUDES) -c -o $@ $<
+	g++ $(CFLAGS) $(INCLUDES) -c -o $@ $<
 
 dirs:
 	@mkdir -p $(OBJDIR)
