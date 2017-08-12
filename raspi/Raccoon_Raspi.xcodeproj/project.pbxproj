@@ -142,6 +142,7 @@
 		619EA8891F1275F2003F6510 /* libopencv_bgsegm.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_bgsegm.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_bgsegm.3.2.0.dylib; sourceTree = "<group>"; };
 		619EA88A1F1275F2003F6510 /* libopencv_plot.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_plot.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_plot.3.2.0.dylib; sourceTree = "<group>"; };
 		619EA88B1F1275F2003F6510 /* libopencv_phase_unwrapping.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_phase_unwrapping.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_phase_unwrapping.3.2.0.dylib; sourceTree = "<group>"; };
+		619FFFAD1F3F6AD000B7CAC7 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +303,7 @@
 		619EA8531F127497003F6510 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				619FFFAD1F3F6AD000B7CAC7 /* debug.h */,
 				6162ECC91F26019000285566 /* json.hpp */,
 				6190800D1F2514BC002B8DD1 /* PktProtocol.cpp */,
 				6190800E1F2514BC002B8DD1 /* PktProtocol.h */,
