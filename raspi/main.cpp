@@ -212,12 +212,16 @@ bool process(cv::Mat *pim, bool toRotate, string path, string filename){
     ", y=" << - deviation * sin(act_deg * M_PI / 180) << ")" << endl;
     
     
-    PktArduino pkt;
+    PktArduinoV2 pkt;
     pkt.mode = 0;
-    pkt.head_degree = act_deg * PKTARDUINO_MULTIPLIER;
-    pkt.x_deviation = deviation * cos(act_deg * M_PI / 180) * PKTARDUINO_MULTIPLIER;
-    pkt.y_deviation = -deviation * sin(act_deg * M_PI / 180) * PKTARDUINO_MULTIPLIER;
-    PktArduino_prepare_packet(&pkt);
+//    pkt.head_degree = act_deg * PKTARDUINO_MULTIPLIER;
+//    pkt.x_deviation = deviation * cos(act_deg * M_PI / 180) * PKTARDUINO_MULTIPLIER;
+//    pkt.y_deviation = -deviation * sin(act_deg * M_PI / 180) * PKTARDUINO_MULTIPLIER;
+    pkt.motor_1_spd = 0;
+    pkt.motor_2_spd = 0;
+    pkt.motor_3_spd = 0;
+    pkt.motor_4_spd = 0;
+    PktArduinoV2_prepare_packet(&pkt);
 //    printf("%d %d\n", pkt.x_deviation, pkt.y_deviation);
     uart.write(&pkt, sizeof(PktArduino));
 
@@ -283,13 +287,14 @@ void read_vid(){
 int main(int argc, const char * argv[]) {
     
     /* UART */
-    uart.begin(9600);
-    PktArduino pkt;
+    uart.begin(115200);
+    PktArduinoV2 pkt;
     pkt.mode = (1<<8);
-    pkt.head_degree = 0;
-    pkt.x_deviation = 0;
-    pkt.y_deviation = 0;
-    PktArduino_prepare_packet(&pkt);
+    pkt.motor_1_spd = 0;
+    pkt.motor_2_spd = 0;
+    pkt.motor_3_spd = 0;
+    pkt.motor_4_spd = 0;
+    PktArduinoV2_prepare_packet(&pkt);
     uart.write(&pkt, sizeof(PktArduino)); // notify boot complete
     
     /* Server */
