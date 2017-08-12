@@ -83,16 +83,16 @@ void StepMotor_move(int motor, int speed) {
     speed = 100;
   int scaled_period = STEP_MOTOR_SPEED_MAX + speed * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX)/100.);
   if(!(PORTC || 1<<6)) PORTC |= 1<<6; // enable driver if driver is off
-  motor_enable[motor] = (speed != 0); // start or stop motor according to speed
+  motor_enable[motor-1] = (speed != 0); // start or stop motor according to speed
   StepMotor_changeperiod(motor, scaled_period);
 }
 
 
 void StepMotor_direction(int motor, int dir) {
   if(dir)
-    PORTK |= (1 << (motor+4));
+    PORTK |= (1 << (motor+3));
   else
-    PORTK &= ~(1 << (motor+4));
+    PORTK &= ~(1 << (motor+3));
 }
 
 void StepMotor_global_enable(){
