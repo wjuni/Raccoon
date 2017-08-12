@@ -20,7 +20,7 @@ $result['repair_status'] = "Off";
 $result['repair_info'] = "n/a";
 $result['lat'] = 0; //36.373465;
 $result['lng'] = 0; //127.359998;
-
+$result['ver'] = '?';
 $obj = fetch_current(1);
 if($obj !== null) {
     if($obj->bot_status == 1) $result['status'] = "Running";
@@ -36,6 +36,7 @@ if($obj !== null) {
     $result['repair_info'] = strlen($obj->repair_module) > 0 ? $obj->repair_module: "n/a";
     $result['lat'] = $obj->gps_lat; //36.373465;
     $result['lng'] = $obj->gps_lon; //127.359998;
+    $result['ver'] = intval($obj->bot_version)/10.;
 }
 echo json_encode($result);
 

@@ -228,7 +228,7 @@ jQuery(function($){
         $("#opt_dist_num").on("change", showTerminateDistance);
 
         onDataReceived = function (parsed) {
-            $('#btn_status').html(parsed['status'] + ' (GPS:' + parsed['gps'] +')')
+            $('#btn_status').html(parsed['status'] + ' (Ver '+ parsed['ver'] + ' / GPS:' + parsed['gps'] +')')
         };
     }
 
@@ -357,8 +357,10 @@ jQuery(function($){
                     }
 
                 } else {
-                    current_location_marker.setMap(null);
-                    current_location_marker = null;
+                    if(current_location_marker !== null) {
+                        current_location_marker.setMap(null);
+                        current_location_marker = null;
+                    }
                     current_location = null;
                 }
             });
