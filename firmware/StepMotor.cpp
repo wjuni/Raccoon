@@ -82,7 +82,7 @@ void StepMotor_move(int motor, int speed) {
     speed = 0;
   if(speed >= 100)
     speed = 100;
-  auto scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX + speed * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
+  int scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX + speed * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
   if(speed != 0) StepMotor_global_enable(); // enable driver if driver is off
   motor_enable[motor-1] = (speed != 0); // start or stop motor according to speed
   StepMotor_changeperiod(motor, scaled_period);

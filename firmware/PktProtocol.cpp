@@ -53,7 +53,7 @@ uint16_t gen_crc16(const uint8_t *data, uint16_t size)
 }
 
 int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *target) {
-    auto *pkt = (PktArduinoV2 *)buf;
+    PktArduinoV2 *pkt = (PktArduinoV2 *)buf;
     
     //length check
     if(len > sizeof(PktArduino)) {

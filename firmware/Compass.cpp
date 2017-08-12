@@ -34,7 +34,7 @@ void Compass::read() {
   Vector norm = this->sensor.readNormalize();
 
   // Calculate heading
-  auto heading = atan2((double)norm.YAxis, (double)norm.XAxis);
+  double heading = atan2((double)norm.YAxis, (double)norm.XAxis);
 
   // Set declination angle on your location and fix heading
   // You can find your declination on: http://magnetic-declination.com/
