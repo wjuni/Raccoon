@@ -39,11 +39,11 @@ void loop() {
   if(epoch >= RASPI_REPORT_PERIOD/READ_PERIOD) {
     epoch = 0;
     PktRaspi p;
-    p.gps_lat = (uint16_t)(gps.data.latitude * 100);
-    p.gps_lon = (uint16_t)(gps.data.longitude * 100);
-    p.gps_alt = (uint16_t)(gps.data.altitude * 100);
-    p.gps_spd = gps.data.speed;
-    p.gps_fix = gps.data.fix;
+    p.gps_lat = (uint32_t)(gps.data.latitude * DEG_MULTIPLIER);
+    p.gps_lon = (uint32_t)(gps.data.longitude * DEG_MULTIPLIER);
+    p.gps_alt = (uint16_t)(gps.data.altitude * SPD_ALT_MULTIPLIER);
+    p.gps_spd = (uint16_t)(gps.data.speed * SPD_ALT_MULTIPLIER);
+    p.gps_fix = (gps.data.fix ? 1 : 0);
     p.voltage = (uint16_t)(((uint32_t)analogRead(A0)*57)/2.048);
     PktRaspi_prepare_packet(&p);  
     raspicomm.write(&p, sizeof(PktRaspi));
@@ -62,7 +62,7 @@ void packet_handler(PktArduinoV2 * pkt) {
     // Network Complete Broadcast
     digitalWrite(LED_OUT2, HIGH);
   }
-  
+
   StepMotor_move(1, abs(pkt->motor_1_spd));
   StepMotor_move(2, abs(pkt->motor_2_spd));
   StepMotor_move(3, abs(pkt->motor_3_spd));

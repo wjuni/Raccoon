@@ -12,7 +12,6 @@ typedef struct  {
 class GPS {
   public:
     GpsData data;
-    
     GPS(HardwareSerial *ser);
     void read();
 };

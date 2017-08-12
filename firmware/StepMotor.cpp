@@ -13,8 +13,7 @@ void StepMotor_initialize(){
   
   // enable global motor output
   DDRC |= 1<<6;
-  StepMotor_global_enable();
-  
+
   for(int i=0;i<4;i++){
     motor_enable[i] = false;
     motor_tick[i] = 0;
@@ -83,7 +82,7 @@ void StepMotor_move(int motor, int speed) {
     speed = 0;
   if(speed >= 100)
     speed = 100;
-  int scaled_period = STEP_MOTOR_SPEED_MAX + speed * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX)/100.);
+  auto scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX + speed * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
   if(speed != 0) StepMotor_global_enable(); // enable driver if driver is off
   motor_enable[motor-1] = (speed != 0); // start or stop motor according to speed
   StepMotor_changeperiod(motor, scaled_period);
@@ -92,7 +91,7 @@ void StepMotor_move(int motor, int speed) {
 
 void StepMotor_direction(int motor, int dir) {
   DEBUG_PRINT(String("Set Motor Direction Motor=") + motor + ", DIR=" + dir);
-  if(dir)
+  if(dir>0)
     PORTK |= (1 << (motor+3));
   else
     PORTK &= ~(1 << (motor+3));

@@ -10,10 +10,10 @@ class SerialComm {
     HardwareSerial *serial;
     PktArduinoV2 received_packet;
     char serial_buffer[BUFFER_SIZE];
-    int buffer_len;
+    unsigned int buffer_len;
   public:
     SerialComm(HardwareSerial *ser, unsigned long baudrate);
     void read(void (*handler)(PktArduinoV2 *));
-    int write(void *payload, int len);
+    int write(void *payload, unsigned int len);
 };
 #endif /* SerialComm_h */

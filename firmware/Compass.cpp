@@ -1,7 +1,7 @@
 #include "Compass.h"
 #include "debug.h"
 
-Compass::Compass() {
+Compass::Compass() : sensor(), headingDegrees() {
   DEBUG_PRINT("Compass Initialize Start...");
   if(!this->sensor.begin()) {
     DEBUG_PRINT("Compass Initialize Fail");
@@ -34,14 +34,14 @@ void Compass::read() {
   Vector norm = this->sensor.readNormalize();
 
   // Calculate heading
-  float heading = atan2(norm.YAxis, norm.XAxis);
+  auto heading = atan2((double)norm.YAxis, (double)norm.XAxis);
 
   // Set declination angle on your location and fix heading
   // You can find your declination on: http://magnetic-declination.com/
   // (+) Positive or (-) for negative
   // For Bytom / Poland declination angle is 4'26E (positive)
   // Formula: (deg + (min / 60.0)) / (180 / M_PI);
-  float declinationAngle = - (7.0 + (35.0 / 60.0)) / (180 / M_PI);
+  double declinationAngle = - (7.0 + (35.0 / 60.0)) / (180 / M_PI);
   heading += declinationAngle;
 
   // Correct for heading < 0deg and heading > 360deg
