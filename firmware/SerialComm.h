@@ -12,7 +12,7 @@ class SerialComm {
     char serial_buffer[BUFFER_SIZE];
     int buffer_len;
   public:
-    SerialComm(HardwareSerial *ser);
+    SerialComm(HardwareSerial *ser, unsigned long baudrate);
     void read(void (*handler)(PktArduinoV2 *));
     int write(void *payload, int len);
 };

@@ -12,7 +12,7 @@
 #define abs(x) ((x)>0 ? (x) : -(x))
 
 /* GLOBAL */
-SerialComm raspicomm(&Serial1);
+SerialComm raspicomm(&Serial1, 115200);
 GPS gps(&Serial2);
 Compass compass;
 long epoch = 0;

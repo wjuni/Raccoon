@@ -2,8 +2,9 @@
 #include "SerialComm.h"
 
 
-SerialComm::SerialComm(HardwareSerial *ser) {
+SerialComm::SerialComm(HardwareSerial *ser, unsigned long baudrate) {
   this->serial = ser;
+  this->serial->begin(baudrate);
   memset(this->serial_buffer, 0, BUFFER_SIZE);
   this->buffer_len = 0;
 }
