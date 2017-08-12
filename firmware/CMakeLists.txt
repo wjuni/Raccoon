@@ -1,24 +1,24 @@
-cmake_minimum_required(VERSION 3.8)
-project(firmware)
+cmake_minimum_required(VERSION 2.8.4)
+set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/cmake/ArduinoToolchain.cmake)
+set(PROJECT_NAME firmware)
+project(${PROJECT_NAME})
 
-set(CMAKE_CXX_STANDARD 11)
-
-set(SOURCE_FILES
+set(${CMAKE_PROJECT_NAME}_SKETCH firmware.ino)
+set(${CMAKE_PROJECT_NAME}_SRCS
         Adafruit_GPS.cpp
-        Adafruit_GPS.h
         Compass.cpp
-        Compass.h
-        debug.h
-        firmware.ino
         GpsModule.cpp
-        GpsModule.h
         HMC5883L.cpp
-        HMC5883L.h
         PktProtocol.cpp
-        PktProtocol.h
         SerialComm.cpp
-        SerialComm.h
-        StepMotor.cpp
-        StepMotor.h)
+        StepMotor.cpp)
 
-add_executable(firmware ${SOURCE_FILES})
+#### Uncomment below additional settings as needed.
+set(${CMAKE_PROJECT_NAME}_BOARD mega)
+# set(${CMAKE_PROJECT_NAME}_PORT /dev/ttyACM0)
+set(mega.build.mcu atmega2560)
+# set(mega.upload.protocol wiring)
+# set(mega.upload.speed 115200)
+message("Start Generation")
+
+generate_arduino_firmware(${CMAKE_PROJECT_NAME})

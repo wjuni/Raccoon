@@ -19,7 +19,7 @@ Compass compass;
 long epoch = 0;
 
 /* Prototype */
-void packet_handler(PktArduino * pkt);
+void packet_handler(PktArduinoV2 * pkt);
 
 void setup() { 
   #if _DEBUG
@@ -39,9 +39,9 @@ void loop() {
   if(epoch >= RASPI_REPORT_PERIOD/READ_PERIOD) {
     epoch = 0;
     PktRaspi p;
-    p.gps_lat = gps.data.latitude;
-    p.gps_lon = gps.data.latitude;
-    p.gps_alt = gps.data.latitude;
+    p.gps_lat = (uint16_t)(gps.data.latitude * 100);
+    p.gps_lon = (uint16_t)(gps.data.longitude * 100);
+    p.gps_alt = (uint16_t)(gps.data.altitude * 100);
     p.gps_spd = gps.data.speed;
     p.gps_fix = gps.data.fix;
     p.voltage = (uint16_t)(((uint32_t)analogRead(A0)*57)/2.048);
