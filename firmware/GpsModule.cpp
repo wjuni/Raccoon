@@ -1,7 +1,9 @@
 #include <string.h>
 #include "GpsModule.h"
+#include "debug.h"
 
 GPS::GPS(HardwareSerial *ser) {
+  DEBUG_PRINT("GPS Initialize Start...");
   memset(&this->data, 0, sizeof(GpsData));
   this->data.GPS = new Adafruit_GPS(ser);
   this->data.GPS->begin(9600);
@@ -10,7 +12,8 @@ GPS::GPS(HardwareSerial *ser) {
 //  GPS.sendCommand(PGCMD_ANTENNA);
 }
 void GPS::read() {
-   int c = this->data.GPS->read();
+  DEBUG_PRINT("GPS Read");
+  int c = this->data.GPS->read();
 #ifdef DEBUG
    UDR0 = c; // write to Serial0
 #endif

@@ -1,3 +1,4 @@
+#include "debug.h"
 #include "PktProtocol.h"
 #include "GpsModule.h"
 #include "Compass.h"
@@ -21,8 +22,13 @@ long epoch = 0;
 void packet_handler(PktArduino * pkt);
 
 void setup() { 
-  Serial.begin(115200);
+  #if _DEBUG
+    Serial.begin(115200);
+  #endif
+  DEBUG_PRINT("Firmware Boot Start...");
   StepMotor_initialize();
+  
+  DEBUG_PRINT("Initialize Complete.");
 }
 
 void loop() {

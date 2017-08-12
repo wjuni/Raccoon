@@ -1,9 +1,11 @@
 #include "StepMotor.h"
+#include "debug.h"
 
 static volatile boolean motor_enable[4];
 static volatile uint32_t motor_tick[4];
 
 void StepMotor_initialize(){
+  DEBUG_PRINT("StepMotor Initialize...");
   // Use 16-bit Timer1,3,4,5 Ch.A
   uint16_t motor_ocr = 0xffff;
   PORTK &= ~0x0f;
@@ -46,8 +48,7 @@ void StepMotor_initialize(){
   TCCR3B |= (1<<CS32) | (0<<CS31) | (0<<CS30); 
   TCCR4B |= (1<<CS42) | (0<<CS41) | (0<<CS40); 
   TCCR5B |= (1<<CS52) | (0<<CS51) | (0<<CS50); 
-  sei();
-  
+  sei();  
 }
 static void StepMotor_changeperiod(int motor, int period) {
   uint32_t motor_ocr = (uint32_t)period * AVR_CLOCK / STEP_MOTOR_PRESCALER;
@@ -55,6 +56,7 @@ static void StepMotor_changeperiod(int motor, int period) {
     StepMotor_stop(motor);
     motor_ocr = 0xffff;
   }
+  DEBUG_PRINT(String("Set Motor Period Motor=") + motor + ", Period=" + period + ", OCR=" +  motor_ocr);
   
   cli();
   if (motor == 1) {
@@ -89,6 +91,7 @@ void StepMotor_move(int motor, int speed) {
 
 
 void StepMotor_direction(int motor, int dir) {
+  DEBUG_PRINT(String("Set Motor Direction Motor=") + motor + ", DIR=" + dir);
   if(dir)
     PORTK |= (1 << (motor+3));
   else
@@ -96,10 +99,12 @@ void StepMotor_direction(int motor, int dir) {
 }
 
 void StepMotor_global_enable(){
+  DEBUG_PRINT("Motor Driver Enabled.");
   PORTC &= ~(1<<6);
 }
 
 void StepMotor_global_disable(){
+  DEBUG_PRINT("Motor Driver Disabled.");
   PORTC |= 1<<6;
 }
 

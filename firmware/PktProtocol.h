@@ -47,9 +47,9 @@ typedef struct {
     uint16_t crc;
 }  __attribute__((packed)) PktRaspi;
 
-int PktArduino_parse_packet(const char* buf, unsigned long len, PktArduino *target);
+/* int PktArduino_parse_packet(const char* buf, unsigned long len, PktArduino *target); */
 int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *target);
-void PktArduino_prepare_packet(PktArduino *target);
+/* void PktArduino_prepare_packet(PktArduino *target); */
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target);
 void PktRaspi_prepare_packet(PktRaspi *target);
 #endif /* PktArduino_h */
