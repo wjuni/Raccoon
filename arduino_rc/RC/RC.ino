@@ -21,7 +21,7 @@ PktArduinoV2 pkt;
 void setup() {
   // put your setup code here, to run once:
   
-  Serial.begin(9600);
+  Serial.begin(115200);
   cbi(DDRD,3); sbi(PORTD,3);
   cbi(DDRD,4); sbi(PORTD,4);
   cbi(DDRD,5); sbi(PORTD,5);
