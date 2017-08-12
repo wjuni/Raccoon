@@ -1,4 +1,4 @@
-#define _DEBUG 0
+#define _DEBUG 1
 
 #ifndef debug_h
 #include <Arduino.h>

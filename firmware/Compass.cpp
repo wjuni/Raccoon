@@ -29,8 +29,7 @@ Compass::Compass() : sensor(), headingDegrees() {
 void Compass::read() {
   if (!this->connected)
     return;
-    
-  DEBUG_PRINT("Compass Read");
+
   Vector norm = this->sensor.readNormalize();
 
   // Calculate heading

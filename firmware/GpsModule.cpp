@@ -12,7 +12,6 @@ GPS::GPS(HardwareSerial *ser) {
 //  GPS.sendCommand(PGCMD_ANTENNA);
 }
 void GPS::read() {
-  DEBUG_PRINT("GPS Read");
   int c = this->data.GPS->read();
 #ifdef DEBUG
    UDR0 = c; // write to Serial0
