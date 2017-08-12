@@ -105,12 +105,12 @@ void StepMotor_global_disable(){
 
 void StepMotor_start(int motor){
   if(motor >= 0 && motor < 4)
-    motor_enable[motor] = true;
+    motor_enable[motor-1] = true;
 }
 
 void StepMotor_stop(int motor){
   if(motor >= 0 && motor < 4)
-    motor_enable[motor] = false;
+    motor_enable[motor-1] = false;
 }
 
 ISR(TIMER1_COMPA_vect) {
