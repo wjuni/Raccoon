@@ -12,18 +12,21 @@ SerialComm::SerialComm(HardwareSerial *ser) : received_packet(), serial_buffer()
 
 void SerialComm::begin(unsigned long baudrate) {
     this->serial->begin(baudrate);
-    this->serial->setTimeout(20);
 }
 
 void SerialComm::read(void (*handler)(PktArduinoV2 *)) {
-    DEBUG_PRINT_("buflen_current=");
-    DEBUG_PRINT(buffer_len);
     if (this->serial->available() > 0 && BUFFER_SIZE > this->buffer_len) {
+        // sync
+        if(buffer_len == 0) {
+            while(this->serial->read() != PKTARDUINO_PREAMBLE);
+            this->serial_buffer[buffer_len++] = PKTARDUINO_PREAMBLE;
+        }
+
         buffer_len += this->serial->readBytes(this->serial_buffer + this->buffer_len, BUFFER_SIZE - this->buffer_len);
         DEBUG_PRINT_("Packet Read, Acclen=");
         DEBUG_PRINT(buffer_len);
     }
-    if (this->buffer_len >= BUFFER_SIZE) {
+    if (this->buffer_len >= sizeof(PktArduinoV2)) {
         DEBUG_PRINT_("New Packet Detected Starting With ");
         DEBUG_PRINT_((unsigned int) this->serial_buffer[0]);
         DEBUG_PRINT_(" ");
