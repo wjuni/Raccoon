@@ -32,6 +32,16 @@ void setup() {
     pinMode(LED_OUT2, OUTPUT);
 
     DEBUG_PRINT("Initialize Complete.");
+
+    /* temporary test code */
+    StepMotor_move(1, 100);
+    StepMotor_direction(1, 1);
+    StepMotor_move(2, 100);
+    StepMotor_direction(2, 1);
+    StepMotor_move(3, 100);
+    StepMotor_direction(3, 1);
+    StepMotor_move(4, 100);
+    StepMotor_direction(4, 1);
 }
 
 void loop() {
