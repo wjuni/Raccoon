@@ -6,7 +6,7 @@
 #include "SerialComm.h"
 
 #define RASPI_REPORT_PERIOD 500
-#define READ_PERIOD 50
+#define READ_PERIOD 15
 #define LED_OUT1 32
 #define LED_OUT2 33
 

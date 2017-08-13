@@ -131,7 +131,7 @@ void loop() {
 //  Serial.print(time_pulse[2]);
 //  Serial.println(time_pulse[3]);
 //  Serial.println(vel);
-delay(100);
+delay(20);
 }
 
 ISR(PCINT2_vect){

@@ -62,7 +62,7 @@ static void StepMotor_changeperiod(int motor, int period) {
         StepMotor_stop(motor);
         motor_ocr = 0xffff;
     }
-//    DEBUG_PRINT(String("Set Motor Period Motor=") + motor + ", Period=" + period + ", OCR=" + motor_ocr);
+    DEBUG_PRINT(String("Set Motor Period Motor=") + motor + ", Period=" + period + ", OCR=" + motor_ocr);
 
     cli();
     if (motor == 1) {
@@ -94,8 +94,7 @@ void StepMotor_move(int motor, int speed) {
         speed = 0;
     if (speed >= 100)
         speed = 100;
-    int scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX +
-                                         speed * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
+    int scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX + (100-speed) * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
     if (speed != 0) StepMotor_global_enable(); // enable driver if driver is off
     motor_enable[motor - 1] = (speed != 0); // start or stop motor according to speed
     DEBUG_PRINT(String("Set Motor Speed Motor=") + motor + ", Speed=" + speed);

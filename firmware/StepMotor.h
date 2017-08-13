@@ -2,8 +2,8 @@
 #define StepMotor_h
 #include <Arduino.h>
 #define AVR_CLOCK 16000 // in kHz
-#define STEP_MOTOR_SPEED_MIN 600 // Half Period, in ms
-#define STEP_MOTOR_SPEED_MAX 100 // Half Period, in ms
+#define STEP_MOTOR_SPEED_MIN 300 // Half Period, in ms
+#define STEP_MOTOR_SPEED_MAX 50 // Half Period, in ms
 #define STEP_MOTOR_PRESCALER 256  //set prescaler Clk/256
 
 void StepMotor_initialize();
