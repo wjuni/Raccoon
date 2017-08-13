@@ -32,7 +32,7 @@ void setup() {
     pinMode(LED_OUT2, OUTPUT);
     DEBUG_PRINT("RaspberryPi Comm Begin...");
     delay(50);
-    raspicomm.begin(115200);
+    raspicomm.begin(9600);
 
     DEBUG_PRINT("Initialize Complete.");
 

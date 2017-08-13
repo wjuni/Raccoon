@@ -74,7 +74,7 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
     }
     
     //crc check
-    uint16_t crc_cal = gen_crc16((uint8_t *)buf, sizeof(PktArduinoV2)-sizeof(uint16_t));
+    uint16_t crc_cal = 88; //gen_crc16((uint8_t *)buf, sizeof(PktArduinoV2)-sizeof(uint16_t));
     if(crc_cal != pkt->crc) {
         DEBUG_PRINT_("[FATAL] Packet CRC Incorrect, Expected=");
         DEBUG_PRINT_((unsigned int)crc_cal);
@@ -89,13 +89,7 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target) {
     target->preamble = PKTARDUINO_PREAMBLE;
     target->_reserved = 0;
-    target->crc = gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
-}
-
-void PktRaspi_prepare_packet(PktRaspi *target) {
-    target->preamble = PKTRASPI_PREAMBLE;
-    target->_reserved = 0;
-    target->crc = gen_crc16((uint8_t *)target, sizeof(PktRaspi)-sizeof(uint16_t));
+    target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
 }
 
 
