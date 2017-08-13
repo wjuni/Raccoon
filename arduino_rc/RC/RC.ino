@@ -124,7 +124,7 @@ void loop() {
   }
   PktArduinoV2_prepare_packet(&pkt);
   Serial.write((char *)&pkt, sizeof(pkt));
-  delay(50);
+  delay(100);
 }
 
 ISR(PCINT2_vect){
