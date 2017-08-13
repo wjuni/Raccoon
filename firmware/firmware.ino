@@ -14,8 +14,8 @@
 
 /* GLOBAL */
 SerialComm raspicomm(&Serial1, 115200);
-GPS gps(&Serial2);
-Compass compass;
+//GPS gps(&Serial2);
+//Compass compass;
 long epoch = 0;
 
 /* Prototype */
@@ -45,11 +45,11 @@ void setup() {
 }
 
 void loop() {
-    gps.read();
-    compass.read();
+    //gps.read();
+    //compass.read();
     raspicomm.read(packet_handler);
 
-    if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
+    /*if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
         epoch = 0;
         PktRaspi p;
         p.gps_lat = (uint32_t) (gps.data.latitude * DEG_MULTIPLIER);
@@ -61,8 +61,8 @@ void loop() {
         PktRaspi_prepare_packet(&p);
         raspicomm.write(&p, sizeof(PktRaspi));
     }
-
-    delay(10);
+*/
+    delay(100);
     epoch++;
 }
 
