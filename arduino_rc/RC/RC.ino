@@ -49,7 +49,8 @@ void loop() {
     if (time_pulse[1] < 1100)
       vel = 0; //stop
     else 
-      vel = (time_pulse[1]-1020)/100; //velocity
+      vel = (time_pulse[1]-1000)/10; //velocity
+//        vel = 10;
 
     if (time_pulse[0]<1200){
       //left
@@ -73,7 +74,6 @@ void loop() {
       //L2 : vel
       //R1 : vel
       //R2 : -vel
-
     }
     else
       //front or retrieve
@@ -123,8 +123,15 @@ void loop() {
     //R2 : 0
   }
   PktArduinoV2_prepare_packet(&pkt);
+//  cli();
   Serial.write((char *)&pkt, sizeof(pkt));
-  delay(100);
+//  sei();
+//  Serial.print(time_pulse[0]);
+//  Serial.print(time_pulse[1]);
+//  Serial.print(time_pulse[2]);
+//  Serial.println(time_pulse[3]);
+//  Serial.println(vel);
+delay(100);
 }
 
 ISR(PCINT2_vect){

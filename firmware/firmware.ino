@@ -6,7 +6,7 @@
 #include "SerialComm.h"
 
 #define RASPI_REPORT_PERIOD 500
-#define READ_PERIOD 25
+#define READ_PERIOD 50
 #define LED_OUT1 32
 #define LED_OUT2 33
 
@@ -37,14 +37,14 @@ void setup() {
     DEBUG_PRINT("Initialize Complete.");
 
     /* temporary test code */
-    StepMotor_move(1, 100);
-    StepMotor_direction(1, 1);
-    StepMotor_move(2, 100);
-    StepMotor_direction(2, 1);
-    StepMotor_move(3, 100);
-    StepMotor_direction(3, 1);
-    StepMotor_move(4, 100);
-    StepMotor_direction(4, 1);
+//    StepMotor_move(1, 100);
+//    StepMotor_direction(1, 1);
+//    StepMotor_move(2, 100);
+//    StepMotor_direction(2, 1);
+//    StepMotor_move(3, 100);
+//    StepMotor_direction(3, 1);
+//    StepMotor_move(4, 100);
+//    StepMotor_direction(4, 1);
 }
 
 void loop() {
@@ -79,7 +79,7 @@ void packet_handler(PktArduinoV2 *pkt) {
         // Network Complete Broadcast
         digitalWrite(LED_OUT2, HIGH);
     }
-
+    DEBUG_PRINT(abs(pkt->motor_2_spd));
     StepMotor_move(1, abs(pkt->motor_1_spd));
     StepMotor_direction(1, pkt->motor_1_spd >= 0);
     StepMotor_move(2, abs(pkt->motor_2_spd));

@@ -62,7 +62,7 @@ static void StepMotor_changeperiod(int motor, int period) {
         StepMotor_stop(motor);
         motor_ocr = 0xffff;
     }
-    DEBUG_PRINT(String("Set Motor Period Motor=") + motor + ", Period=" + period + ", OCR=" + motor_ocr);
+//    DEBUG_PRINT(String("Set Motor Period Motor=") + motor + ", Period=" + period + ", OCR=" + motor_ocr);
 
     cli();
     if (motor == 1) {
