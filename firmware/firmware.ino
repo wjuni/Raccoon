@@ -35,16 +35,6 @@ void setup() {
     raspicomm.begin(9600);
 
     DEBUG_PRINT("Initialize Complete.");
-
-    /* temporary test code */
-//    StepMotor_move(1, 100);
-//    StepMotor_direction(1, 1);
-//    StepMotor_move(2, 100);
-//    StepMotor_direction(2, 1);
-//    StepMotor_move(3, 100);
-//    StepMotor_direction(3, 1);
-//    StepMotor_move(4, 100);
-//    StepMotor_direction(4, 1);
 }
 
 void loop() {
@@ -88,6 +78,5 @@ void packet_handler(PktArduinoV2 *pkt) {
     StepMotor_direction(3, pkt->motor_3_spd >= 0);
     StepMotor_move(4, abs(pkt->motor_4_spd));
     StepMotor_direction(4, pkt->motor_4_spd >= 0);
-
 }
 
