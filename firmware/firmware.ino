@@ -6,14 +6,14 @@
 #include "SerialComm.h"
 
 #define RASPI_REPORT_PERIOD 500
-#define READ_PERIOD 10
+#define READ_PERIOD 25
 #define LED_OUT1 32
 #define LED_OUT2 33
 
 #define abs(x) ((x)>0 ? (x) : -(x))
 
 /* GLOBAL */
-SerialComm raspicomm(&Serial1, 115200);
+SerialComm raspicomm(&Serial1);
 //GPS gps(&Serial2);
 //Compass compass;
 long epoch = 0;
@@ -30,6 +30,8 @@ void setup() {
 
     pinMode(LED_OUT1, OUTPUT);
     pinMode(LED_OUT2, OUTPUT);
+    DEBUG_PRINT("RaspberryPi Comm Begin...");
+    raspicomm.begin(115200);
 
     DEBUG_PRINT("Initialize Complete.");
 
@@ -62,7 +64,7 @@ void loop() {
         raspicomm.write(&p, sizeof(PktRaspi));
     }
 */
-    delay(100);
+    delay(READ_PERIOD);
     epoch++;
 }
 

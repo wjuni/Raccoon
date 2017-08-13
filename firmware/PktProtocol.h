@@ -13,15 +13,15 @@
 #define PKTARDUINO_PREAMBLE 0x24
 #define PKTRASPI_PREAMBLE 0x31
 #include <stdint.h>
-typedef struct {
-    uint8_t preamble;
-    uint8_t _reserved;
-    uint16_t mode;
-    int32_t head_degree;
-    int32_t x_deviation;
-    int32_t y_deviation;
-    uint16_t crc;
-}  __attribute__((packed)) PktArduino;
+//typedef struct {
+//    uint8_t preamble;
+//    uint8_t _reserved;
+//    uint16_t mode;
+//    int32_t head_degree;
+//    int32_t x_deviation;
+//    int32_t y_deviation;
+//    uint16_t crc;
+//}  __attribute__((packed)) PktArduino;
 
 typedef struct {
     uint8_t preamble;

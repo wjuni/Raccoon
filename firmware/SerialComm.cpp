@@ -2,22 +2,32 @@
 #include "SerialComm.h"
 #include "debug.h"
 
-SerialComm::SerialComm(HardwareSerial *ser, unsigned long baudrate) : received_packet(), serial_buffer() {
+SerialComm::SerialComm(HardwareSerial *ser) : received_packet(), serial_buffer() {
   this->serial = ser;
-  this->serial->begin(baudrate);
   memset(this->serial_buffer, 0, BUFFER_SIZE);
   this->buffer_len = 0;
   memset(&received_packet, 0, sizeof(PktArduinoV2));
   memset(serial_buffer, 0, sizeof(serial_buffer));
 }
 
+void SerialComm::begin(unsigned long baudrate) {
+  this->serial->begin(baudrate);
+}
+
 void SerialComm::read(void (*handler)(PktArduinoV2 *)){
   if (this->serial->available() > 0 && BUFFER_SIZE > this->buffer_len) {
     buffer_len += this->serial->readBytes(this->serial_buffer + this->buffer_len, BUFFER_SIZE - this->buffer_len);
-    DEBUG_PRINT("Packet Read, Acclen=" + buffer_len);
+    DEBUG_PRINT_("Packet Read, Acclen=");
+    DEBUG_PRINT(buffer_len);
   }
   if(this->buffer_len >= BUFFER_SIZE) {
-    DEBUG_PRINT("New Packet Detected.");
+    DEBUG_PRINT_("New Packet Detected Starting With ");
+    DEBUG_PRINT_((unsigned int)this->serial_buffer[0]);
+    DEBUG_PRINT_(" ");
+    DEBUG_PRINT_((unsigned int)this->serial_buffer[1]);
+    DEBUG_PRINT_(" ");
+    DEBUG_PRINT((unsigned int)this->serial_buffer[2]);
+
     if(PktArduinoV2_parse_packet(serial_buffer, buffer_len, &(this->received_packet)) > 0){
       // on Packet Received Successful
       DEBUG_PRINT("Packet Read Successful");
