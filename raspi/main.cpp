@@ -223,7 +223,7 @@ bool process(cv::Mat *pim, bool toRotate, string path, string filename){
     pkt.motor_4_spd = 0;
     PktArduinoV2_prepare_packet(&pkt);
 //    printf("%d %d\n", pkt.x_deviation, pkt.y_deviation);
-    uart.write(&pkt, sizeof(PktArduino));
+    uart.write(&pkt, sizeof(PktArduinoV2));
 
     
     
@@ -295,7 +295,7 @@ int main(int argc, const char * argv[]) {
     pkt.motor_3_spd = 0;
     pkt.motor_4_spd = 0;
     PktArduinoV2_prepare_packet(&pkt);
-    uart.write(&pkt, sizeof(PktArduino)); // notify boot complete
+    uart.write(&pkt, sizeof(PktArduinoV2)); // notify boot complete
     
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
