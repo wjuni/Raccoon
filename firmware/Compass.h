@@ -11,6 +11,7 @@ class Compass {
     float headingDegrees;
     boolean connected;
     Compass();
+    void begin();
     void read();
 };
 

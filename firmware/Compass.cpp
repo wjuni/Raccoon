@@ -1,15 +1,19 @@
 #include "Compass.h"
 #include "debug.h"
 
-Compass::Compass() : sensor(), headingDegrees() {
-  DEBUG_PRINT("Compass Initialize Start...");
+Compass::Compass(){
+  this->connected = false;
+}
+
+void Compass::begin() {
   if(!this->sensor.begin()) {
     DEBUG_PRINT("Compass Initialize Fail");
     return;
   }
-  
+  DEBUG_PRINT("Compass connect successful.");
+
   this->connected = true;
-  
+
   // Set measurement range
   this->sensor.setRange(HMC5883L_RANGE_1_3GA);
 
@@ -40,7 +44,7 @@ void Compass::read() {
   // (+) Positive or (-) for negative
   // For Bytom / Poland declination angle is 4'26E (positive)
   // Formula: (deg + (min / 60.0)) / (180 / M_PI);
-  double declinationAngle = - (7.0 + (35.0 / 60.0)) / (180 / M_PI);
+  double declinationAngle = - (7.0 + (35.0 / 60.0)) / (180 / M_PI); // for Daejeon, KR
   heading += declinationAngle;
 
   // Correct for heading < 0deg and heading > 360deg
