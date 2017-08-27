@@ -39,11 +39,36 @@ void setup() {
     compass.begin(); delay(10);
 
     DEBUG_PRINT("Initialize Complete.");
+	   for(int i=0;i<=100;i+=1){
+        StepMotor_move(1,i);
+        StepMotor_direction(1, 1);
+        StepMotor_move(2, i);
+        StepMotor_direction(2, 1);
+        StepMotor_move(3, i);
+        StepMotor_direction(3, 1);
+        StepMotor_move(4, i);
+        StepMotor_direction(4, 1);
+      delay(70);
+
+    }
+     for(int i=100;i>=0;i-=1){
+        StepMotor_move(1,i);
+        StepMotor_direction(1, 1);
+        StepMotor_move(2, i);
+        StepMotor_direction(2, 1);
+        StepMotor_move(3, i);
+        StepMotor_direction(3, 1);
+        StepMotor_move(4, i);
+        StepMotor_direction(4, 1);
+      delay(70);
+
+    }
+	
 }
 
 void loop() {
     gps.read();
-    compass.read();
+    //compass.read();
     raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {

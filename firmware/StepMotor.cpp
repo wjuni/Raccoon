@@ -25,6 +25,20 @@ void StepMotor_initialize() {
     TCCR4B &= ~((1 << CS42) | (1 << CS41) | (1 << CS40));
     TCCR5B &= ~((1 << CS52) | (1 << CS51) | (1 << CS50));
 
+    // set Wave generation mode to CTC - 0100
+    TCCR1B &= ~((1 << WGM13) | (1 << WGM12));
+    TCCR3B &= ~((1 << WGM33) | (1 << WGM32));
+    TCCR4B &= ~((1 << WGM43) | (1 << WGM42));
+    TCCR5B &= ~((1 << WGM53) | (1 << WGM52));
+    TCCR1B |= ((1 << WGM12));
+    TCCR3B |= ((1 << WGM32));
+    TCCR4B |= ((1 << WGM42));
+    TCCR5B |= ((1 << WGM52));
+    TCCR1A &= ~((1 << WGM11) | (1 << WGM10));
+    TCCR3A &= ~((1 << WGM31) | (1 << WGM30));
+    TCCR4A &= ~((1 << WGM41) | (1 << WGM40));
+    TCCR5A &= ~((1 << WGM51) | (1 << WGM50));
+
     TIMSK1 |= (1 << OCIE1A);
     TIMSK3 |= (1 << OCIE3A);
     TIMSK4 |= (1 << OCIE4A);
@@ -49,10 +63,10 @@ void StepMotor_initialize() {
     TCNT5L = 0;
 
     // restart timer
-    TCCR1B |= (1 << CS12) | (0 << CS11) | (0 << CS10);
-    TCCR3B |= (1 << CS32) | (0 << CS31) | (0 << CS30);
-    TCCR4B |= (1 << CS42) | (0 << CS41) | (0 << CS40);
-    TCCR5B |= (1 << CS52) | (0 << CS51) | (0 << CS50);
+    TCCR1B |= (0 << CS12) | (1 << CS11) | (1 << CS10);
+    TCCR3B |= (0 << CS32) | (1 << CS31) | (1 << CS30);
+    TCCR4B |= (0 << CS42) | (1 << CS41) | (1 << CS40);
+    TCCR5B |= (0 << CS52) | (1 << CS51) | (1 << CS50);
     sei();
 }
 
@@ -63,8 +77,11 @@ static void StepMotor_changeperiod(int motor, int period) {
         motor_ocr = 0xffff;
     }
     DEBUG_PRINT(String("Set Motor Period Motor=") + motor + ", Period=" + period + ", OCR=" + motor_ocr);
+    TCCR1B &= ~((1 << CS12) | (1 << CS11) | (1 << CS10));
+    TCCR3B &= ~((1 << CS32) | (1 << CS31) | (1 << CS30));
+    TCCR4B &= ~((1 << CS42) | (1 << CS41) | (1 << CS40));
+    TCCR5B &= ~((1 << CS52) | (1 << CS51) | (1 << CS50));
 
-    cli();
     if (motor == 1) {
         OCR1AH = (motor_ocr >> 8) & 0xFF;
         OCR1AL = (motor_ocr) & 0xFF;
@@ -86,7 +103,12 @@ static void StepMotor_changeperiod(int motor, int period) {
         TCNT5H = 0;
         TCNT5L = 0;
     }
-    sei();
+    
+    TCCR1B |= (1 << CS12) | (0 << CS11) | (0 << CS10);
+    TCCR3B |= (1 << CS32) | (0 << CS31) | (0 << CS30);
+    TCCR4B |= (1 << CS42) | (0 << CS41) | (0 << CS40);
+    TCCR5B |= (1 << CS52) | (0 << CS51) | (0 << CS50);
+    
 }
 
 void StepMotor_move(int motor, int speed) {
@@ -94,7 +116,8 @@ void StepMotor_move(int motor, int speed) {
         speed = 0;
     if (speed >= 100)
         speed = 100;
-    int scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX + (100-speed) * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
+   // int scaled_period = static_cast<int>(STEP_MOTOR_SPEED_MAX + (100-speed) * ((STEP_MOTOR_SPEED_MIN - STEP_MOTOR_SPEED_MAX) / 100.));
+    int scaled_period = static_cast<int>(50000.0 / (100*STEP_MOTOR_FREQ_MIN + (STEP_MOTOR_FREQ_MAX-STEP_MOTOR_FREQ_MIN) * speed));
     if (speed != 0) StepMotor_global_enable(); // enable driver if driver is off
     motor_enable[motor - 1] = (speed != 0); // start or stop motor according to speed
     DEBUG_PRINT(String("Set Motor Speed Motor=") + motor + ", Speed=" + speed);
@@ -108,6 +131,8 @@ void StepMotor_direction(int motor, int dir) {
         PORTK |= (1 << (motor + 3));
     else
         PORTK &= ~(1 << (motor + 3));
+    DEBUG_PRINT(String("PORTK=") + (int)(PORTK & 0x10));
+        
 }
 
 void StepMotor_global_enable() {
