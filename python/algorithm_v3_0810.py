@@ -1,10 +1,13 @@
 import cv2
 import os.path
 import numpy as np
+from pylab import figure, axis, pie, title, plot, show, savefig, xlabel, ylabel, annotate, close
+
 
 LINEWIDTH_DEFAULT = 0.220 # of screen width
-TARGET_FRAMESIZE = (240, 136)
-N = 8
+# TARGET_FRAMESIZE = (240, 136)
+TARGET_FRAMESIZE = (854, 480)
+N = 16
 CONV_THRESH = 25  # change according to the screen width (30% of width is appropriate)
 LINE_MARGIN_RATIO = 1.2
 
@@ -25,7 +28,7 @@ def process(path, filename, rotate, lines):
     if rotate:
         im = cv2.rotate(im, cv2.ROTATE_90_CLOCKWISE, im)
 
-    im = cv2.resize(im, TARGET_FRAMESIZE, 0, 0, cv2.INTER_CUBIC)
+    # im = cv2.resize(im, TARGET_FRAMESIZE, 0, 0, cv2.INTER_CUBIC)
 
     height, width = TARGET_FRAMESIZE
 
@@ -54,6 +57,12 @@ def process(path, filename, rotate, lines):
         if estimated_linewidth > local_max_linewidth :
             local_max_linewidth = estimated_linewidth
 
+        # figure()
+        # title('Distribution of Thresholded Pixels')
+        # plot(normalized_vec)
+        # ylabel('number of thres. pixels in column (normalized)')
+        # xlabel('horizontal axis (px)')
+        # savefig('normalized_vec.png', transparent=True)
 
         conv_filter = np.zeros(shape=(int(estimated_linewidth*1.5)))
         conv_filter[:] = -1
@@ -61,12 +70,21 @@ def process(path, filename, rotate, lines):
         # print conv_filter
 
         conv = np.convolve(normalized_vec, conv_filter)
-        # plt.figure()
-        # plt.plot(conv)
-        # plt.show()
-        # print conv
-        # print len(conv_filter), len(normalized_vec), len(conv)
-        # print np.max(conv), np.argmax(conv)
+        figure()
+        plot(conv)
+        title('Convolution Result')
+        xlabel('(px)')
+        t = np.arange(0., len(conv))
+        t2 = np.arange(0., len(conv))
+        t2.fill(75.)
+        plot(t, t2, 'r--')
+        axis([200, 900, -150, 250])
+        savefig('convolution_result_' + str(i) + '.png', transparent=True)
+        close()
+
+        print conv
+        print len(conv_filter), len(normalized_vec), len(conv)
+        print np.max(conv), np.argmax(conv)
         for l in range(lines):
             max_v = np.max(conv)
             max_arg = np.argmax(conv)
@@ -112,15 +130,15 @@ def process(path, filename, rotate, lines):
         betahat = corr * xstd / ystd
         alphahat = xavg - yavg * betahat
         print betahat, alphahat
-        cv2.line(im,
-                 (int(alphahat), 0),
-                 (int(alphahat + betahat * height), height), (255, 0, 255), 2)
-        cv2.line(im,
-                 (int(alphahat + global_linewidth_estimation / 2), 0),
-                 (int(alphahat + betahat * height + global_linewidth_estimation / 2), height), (0, 255, 0), 2)
-        cv2.line(im,
-                 (int(alphahat - global_linewidth_estimation / 2), 0),
-                 (int(alphahat + betahat * height - global_linewidth_estimation / 2), height), (0, 255, 0), 2)
+        # cv2.line(im,
+        #          (int(alphahat), 0),
+        #          (int(alphahat + betahat * height), height), (255, 0, 255), 2)
+        # cv2.line(im,
+        #          (int(alphahat + global_linewidth_estimation / 2), 0),
+        #          (int(alphahat + betahat * height + global_linewidth_estimation / 2), height), (0, 255, 0), 2)
+        # cv2.line(im,
+        #          (int(alphahat - global_linewidth_estimation / 2), 0),
+        #          (int(alphahat + betahat * height - global_linewidth_estimation / 2), height), (0, 255, 0), 2)
     except:
         print ("To minimal")
 
@@ -145,8 +163,19 @@ def process(path, filename, rotate, lines):
     return True
 
 
+#
+# figure()
+# # title('Distribution of Thresholded Pixels')
+# conv_filter = np.zeros(shape=(int(160 * 1.5)))
+# conv_filter[:] = -1
+# conv_filter[int(160 / 4):int(160 * 5 / 4)] = 1
+#
+# plot(conv_filter)
+# xlabel('(px)')
+# savefig('filter.png', transparent=True)
+
 fileId = 0
-while fileId< 149:
+while fileId< 1:
     fileId += 1
     path = "/Users/wjuni/ffmpeg/"
     filename = "frame%04d.jpg" % (fileId)

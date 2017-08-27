@@ -13,6 +13,7 @@ class GPS {
   public:
     GpsData data;
     GPS(HardwareSerial *ser);
+    void begin();
     void read();
 };
 #endif /* GpsModule_h */

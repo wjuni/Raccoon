@@ -3,14 +3,18 @@
 #include "debug.h"
 
 GPS::GPS(HardwareSerial *ser) {
-  DEBUG_PRINT("GPS Initialize Start...");
   memset(&this->data, 0, sizeof(GpsData));
-  this->data.GPS = new Adafruit_GPS(ser);
-  this->data.GPS->begin(9600);
-  this->data.GPS->sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
-  this->data.GPS->sendCommand(PMTK_SET_NMEA_UPDATE_5HZ); // 5 Hz update rate
+  this->data.ser = ser;
+}
+
+void GPS::begin() {
+    this->data.GPS = new Adafruit_GPS(this->data.ser);
+    this->data.GPS->begin(9600);
+    this->data.GPS->sendCommand(PMTK_SET_NMEA_OUTPUT_RMCGGA);
+    this->data.GPS->sendCommand(PMTK_SET_NMEA_UPDATE_5HZ); // 5 Hz update rate
 //  GPS.sendCommand(PGCMD_ANTENNA);
 }
+
 void GPS::read() {
   int c = this->data.GPS->read();
 #ifdef DEBUG

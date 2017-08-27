@@ -17,7 +17,7 @@ ServerCommunicator::ServerCommunicator(std::string uri) {
 
 ServerCommunicator::~ServerCommunicator() {
     if (this->_running) {
-        this->_running = false;
+        //this->_running = false;
         nw_thd.join();
     }
     delete phr;

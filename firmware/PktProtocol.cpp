@@ -92,5 +92,9 @@ void PktArduinoV2_prepare_packet(PktArduinoV2 *target) {
     target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
 }
 
-
+void PktRaspi_prepare_packet(PktRaspi *target) {
+    target->preamble = PKTRASPI_PREAMBLE;
+    target->_reserved = 0;
+    target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
+}
 
