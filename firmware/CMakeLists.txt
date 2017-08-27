@@ -15,7 +15,7 @@ set(${CMAKE_PROJECT_NAME}_SRCS
 
 #### Uncomment below additional settings as needed.
 set(${CMAKE_PROJECT_NAME}_BOARD mega)
-# set(${CMAKE_PROJECT_NAME}_PORT /dev/ttyACM0)
+ set(${CMAKE_PROJECT_NAME}_PORT /dev/cu.SLAB_USBtoUART)
 set(mega.build.mcu atmega2560)
 # set(mega.upload.protocol wiring)
 # set(mega.upload.speed 115200)

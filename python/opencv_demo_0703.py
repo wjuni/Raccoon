@@ -68,8 +68,10 @@ def process(path, filename, rotate):
     # cv2.imwrite(path + filename + '_out.jpg', frame_threshed)
     # cv2.imwrite(path + filename + '_out0.jpg', filtered)
 
-    cv2.circle(im, (width / 2, height / 2), 2, (255, 0, 0), thickness=3)
-    cv2.circle(im, (int(moment_x), int(moment_y)), 2, (255, 0, 255), thickness=3)
+    # cv2.circle(im, (width / 2, height / 2), 2, (255, 0, 0), thickness=3)
+    cv2.circle(im, (int(moment_x), int(moment_y)), 2, (255, 0, 255), thickness=15)
+
+    cv2.imwrite(path + 'threshed_com.jpg', im)
 
     best_fit_param = []
     best_fit_area = 0
@@ -155,7 +157,7 @@ def process(path, filename, rotate):
 
 
 fileId = 0
-while True:
+while fileId< 1:
     fileId += 1
     path = "/Users/wjuni/ffmpeg/"
     filename = "frame%04d.jpg" % (fileId)
