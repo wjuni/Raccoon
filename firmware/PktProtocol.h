@@ -8,7 +8,7 @@
 #ifndef PktProtocol_h
 #define PktProtocol_h
 #define PKTARDUINO_MULTIPLIER 100000
-#define DEG_MULTIPLIER 1000000 // i.e. 127.359942 -> 127359942
+#define DEG_MULTIPLIER 1000 // i.e. 127.359942 -> 127359942
 #define SPD_ALT_MULTIPLIER 100 // i.e. 4.23km/h -> 423, 123.45m -> 12345
 #define PKTARDUINO_PREAMBLE 0x24
 #define PKTRASPI_PREAMBLE 0x31

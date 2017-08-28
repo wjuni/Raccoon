@@ -1,7 +1,7 @@
 #include "debug.h"
 #include "PktProtocol.h"
 #include "GpsModule.h"
-#include "Compass.h"
+//#include "Compass.h"
 #include "StepMotor.h"
 #include "SerialComm.h"
 
@@ -15,7 +15,7 @@
 /* GLOBAL */
 SerialComm raspicomm(&Serial1);
 GPS gps(&Serial2);
-Compass compass;
+//Compass compass;
 long epoch = 0;
 
 /* Prototype */
@@ -26,20 +26,21 @@ void setup() {
     Serial.begin(115200);
 #endif
     DEBUG_PRINT("Firmware Boot Start...");
-    StepMotor_initialize();
+   StepMotor_initialize();
 
     pinMode(LED_OUT1, OUTPUT);
     pinMode(LED_OUT2, OUTPUT);
-
     DEBUG_PRINT("RaspberryPi Comm Begin...");
     raspicomm.begin(9600); delay(10);
     DEBUG_PRINT("GPS Module Begin...");
     gps.begin(); delay(10);
-    DEBUG_PRINT("Compass Module Begin...");
-    compass.begin(); delay(10);
-
+    
     DEBUG_PRINT("Initialize Complete.");
-	   for(int i=0;i<=100;i+=1){
+    
+// DEBUG_PRINT("Compass Module Begin...");
+ //   compass.begin(); delay(10);
+
+/*   for(int i=0;i<=100;i+=1){
         StepMotor_move(1,i);
         StepMotor_direction(1, 1);
         StepMotor_move(2, i);
@@ -63,15 +64,20 @@ void setup() {
       delay(70);
 
     }
-	
+*/ 
 }
 
 void loop() {
-    gps.read();
-    //compass.read();
-    raspicomm.read(packet_handler);
+   gps.read();
+ //   compass.read();
+//    raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
+    Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
+      Serial.println((long)(gps.data.longitude*DEG_MULTIPLIER));
+      Serial.println((long)(gps.data.altitude*SPD_ALT_MULTIPLIER));
+      Serial.println((long)(gps.data.speed*SPD_ALT_MULTIPLIER));
+      Serial.println((int)gps.data.fix);
         epoch = 0;
         PktRaspi p;
         p.gps_lat = (uint32_t) (gps.data.latitude * DEG_MULTIPLIER);
@@ -82,6 +88,7 @@ void loop() {
         p.voltage = (uint16_t) (((uint32_t) analogRead(A0) * 57) / 2.048);
         PktRaspi_prepare_packet(&p);
         raspicomm.write(&p, sizeof(PktRaspi));
+ 
     }
 
     delay(READ_PERIOD);
