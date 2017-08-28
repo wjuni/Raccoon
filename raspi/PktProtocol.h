@@ -39,7 +39,7 @@ typedef struct {
     uint16_t voltage;
     uint16_t crc;
 }  __attribute__((packed)) PktRaspi;
-
+int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi  *target);
 int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2  *target);
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target);
 void PktRaspi_prepare_packet(PktRaspi *target);
