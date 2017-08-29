@@ -1,4 +1,4 @@
-#include <cstring>
+#include <string.h>
 #include "SerialComm.h"
 #include "debug.h"
 

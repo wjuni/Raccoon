@@ -259,11 +259,11 @@ bool process(string path, string filename, bool toRotate) {
     cv::resize(im, im, cv::Size(136, 240), 0, 0, cv::INTER_CUBIC);
     return process(&im, true, path, filename);
 }
-
+int buffer_len = 0;
+PktRaspi received_packet;
+char serial_buffer[BUFFER_SIZE];
+    
 void read(void (*handler)(PktRaspi *)) {
-    int buffer_len = 0;
-    PktRaspi received_packet;
-    char serial_buffer[BUFFER_SIZE];
     memset(serial_buffer, 0, BUFFER_SIZE);
     if(BUFFER_SIZE > buffer_len) {
         if(buffer_len == 0) {

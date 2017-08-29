@@ -1,7 +1,7 @@
 #include "debug.h"
 #include "PktProtocol.h"
 #include "GpsModule.h"
-//#include "Compass.h"
+#include "Compass.h"
 #include "StepMotor.h"
 #include "SerialComm.h"
 
@@ -15,7 +15,7 @@
 /* GLOBAL */
 SerialComm raspicomm(&Serial1);
 GPS gps(&Serial2);
-//Compass compass;
+Compass compass;
 long epoch = 0;
 
 /* Prototype */
@@ -37,8 +37,8 @@ void setup() {
     
     DEBUG_PRINT("Initialize Complete.");
     
-// DEBUG_PRINT("Compass Module Begin...");
- //   compass.begin(); delay(10);
+  DEBUG_PRINT("Compass Module Begin...");
+    compass.begin(); delay(10);
 
 /*   for(int i=0;i<=100;i+=1){
         StepMotor_move(1,i);
@@ -69,8 +69,8 @@ void setup() {
 
 void loop() {
    gps.read();
- //   compass.read();
-//    raspicomm.read(packet_handler);
+   compass.read();
+    raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
       Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
