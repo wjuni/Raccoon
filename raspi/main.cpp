@@ -260,21 +260,27 @@ bool process(string path, string filename, bool toRotate) {
     return process(&im, true, path, filename);
 }
 int buffer_len = 0;
-PktRaspi received_packet;
 char serial_buffer[BUFFER_SIZE];
     
 void read(void (*handler)(PktRaspi *)) {
-    memset(serial_buffer, 0, BUFFER_SIZE);
-    if(BUFFER_SIZE > buffer_len) {
+    PktRaspi received_packet;
+
+   if(BUFFER_SIZE > buffer_len) {
         if(buffer_len == 0) {
             while(uart.read() != PKTRASPI_PREAMBLE);
             serial_buffer[buffer_len++] = PKTRASPI_PREAMBLE;
         }
 //        buffer_len += this->serial->readBytes(this->serial_buffer + this->buffer_len, BUFFER_SIZE - this->buffer_len);
-        buffer_len += uart.read(serial_buffer + buffer_len, BUFFER_SIZE - buffer_len);
-        cout << "Packet Read, Acclen=";
-        cout << buffer_len << endl;
-    }
+      long read_byte = uart.read(serial_buffer + buffer_len, BUFFER_SIZE - buffer_len);
+	if(read_byte >= 0) {
+	      cout << "Read Byte = " << read_byte << endl;
+	      buffer_len += read_byte;
+
+	      cout << "Packet Read, Acclen=";
+	      cout << buffer_len << endl;
+ 
+	}
+   }
 
     if(buffer_len >= BUFFER_SIZE) {
         cout << "New Packet Detected Starting With ";
@@ -350,9 +356,11 @@ int main(int argc, const char * argv[]) {
 /*    read_vid(); */
     // read_img();/
 
+    memset(serial_buffer, 0, BUFFER_SIZE);
+ 
     while(true) {
         read(packet_handler);
-        usleep(10000);
+    //    usleep(10000);
     }
 
     return 0;
