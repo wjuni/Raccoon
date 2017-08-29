@@ -17,7 +17,7 @@
 #include "PktProtocol.h"
 #include "UART.h"
 #include "ServerCommunicator.hpp"
-
+#include <unistd.h>
 #ifdef RASPBERRY_PI
 #define TEST_FFMPEG_PATH "/home/wjuni/opencvtest/ffmpeg/"
 #else

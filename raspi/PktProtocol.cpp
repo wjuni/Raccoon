@@ -85,7 +85,7 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
     memcpy(target, buf, sizeof(PktArduinoV2));
     return 1;
 }
-int PktRaspi_prepare_packet(const char* buf, unsigned long len, PktRaspi *target) {
+int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi *target) {
     PktRaspi *pkt = (PktRaspi *)buf;
     
     //length check
