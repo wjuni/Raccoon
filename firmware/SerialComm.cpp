@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "SerialComm.h"
 #include "debug.h"
 
@@ -42,6 +42,7 @@ void SerialComm::read(void (*handler)(PktArduinoV2 *)) {
         this->buffer_len = 0; //clear buffer
     }
 }
+
 
 int SerialComm::write(void *payload, unsigned int len) {
     DEBUG_PRINT("Serial Write");

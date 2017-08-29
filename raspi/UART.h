@@ -17,6 +17,7 @@ public:
     UART(std::string deviceName);
     int begin(unsigned long baudrate);
     long read(void *buf, unsigned long len);
+	int read();
     long write(void *buf, unsigned long len);
     void close();
 };

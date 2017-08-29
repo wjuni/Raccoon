@@ -74,7 +74,12 @@ long UART::read(void *buf, unsigned long len) {
         return ::read(uart0_filestream, buf, len);
     return 0;
 }
-
+int UART::read(){
+	int b=0;
+	
+	UART::read(&b,1);
+	return b;
+}
 void UART::close() {
     ::close(uart0_filestream);
 }

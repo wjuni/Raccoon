@@ -73,7 +73,7 @@ void loop() {
 //    raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
-    Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
+      Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
       Serial.println((long)(gps.data.longitude*DEG_MULTIPLIER));
       Serial.println((long)(gps.data.altitude*SPD_ALT_MULTIPLIER));
       Serial.println((long)(gps.data.speed*SPD_ALT_MULTIPLIER));

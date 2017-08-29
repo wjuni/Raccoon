@@ -5,6 +5,7 @@
 //  Copyright © 2017 Hwijoon Lim. All rights reserved.
 //
 #define _USE_MATH_DEFINES
+#define BUFFER_SIZE sizeof(PktRaspi)
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -259,6 +260,40 @@ bool process(string path, string filename, bool toRotate) {
     return process(&im, true, path, filename);
 }
 
+void read(void (*handler)(PktRaspi *)) {
+    int buffer_len = 0;
+    PktRaspi received_packet;
+    char serial_buffer[BUFFER_SIZE];
+    memset(serial_buffer, 0, BUFFER_SIZE);
+    if(BUFFER_SIZE > buffer_len) {
+        if(buffer_len == 0) {
+            while(uart.read() != PKTRASPI_PREAMBLE);
+            serial_buffer[buffer_len++] = PKTRASPI_PREAMBLE;
+        }
+//        buffer_len += this->serial->readBytes(this->serial_buffer + this->buffer_len, BUFFER_SIZE - this->buffer_len);
+        buffer_len += uart.read(serial_buffer + buffer_len, BUFFER_SIZE - buffer_len);
+        cout << "Packet Read, Acclen=";
+        cout << buffer_len << endl;
+    }
+
+    if(buffer_len >= BUFFER_SIZE) {
+        cout << "New Packet Detected Starting With ";
+        cout << ((unsigned int) serial_buffer[0]);
+        cout << " ";
+        cout << ((unsigned int) serial_buffer[1]);
+        cout << " ";
+        cout << ((unsigned int) serial_buffer[2]) << endl;
+
+        if (PktRaspi_parse_packet(serial_buffer, buffer_len, &received_packet) > 0) {
+            cout << "Packet Read Successful" << endl;
+            (*handler)(&received_packet);
+        }
+
+        buffer_len = 0; //clear buffer
+    }
+
+}
+
 void read_img(){
     char dst[100] = {};
     for(int i=1;i<=302;i++){
@@ -284,6 +319,12 @@ void read_vid(){
     }
 }
 
+void packet_handler(PktRaspi *pkt) {
+   cout << "GPS Lat : " << pkt->gps_lat << endl;
+   cout << "GPS Lon : " << pkt->gps_lon << endl;
+   cout << "GPS Fix : " << pkt->gps_fix << endl;
+}
+
 int main(int argc, const char * argv[]) {
     
     /* UART */
@@ -307,6 +348,12 @@ int main(int argc, const char * argv[]) {
     server.start(&context);
     
 /*    read_vid(); */
-    read_img();
+    // read_img();/
+
+    while(true) {
+        read(packet_handler);
+        usleep(10000);
+    }
+
     return 0;
 }
