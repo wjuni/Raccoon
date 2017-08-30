@@ -18,6 +18,7 @@
 #include "UART.h"
 #include "ServerCommunicator.hpp"
 #include <unistd.h>
+#include <time.h>
 #ifdef RASPBERRY_PI
 #define TEST_FFMPEG_PATH "/home/wjuni/opencvtest/ffmpeg/"
 #else
@@ -325,14 +326,37 @@ void read_vid(){
     }
 }
 
+/*
+Initialize the context struct with the values from the board.
+The context struct will be sent to the server later.
+*/
 void packet_handler(PktRaspi *pkt) {
    cout << "GPS Lat : " << pkt->gps_lat << endl;
    cout << "GPS Lon : " << pkt->gps_lon << endl;
    cout << "GPS Fix : " << pkt->gps_fix << endl;
+   context.bot_id = 1;
+//   context.record_time = 
+   context.bot_status = 1;
+//   context.damage_ratio = 
+//   context.acc_distance = 
+//   context.task_id = 
+   context.gps_lat = pkt->gps_lat;
+   context.gps_lon = pkt->gps_lon;
+   context.bot_battery = pkt->voltage>=12 ? 100 : pkt->voltage >= 11 ? 50 : 25;
+   /*
+   If voltage of Raccoon is greater than 12V, consider as 100%
+   If voltage of Raccoon is greater than 11V and less than 12V, consider as 50%
+   Otherwise, consider as 25%
+   */
+   context.bot_speed = pkt->gps_spd;
+   context.bot_version = 10;
 }
 
 int main(int argc, const char * argv[]) {
     
+	/* Start to measure the passed time */
+	time_t Start_t = time(NULL);
+
     /* UART */
     uart.begin(115200);
     PktArduinoV2 pkt;
@@ -360,6 +384,7 @@ int main(int argc, const char * argv[]) {
  
     while(true) {
         read(packet_handler);
+        context.record_time = time(NULL) - Start_t;
     //    usleep(10000);
     }
 

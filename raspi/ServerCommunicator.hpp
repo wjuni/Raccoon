@@ -14,7 +14,16 @@
 #include "PythonHttpsRequest.hpp"
 
 typedef struct {
-    int bot_id, record_time, bot_status, damage_ratio, acc_distance, task_id, gps_lat, gps_lon, bot_battery, bot_speed, bot_version;
+    int bot_id;             // Raccoon bot ID number
+    int record_time;        // Passed time after the robot boots
+    int bot_status;         // 0 : default, 1 : On-line, 2 : Task on progress, 3 : error occured
+    int damage_ratio;       // Damage ratio from the Video (Picture from the cammera)
+    int acc_distance;       // Accumulated distance;
+    int task_id;            // Task id which is on progress (Should be gotten from the board)
+    int gps_lat, gps_lon;   // Gps values
+    int bot_battery;        // Voltage of the battery
+    int bot_speed;          // Speed of the robot gotten from the GPS
+    int bot_version;        // Firmware version
     char repair_module[8];  // have a segfault issue on Raspberry Pi with std::string
 } ServerCommContext;
 
