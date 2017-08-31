@@ -16,7 +16,10 @@ using json = nlohmann::json;
 class PythonHttpsRequest {
 private:
     std::string _uri;
-    std::string buildPythonCode(json *data);
+    //std::string buildPythonCode(json *data);
+    PyObject* ReadResponse(json *data);
+    PyObject* urllib;
+    PyObject* urllib2;
 public:
     PythonHttpsRequest(std::string uri);
     ~PythonHttpsRequest();
