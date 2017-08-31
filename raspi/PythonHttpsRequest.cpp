@@ -20,8 +20,8 @@ PythonHttpsRequest::PythonHttpsRequest(std::string uri) {
     this->_uri = uri;
     Py_SetProgramName((char *)"Raccoon_Python");
     Py_Initialize();
-    this->urllib = PyImport_Import(PyUnicode_FromString("urllib"));
-    this->urllib2 = PyImport_Import(PyUnicode_FromString("urllib2"));
+    this->urllib = PyImport_Import(PyString_FromString("urllib"));
+    this->urllib2 = PyImport_Import(PyString_FromString("urllib2"));
     //PyRun_SimpleString("import urllib, urllib2");
 
 }
@@ -33,8 +33,7 @@ Then receive the json structure from the web frontend
 void PythonHttpsRequest::sendData(json *data) {
     //std::string code = buildPythonCode(data);
     //PyRun_SimpleString(code.c_str());
-    Py_ssize_t len;
-    char* data = PyUnicode_AsUTF8AndSize(ReadResponse(data), &len);
+    char* ReceivedData = PyString_AsString(ReadResponse(data));
 }
 
 PythonHttpsRequest::~PythonHttpsRequest() {
@@ -51,9 +50,9 @@ PyObject* PythonHttpsRequest::ReadResponse(json *data){
     stringStream << data->dump();
     stringStream << "'}\n";
     */
-    PyObject* url = PyUnicode_FromString( (char *)(_uri.c_str()) );
-    PyObject* values;
-    PyDict_SetItemString(values, (char *)"data", PyUnicode_FromString(data->dump()));
+    PyObject* url = PyString_FromString( (char *)(_uri.c_str()) );
+    PyObject* values = PyDict_New();
+    PyDict_SetItemString(values, (char *)"data", PyString_FromString( (data->dump()).c_str() ));
     PyObject* urlencode = PyObject_CallObject(PyObject_GetAttrString(this->urllib, (char *)"urlencode"), PyTuple_Pack(1, values));
     PyObject* request = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"Request"), PyTuple_Pack(2, url, urlencode));
     PyObject* response = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"urlopen"), PyTuple_Pack(1, request));
