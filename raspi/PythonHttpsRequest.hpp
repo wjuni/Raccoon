@@ -21,7 +21,7 @@ private:
     PyObject* urllib;
     PyObject* urllib2;
     PyObject* Response;
-    char* ReceivedData;
+    std::string ReceivedData;
 public:
     PythonHttpsRequest(std::string uri);
     ~PythonHttpsRequest();

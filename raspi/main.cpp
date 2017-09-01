@@ -384,6 +384,7 @@ int main(int argc, const char * argv[]) {
  
     while(true) {
         read(packet_handler);
+        server.GetandParseData();
         context.record_time = time(NULL) - Start_t;
     //    usleep(10000);
     }

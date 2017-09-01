@@ -37,7 +37,7 @@ void PythonHttpsRequest::sendData(json *data) {
 }
 
 void PythonHttpsRequest::ReceiveData() {
-	this->ReceivedData = PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL));
+	this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL)));
 }
 
 PythonHttpsRequest::~PythonHttpsRequest() {
