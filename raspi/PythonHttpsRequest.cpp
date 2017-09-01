@@ -7,11 +7,7 @@
 //
 
 #include "PythonHttpsRequest.hpp"
-#ifdef __APPLE__
-#include <Python/Python.h>
-#else
-#include <Python.h>
-#endif
+
 
 //static std::string code_send ="\nresponse = urllib2.urlopen(urllib2.Request(url, urllib.urlencode(values)))\ndata = response.read()\n"; //"print(response.read())\n";
 

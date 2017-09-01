@@ -50,7 +50,7 @@ private:
     static void handleTransmission(void *data);
     PythonHttpsRequest *phr;
     ServerCommContext *scc;
-    ServerRecvContest *scr;
+    ServerRecvContext *scr;
     
 public:
     ServerCommunicator(std::string uri);
@@ -63,6 +63,6 @@ public:
     inline ServerCommContext *getScc();
 };
 
-vector<string> split(const std::string &s, char delim);
+std::vector<std::string> split(const std::string &s, char delim);
 
 #endif /* ServerCommunicator_hpp */

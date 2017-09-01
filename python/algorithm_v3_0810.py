@@ -21,12 +21,15 @@ def process(path, filename, rotate, lines):
 
     if not os.path.isfile(path + filename):
         return False
+    # if the file is not exist, return
 
     im = cv2.imread(path + filename)
     e1 = cv2.getTickCount()
+    # initialize tick counter to further count time
 
     if rotate:
         im = cv2.rotate(im, cv2.ROTATE_90_CLOCKWISE, im)
+    # if the image is rotated, rotate the image
 
     # im = cv2.resize(im, TARGET_FRAMESIZE, 0, 0, cv2.INTER_CUBIC)
 
@@ -38,6 +41,7 @@ def process(path, filename, rotate, lines):
     ORANGE_MAX = np.array([30, 250, 255],np.uint8)
 
     frame_threshed = cv2.inRange(im_hsv, ORANGE_MIN, ORANGE_MAX)
+    # convert the image into W/B image and threshold it
 
     line_center = []
     line_left = []

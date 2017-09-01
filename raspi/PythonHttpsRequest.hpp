@@ -9,6 +9,11 @@
 #ifndef PythonHttpsRequest_hpp
 #define PythonHttpsRequest_hpp
 
+#ifdef __APPLE__
+#include <Python/Python.h>
+#else
+#include <Python.h>
+#endif
 #include <iostream>
 #include "json.hpp"
 using json = nlohmann::json;
