@@ -60,3 +60,12 @@ void ServerCommunicator::handleTransmission(void *communicator) {
         usleep(750*1000);
     }
 }
+
+void ServerCommunicator::GetData(ServerCommContext *data) {
+    PythonHttpsRequest *phr = this->getPhr();
+    
+    //data->tid = 
+
+
+
+}

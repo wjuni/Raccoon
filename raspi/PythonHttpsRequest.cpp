@@ -33,7 +33,11 @@ Then receive the json structure from the web frontend
 void PythonHttpsRequest::sendData(json *data) {
     //std::string code = buildPythonCode(data);
     //PyRun_SimpleString(code.c_str());
-    char* ReceivedData = PyString_AsString(ReadResponse(data));
+    this->Response = ReturnResponse(data);
+}
+
+void PythonHttpsRequest::ReceiveData() {
+	this->ReceivedData = PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL));
 }
 
 PythonHttpsRequest::~PythonHttpsRequest() {
@@ -41,7 +45,7 @@ PythonHttpsRequest::~PythonHttpsRequest() {
 }
 
 //std::string PythonHttpsRequest::buildPythonCode(json *data){
-PyObject* PythonHttpsRequest::ReadResponse(json *data){
+PyObject* PythonHttpsRequest::GetResponse(json *data){
     /*
     std::ostringstream stringStream;
     stringStream << "url = '";
@@ -56,8 +60,9 @@ PyObject* PythonHttpsRequest::ReadResponse(json *data){
     PyObject* urlencode = PyObject_CallObject(PyObject_GetAttrString(this->urllib, (char *)"urlencode"), PyTuple_Pack(1, values));
     PyObject* request = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"Request"), PyTuple_Pack(2, url, urlencode));
     PyObject* response = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"urlopen"), PyTuple_Pack(1, request));
-    PyObject* read = PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL);
-    return read;
+//    PyObject* read = PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL);
+//    return read;
+    return response;
     /*
     stringStream << code_send;
     return stringStream.str();

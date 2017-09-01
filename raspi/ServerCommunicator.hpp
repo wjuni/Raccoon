@@ -41,6 +41,7 @@ public:
     ~ServerCommunicator();
     void start(ServerCommContext *sco);
     void stop();
+    void GetData(ServerCommContext *data); // Get data from the web page
     inline bool isRunning();
     inline PythonHttpsRequest *getPhr();
     inline ServerCommContext *getScc();

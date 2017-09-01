@@ -17,12 +17,15 @@ class PythonHttpsRequest {
 private:
     std::string _uri;
     //std::string buildPythonCode(json *data);
-    PyObject* ReadResponse(json *data);
+    PyObject* GetResponse(json *data);
     PyObject* urllib;
     PyObject* urllib2;
+    PyObject* Response;
+    char* ReceivedData;
 public:
     PythonHttpsRequest(std::string uri);
     ~PythonHttpsRequest();
     void sendData(json *data);
+    void ReceiveData();
 };
 #endif /* PythonHttpsRequest_hpp */
