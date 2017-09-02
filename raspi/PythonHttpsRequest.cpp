@@ -29,11 +29,11 @@ Then receive the json structure from the web frontend
 void PythonHttpsRequest::sendData(json *data) {
     //std::string code = buildPythonCode(data);
     //PyRun_SimpleString(code.c_str());
-    this->Response = ReturnResponse(data);
+    this->Response = GetResponse(data);
 }
 
 void PythonHttpsRequest::ReceiveData() {
-	this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL)));
+	this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
 }
 
 PythonHttpsRequest::~PythonHttpsRequest() {
