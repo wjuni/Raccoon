@@ -64,3 +64,7 @@ PyObject* PythonHttpsRequest::GetResponse(json *data){
     return stringStream.str();
     */
 }
+
+std::string PythonHttpsRequest::getData() {
+    return this->ReceivedData;
+}
