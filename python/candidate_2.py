@@ -134,7 +134,7 @@ def process(path, filename, rotate, lines):
 fileId = 0
 while True:
     fileId += 1
-    path = "/Users/wjuni/ffmpeg/"
+    path = ""
     filename = "frame%04d.jpg" % (fileId)
     if not os.path.isfile(path + filename):
         break
