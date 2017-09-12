@@ -114,6 +114,7 @@ def process(path, filename, rotate, lines):
         betahat = corr * xstd / ystd
         alphahat = xavg - yavg * betahat
         # print betahat, alphahat
+        # x= alphahat * y + betahat
         cv2.line(im,
                  (int(alphahat), 0),
                  (int(alphahat + betahat * height), height), (255, 0, 255), 2)
