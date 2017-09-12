@@ -63,14 +63,14 @@ void ServerCommunicator::handleTransmission(void *communicator) {
 
 void ServerCommunicator::GetandParseData() {
     PythonHttpsRequest *phr = this->getPhr();
-    ServerRecvContext *data = this->src;
-    std::string RecvStr = phr->ReceiveData();
-    std::vector<std::string> tokens = split(RecvStr, '"');
-    data->tid = atoi(tokens[2].substring(1, tokens[2].length()-2).c_str());
-    data->multi = atoi(tokens[4].substring(1, tokens[4].length()-2).c_str());
-    data->yellow = atoi(tokens[6].substring(1, tokens[6].length()-2).c_str());
-    data->recovery = atoi(tokens[8].substring(1, tokens[8].length()-2).c_str());
-    data->cond = atoi(tokens[10].substring(1, tokens[10].length()-2).c_str());
+    ServerRecvContext *data = this->scr;
+    phr->ReceiveData();
+    std::vector<std::string> tokens = split(phr->getData(), '"');
+    data->tid = atoi(tokens[2].substr(1, tokens[2].length()-2).c_str());
+    data->multi = atoi(tokens[4].substr(1, tokens[4].length()-2).c_str());
+    data->yellow = atoi(tokens[6].substr(1, tokens[6].length()-2).c_str());
+    data->recovery = atoi(tokens[8].substr(1, tokens[8].length()-2).c_str());
+    data->cond = atoi(tokens[10].substr(1, tokens[10].length()-2).c_str());
     data->param = tokens[13];
 }
 

@@ -32,5 +32,6 @@ public:
     ~PythonHttpsRequest();
     void sendData(json *data);
     void ReceiveData();
+    std::string getData();
 };
 #endif /* PythonHttpsRequest_hpp */
