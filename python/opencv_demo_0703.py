@@ -150,18 +150,17 @@ def process(path, filename, rotate):
     t = (e2 - e1)/cv2.getTickFrequency()
     # cv2.imwrite(path + filename + '_out2.jpg', best_fit_est_mask)
     # cv2.imwrite(path + filename + '_out1.jpg', best_fit_filest)
-    cv2.imwrite(path + 'detect_' + filename, im)
+    cv2.imwrite(path + 'alg1_detect_' + filename, im)
 
     print 'Task complete in ', t, 'secs (', 1./t, 'fps)'
     return True
 
 
 fileId = 0
-while fileId< 1:
+while True:
     fileId += 1
     path = "/Users/wjuni/ffmpeg/"
     filename = "frame%04d.jpg" % (fileId)
     print filename
     if not process(path, filename, True):
         break
-# process('/Users/wjuni/', 'test7.jpg', False)

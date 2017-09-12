@@ -1,8 +1,6 @@
 import cv2
 import os.path
 import numpy as np
-from pylab import figure, axis, pie, title, plot, show, savefig, xlabel, ylabel, annotate, close
-
 
 LINEWIDTH_DEFAULT = 0.220 # of screen width
 # TARGET_FRAMESIZE = (240, 136)
@@ -57,16 +55,9 @@ def process(path, filename, rotate, lines):
         # print max_val
         # print normalized_vec
         estimated_linewidth = (np.sum(vec_avg) / 255)
-        print 'linewidth', estimated_linewidth
+        # print 'linewidth', estimated_linewidth
         if estimated_linewidth > local_max_linewidth :
             local_max_linewidth = estimated_linewidth
-
-        # figure()
-        # title('Distribution of Thresholded Pixels')
-        # plot(normalized_vec)
-        # ylabel('number of thres. pixels in column (normalized)')
-        # xlabel('horizontal axis (px)')
-        # savefig('normalized_vec.png', transparent=True)
 
         conv_filter = np.zeros(shape=(int(estimated_linewidth*1.5)))
         conv_filter[:] = -1
@@ -74,21 +65,10 @@ def process(path, filename, rotate, lines):
         # print conv_filter
 
         conv = np.convolve(normalized_vec, conv_filter)
-        figure()
-        plot(conv)
-        title('Convolution Result')
-        xlabel('(px)')
-        t = np.arange(0., len(conv))
-        t2 = np.arange(0., len(conv))
-        t2.fill(75.)
-        plot(t, t2, 'r--')
-        axis([200, 900, -150, 250])
-        savefig('convolution_result_' + str(i) + '.png', transparent=True)
-        close()
 
-        print conv
-        print len(conv_filter), len(normalized_vec), len(conv)
-        print np.max(conv), np.argmax(conv)
+        # print conv
+        # print len(conv_filter), len(normalized_vec), len(conv)
+        # print np.max(conv), np.argmax(conv)
         for l in range(lines):
             max_v = np.max(conv)
             max_arg = np.argmax(conv)
@@ -118,7 +98,7 @@ def process(path, filename, rotate, lines):
         global_linewidth_estimation = local_max_linewidth
     else:
         global_linewidth_estimation = 0.9 * global_linewidth_estimation + 0.1 * local_max_linewidth
-    print global_linewidth_estimation
+    # print global_linewidth_estimation
 
     try:
         xsample = np.array(center_xsample)
@@ -133,16 +113,16 @@ def process(path, filename, rotate, lines):
         # print corr, np.corrcoef(xsample, ysample)[0, 1]
         betahat = corr * xstd / ystd
         alphahat = xavg - yavg * betahat
-        print betahat, alphahat
-        # cv2.line(im,
-        #          (int(alphahat), 0),
-        #          (int(alphahat + betahat * height), height), (255, 0, 255), 2)
-        # cv2.line(im,
-        #          (int(alphahat + global_linewidth_estimation / 2), 0),
-        #          (int(alphahat + betahat * height + global_linewidth_estimation / 2), height), (0, 255, 0), 2)
-        # cv2.line(im,
-        #          (int(alphahat - global_linewidth_estimation / 2), 0),
-        #          (int(alphahat + betahat * height - global_linewidth_estimation / 2), height), (0, 255, 0), 2)
+        # print betahat, alphahat
+        cv2.line(im,
+                 (int(alphahat), 0),
+                 (int(alphahat + betahat * height), height), (255, 0, 255), 2)
+        cv2.line(im,
+                 (int(alphahat + global_linewidth_estimation / 2), 0),
+                 (int(alphahat + betahat * height + global_linewidth_estimation / 2), height), (0, 255, 0), 2)
+        cv2.line(im,
+                 (int(alphahat - global_linewidth_estimation / 2), 0),
+                 (int(alphahat + betahat * height - global_linewidth_estimation / 2), height), (0, 255, 0), 2)
     except:
         print ("To minimal")
 
@@ -160,32 +140,18 @@ def process(path, filename, rotate, lines):
 
     e2 = cv2.getTickCount()
     t = (e2 - e1)/cv2.getTickFrequency()
-    cv2.imwrite(path + 'detect_' + filename, im)
-    cv2.imwrite(path + 'thresh_' + filename, frame_threshed)
+    cv2.imwrite(path + 'alg2_detect_' + filename, im)
+    # cv2.imwrite(path + 'thresh_' + filename, frame_threshed)
 
     print 'Task complete in ', t, 'secs (', 1./t, 'fps)'
     return True
 
 
-#
-# figure()
-# # title('Distribution of Thresholded Pixels')
-# conv_filter = np.zeros(shape=(int(160 * 1.5)))
-# conv_filter[:] = -1
-# conv_filter[int(160 / 4):int(160 * 5 / 4)] = 1
-#
-# plot(conv_filter)
-# xlabel('(px)')
-# savefig('filter.png', transparent=True)
-
 fileId = 0
-while fileId< 1:
+while True:
     fileId += 1
     path = "/Users/wjuni/ffmpeg/"
     filename = "frame%04d.jpg" % (fileId)
     print filename
     if not process(path, filename, True, 1):
         break
-process('/Users/wjuni/', 'test7.jpg', False, 1)
-# raw_input()
-# process("/Users/wjuni/ffmpeg/", 'test_graphics.jpg', False, 1)
