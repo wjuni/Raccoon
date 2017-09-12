@@ -20,7 +20,7 @@ $stmt = $mysqli->prepare("INSERT INTO tbl_status (bot_id, record_time, bot_statu
 acc_distance, task_id, gps_lat, gps_lon, bot_battery, repair_module, bot_speed, bot_version)
 VALUES (?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 $stmt->bind_param("iiiiiiiisii", $data->bid, $data->sta, $data->dam, $data->dis, $data->tid, $data->lat, $data->lon, $data->bat, $data->rep, $data->spd, $data->ver);
-echo $stmt->execute();
+$stmt->execute();
 $stmt->close();
 $mysqli->close();
 
