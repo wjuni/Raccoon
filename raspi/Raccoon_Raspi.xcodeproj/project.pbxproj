@@ -56,6 +56,8 @@
 		619EA8B41F1275F2003F6510 /* libopencv_bgsegm.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 619EA8891F1275F2003F6510 /* libopencv_bgsegm.3.2.0.dylib */; };
 		619EA8B51F1275F2003F6510 /* libopencv_plot.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 619EA88A1F1275F2003F6510 /* libopencv_plot.3.2.0.dylib */; };
 		619EA8B61F1275F2003F6510 /* libopencv_phase_unwrapping.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 619EA88B1F1275F2003F6510 /* libopencv_phase_unwrapping.3.2.0.dylib */; };
+		61F7AA5B1F68177100492270 /* WebcamProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F7AA591F68177100492270 /* WebcamProcessor.cpp */; };
+		61F7AA5E1F681A4C00492270 /* ArduinoCommunicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 61F7AA5C1F681A4C00492270 /* ArduinoCommunicator.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -143,6 +145,10 @@
 		619EA88A1F1275F2003F6510 /* libopencv_plot.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_plot.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_plot.3.2.0.dylib; sourceTree = "<group>"; };
 		619EA88B1F1275F2003F6510 /* libopencv_phase_unwrapping.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_phase_unwrapping.3.2.0.dylib; path = ../../../../../../../usr/local/lib/libopencv_phase_unwrapping.3.2.0.dylib; sourceTree = "<group>"; };
 		619FFFAD1F3F6AD000B7CAC7 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		61F7AA591F68177100492270 /* WebcamProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WebcamProcessor.cpp; sourceTree = "<group>"; };
+		61F7AA5A1F68177100492270 /* WebcamProcessor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WebcamProcessor.hpp; sourceTree = "<group>"; };
+		61F7AA5C1F681A4C00492270 /* ArduinoCommunicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArduinoCommunicator.cpp; sourceTree = "<group>"; };
+		61F7AA5D1F681A4C00492270 /* ArduinoCommunicator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ArduinoCommunicator.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,9 +317,13 @@
 				619080101F25159C002B8DD1 /* UART.cpp */,
 				619080111F25159C002B8DD1 /* UART.h */,
 				6105D1F01F3B47610082EB92 /* PythonHttpsRequest.cpp */,
+				61F7AA5C1F681A4C00492270 /* ArduinoCommunicator.cpp */,
+				61F7AA5D1F681A4C00492270 /* ArduinoCommunicator.hpp */,
 				6105D1F11F3B47610082EB92 /* PythonHttpsRequest.hpp */,
 				6105D1F61F3CAD600082EB92 /* ServerCommunicator.cpp */,
 				6105D1F71F3CAD600082EB92 /* ServerCommunicator.hpp */,
+				61F7AA591F68177100492270 /* WebcamProcessor.cpp */,
+				61F7AA5A1F68177100492270 /* WebcamProcessor.hpp */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -378,9 +388,11 @@
 			files = (
 				6105D1F21F3B47610082EB92 /* PythonHttpsRequest.cpp in Sources */,
 				6105D1F81F3CAD600082EB92 /* ServerCommunicator.cpp in Sources */,
+				61F7AA5E1F681A4C00492270 /* ArduinoCommunicator.cpp in Sources */,
 				619080121F25159C002B8DD1 /* UART.cpp in Sources */,
 				619EA85E1F127543003F6510 /* main.cpp in Sources */,
 				6190800F1F2514BC002B8DD1 /* PktProtocol.cpp in Sources */,
+				61F7AA5B1F68177100492270 /* WebcamProcessor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

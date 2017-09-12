@@ -20,7 +20,7 @@
 // A data format that will be sent to the server
 typedef struct {
     int bot_id;             // Raccoon bot ID number
-    int record_time;        // Passed time after the robot boots
+//    int record_time;        // Passed time after the robot boots
     int bot_status;         // 0 : default, 1 : On-line, 2 : Task on progress, 3 : error occured
     int damage_ratio;       // Damage ratio from the Video (Picture from the cammera)
     int acc_distance;       // Accumulated distance;
@@ -51,22 +51,15 @@ private:
     PythonHttpsRequest *phr;
     ServerCommContext *scc;
     ServerRecvContext *scr;
-    // I want a setcontext function
 
 public:
     ServerCommunicator(std::string uri);
     ~ServerCommunicator();
     void start(ServerCommContext *sco);
     void stop();
-    void GetandParseData(); // Get data from the web page
-    void PrintData();
-//    void SendRequest();
-//    void SetScc(const ServerCommContext* context);
     inline bool isRunning();
     inline PythonHttpsRequest *getPhr();
     inline ServerCommContext *getScc();
 };
-
-std::vector<std::string> split(const std::string &s, char delim);
 
 #endif /* ServerCommunicator_hpp */
