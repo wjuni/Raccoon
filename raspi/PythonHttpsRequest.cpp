@@ -33,7 +33,17 @@ void PythonHttpsRequest::sendData(json *data) {
 }
 
 void PythonHttpsRequest::ReceiveData() {
-	this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
+//    std::cout << "IntheReceiveData\n";
+/*    PyObject_GetAttrString(this->Response, (char *)"read");
+    std::cout << "Step1\n";
+    PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL);
+    std::cout << "Step2\n";
+    PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL));
+    std::cout << "Step3\n";
+    std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
+    std::cout << "Before\n";*/
+    this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
+//    std::cout << "END\n";
 }
 
 PythonHttpsRequest::~PythonHttpsRequest() {
@@ -56,8 +66,10 @@ PyObject* PythonHttpsRequest::GetResponse(json *data){
     PyObject* urlencode = PyObject_CallObject(PyObject_GetAttrString(this->urllib, (char *)"urlencode"), PyTuple_Pack(1, values));
     PyObject* request = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"Request"), PyTuple_Pack(2, url, urlencode));
     PyObject* response = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"urlopen"), PyTuple_Pack(1, request));
-//    PyObject* read = PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL);
-//    return read;
+
+    this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL)));
+//    std::cout << "END\n";
+
     return response;
     /*
     stringStream << code_send;

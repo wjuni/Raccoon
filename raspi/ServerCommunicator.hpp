@@ -47,11 +47,12 @@ private:
     bool _running = false;
     std::string _uri;
     std::thread nw_thd;
-    static void handleTransmission(void *data);
+    static void handleTransmission(void*);
     PythonHttpsRequest *phr;
     ServerCommContext *scc;
     ServerRecvContext *scr;
-    
+    // I want a setcontext function
+
 public:
     ServerCommunicator(std::string uri);
     ~ServerCommunicator();
@@ -59,6 +60,8 @@ public:
     void stop();
     void GetandParseData(); // Get data from the web page
     void PrintData();
+//    void SendRequest();
+//    void SetScc(const ServerCommContext* context);
     inline bool isRunning();
     inline PythonHttpsRequest *getPhr();
     inline ServerCommContext *getScc();
