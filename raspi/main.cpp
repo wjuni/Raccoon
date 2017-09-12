@@ -358,6 +358,7 @@ int main(int argc, const char * argv[]) {
 	time_t Start_t = time(NULL);
 
     /* UART */
+    /*
     uart.begin(115200);
     PktArduinoV2 pkt;
     pkt.mode = (1<<8);
@@ -367,7 +368,8 @@ int main(int argc, const char * argv[]) {
     pkt.motor_4_spd = 0;
     PktArduinoV2_prepare_packet(&pkt);
     uart.write(&pkt, sizeof(PktArduinoV2)); // notify boot complete
-    
+ 	*/
+
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
     context.bot_id = 1;
@@ -383,8 +385,9 @@ int main(int argc, const char * argv[]) {
     memset(serial_buffer, 0, BUFFER_SIZE);
  
     while(true) {
-        read(packet_handler);
+//        read(packet_handler);
         server.GetandParseData();
+        server.PrintData();
         context.record_time = time(NULL) - Start_t;
     //    usleep(10000);
     }

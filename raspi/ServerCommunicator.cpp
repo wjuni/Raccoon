@@ -20,11 +20,13 @@ ServerCommunicator::~ServerCommunicator() {
         //this->_running = false;
         nw_thd.join();
     }
+    delete scr;
     delete phr;
 }
 
 void ServerCommunicator::start(ServerCommContext *scc) {
     this->scc = scc;
+    this->scr = new ServerRecvContext;
     this->_running = true;
     nw_thd = std::thread(handleTransmission, this);
 }
@@ -72,6 +74,19 @@ void ServerCommunicator::GetandParseData() {
     data->recovery = atoi(tokens[8].substr(1, tokens[8].length()-2).c_str());
     data->cond = atoi(tokens[10].substr(1, tokens[10].length()-2).c_str());
     data->param = tokens[13];
+}
+
+void ServerCommunicator::PrintData()	{
+	ServerRecvContext* data = this->scr;
+	std::cout << "Starting to receive data\n";
+	std::cout << "tid : " << data->tid << std::endl;
+	std::cout << "multi : " << data->multi << std::endl;
+	std::cout << "yellow : " << data->yellow << std::endl;
+	std::cout << "recovery : " << data->recovery << std::endl;
+	std::cout << "cond : " << data->cond << std::endl;
+	std::cout << "param : " << data->param << std::endl;
+	std::cout << "End of the data" << std::endl;
+
 }
 
 std::vector<std::string> split(const std::string &s, char delim) {
