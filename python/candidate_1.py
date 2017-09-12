@@ -57,7 +57,7 @@ def process(path, filename, rotate):
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
     ORANGE_MIN = np.array([15, 70, 100],np.uint8)
-    ORANGE_MAX = np.array([30, 250, 255],np.uint8)
+    ORANGE_MAX = np.array([30, 255, 255],np.uint8)
 
     frame_threshed = cv2.inRange(im_hsv, ORANGE_MIN, ORANGE_MAX)
     #filtered = cv2.bitwise_and(im, im, mask=frame_threshed)
@@ -143,11 +143,12 @@ def process(path, filename, rotate):
         if act_deg > 90: act_deg = act_deg - 180
         # x - newm*y - newx = 0 , (width/2, height/2)
         deviation = (width / 2 - newm * height / 2 - newx) / np.sqrt(1 + newm * newm)
-        m=((height/2+newm**(2))/newm, height/2)
-        t=(m[0]+SPEED_RATIO*height*math.cos(math.atan(newm**(2))), m[1] - SPEED_RATIO*height*math.sin(math.atan(newm**(2))))
+        m=(newm*height/2+newx, height/2)
+        t=(m[0]+SPEED_RATIO*height*math.cos(math.atan(1/newm)), m[1] - SPEED_RATIO*height*math.sin(math.atan(1/newm)))
         v1 = (t[0] - width / 2, t[1] - height / 2)
-        w=1/(newm**(2))
+        w=newm
     else:
+        print 'm not defined'
         v1=(0, -SPEED_RATIO*height)
         w=0
     print 'vdiff', v1
@@ -166,9 +167,9 @@ def process(path, filename, rotate):
 fileId = 0
 while True:
     fileId += 1
-    path = "/Users/wjuni/ffmpeg/"
+    path = ""
     filename = "frame%04d.jpg" % (fileId)
     if not os.path.isfile(path + filename):
         break
     print filename
-    process(path, filename, True)
+    process(path, filename, False)

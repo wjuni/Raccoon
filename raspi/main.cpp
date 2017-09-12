@@ -358,6 +358,7 @@ int main(int argc, const char * argv[]) {
 	time_t Start_t = time(NULL);
 
     /* UART */
+    /*
     uart.begin(115200);
     PktArduinoV2 pkt;
     pkt.mode = (1<<8);
@@ -367,7 +368,7 @@ int main(int argc, const char * argv[]) {
     pkt.motor_4_spd = 0;
     PktArduinoV2_prepare_packet(&pkt);
     uart.write(&pkt, sizeof(PktArduinoV2)); // notify boot complete
-    
+    */
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
     context.bot_id = 1;
@@ -380,11 +381,23 @@ int main(int argc, const char * argv[]) {
 /*    read_vid(); */
     // read_img();/
 
+    /* Set the ServerCommunicator*/
+//    ServerCommContext TextToSend = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, "Sinjeong"};
+
     memset(serial_buffer, 0, BUFFER_SIZE);
- 
+    sleep(5);
+
     while(true) {
-        read(packet_handler);
+//        std::cout << "Debug1\n";
+//        read(packet_handler);
+//        server.SetScc(&TextToSend);
+//        server.handleTransmission();
+//        server.SendRequest();
+//        std::cout << "Debug2\n";
         server.GetandParseData();
+        std::cout << "Debug3\n";
+        server.PrintData();
+        std::cout << "Debug4\n";
         context.record_time = time(NULL) - Start_t;
     //    usleep(10000);
     }
