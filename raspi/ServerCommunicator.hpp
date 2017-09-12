@@ -58,6 +58,7 @@ public:
     void start(ServerCommContext *sco);
     void stop();
     void GetandParseData(); // Get data from the web page
+    void PrintData();
     inline bool isRunning();
     inline PythonHttpsRequest *getPhr();
     inline ServerCommContext *getScc();
