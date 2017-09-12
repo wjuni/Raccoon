@@ -5,12 +5,12 @@
  * Date: 2017. 8. 9.
  * Time: PM 3:35
  */
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
 require_once '../php/db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !key_exists('data', $_POST)) {
+if (!key_exists('data', $_POST)) {
     http_response_code(405);
     exit;
 }
@@ -23,4 +23,7 @@ $stmt->bind_param("iiiiiiiisii", $data->bid, $data->sta, $data->dam, $data->dis,
 echo $stmt->execute();
 $stmt->close();
 $mysqli->close();
+
+echo json_encode(array('tid' => 0, 'multi' => 0, 'yellow' => 0, 'recovery' => 0, 'cond' => 0, 'param' => ''))
+
 ?>
