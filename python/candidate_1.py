@@ -151,8 +151,6 @@ def process(path, filename, rotate):
         print 'm not defined'
         v1=(0, -SPEED_RATIO*height)
         w=0
-    print m
-    print t
     print 'vdiff', v1
     print 'alphabet', w
     print 'Direction Degree = ', act_deg, 'Deviation from Center = ', deviation, ', (x=', deviation * np.cos(
