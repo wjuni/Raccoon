@@ -8,7 +8,6 @@
 
 #ifndef ArduinoCommunicator_hpp
 #define ArduinoCommunicator_hpp
-#include <iostream>
 #include "PktProtocol.h"
 #include "UART.h"
 

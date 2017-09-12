@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="654e4d1f-1b54-4945-b914-8457de2663b1" name="raccoon-mr" url="https://raccoon.wjuni.com">
-        <fileTransfer host="raccoon.wjuni.com" port="22" privateKey="$USER_HOME$/.ssh/mr-d2-ubuntu-key.pem" rootFolder="/var/www/maker/lane" accessType="SFTP" keyPair="true">
+        <fileTransfer host="raccoon.wjuni.com" port="22" rootFolder="/var/www/maker/lane" accessType="SFTP">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

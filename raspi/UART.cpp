@@ -17,27 +17,9 @@ UART::UART(std::string deviceName) {
 }
 
 int UART::begin(unsigned long baudrate) {
-    //-------------------------
-    //----- SETUP USART 0 -----
-    //-------------------------
-    //At bootup, pins 8 and 10 are already set to UART0_TXD, UART0_RXD (ie the alt0 function) respectively
-    
-    //OPEN THE UART
-    //The flags (defined in fcntl.h):
-    //	Access modes (use 1 of these):
-    //		O_RDONLY - Open for reading only.
-    //		O_RDWR - Open for reading and writing.
-    //		O_WRONLY - Open for writing only.
-    //
-    //	O_NDELAY / O_NONBLOCK (same function) - Enables nonblocking mode. When set read requests on the file can return immediately with a failure status
-    //											if there is no input immediately available (instead of blocking). Likewise, write requests can also return
-    //											immediately with a failure status if the output can't be written immediately.
-    //
-    //	O_NOCTTY - When set and path identifies a terminal device, open() shall not cause the terminal device to become the controlling terminal for the process.
-    uart0_filestream = open(this->deviceName.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);		//Open in non blocking read/write mode
+    uart0_filestream = open(this->deviceName.c_str(), O_RDWR | O_NOCTTY | O_NDELAY); //Open in non blocking read/write mode
     if (uart0_filestream == -1)
     {
-        //ERROR - CAN'T OPEN SERIAL PORT
         std::cout << "Error - Unable to open UART : " << deviceName << std::endl;
         return 0;
     }
@@ -74,12 +56,14 @@ long UART::read(void *buf, unsigned long len) {
         return ::read(uart0_filestream, buf, len);
     return 0;
 }
+
 int UART::read(){
 	int b=0;
 	
 	UART::read(&b,1);
 	return b;
 }
+
 void UART::close() {
     ::close(uart0_filestream);
 }

@@ -6,10 +6,10 @@
 //  Copyright © 2017년 임휘준. All rights reserved.
 //
 #define _USE_MATH_DEFINES
-#include <cmath>
 #include <iostream>
 #include <fstream>
 #include <thread>
+#include <cmath>
 #include "WebcamProcessor.hpp"
 
 #ifdef RASPBERRY_PI

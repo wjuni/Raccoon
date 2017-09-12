@@ -5,7 +5,7 @@
 //  Copyright © 2017 Hwijoon Lim. All rights reserved.
 //
 
-#include <cstring>
+#include <iostream>
 #include <thread>
 #include "PktProtocol.h"
 #include "ArduinoCommunicator.hpp"

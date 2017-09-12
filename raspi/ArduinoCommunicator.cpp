@@ -7,6 +7,7 @@
 //
 
 #include "ArduinoCommunicator.hpp"
+#include <iostream>
 
 using namespace std;
 
