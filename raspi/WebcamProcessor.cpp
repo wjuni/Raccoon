@@ -16,7 +16,7 @@
 #ifdef RASPBERRY_PI
 #define TEST_FFMPEG_PATH "/home/wjuni/opencvtest/ffmpeg/"
 #else
-#define TEST_FFMPEG_PATH "/Users/wjuni/ffmpeg_data/"
+#define TEST_FFMPEG_PATH "data/"
 #endif
 
 using namespace std;
@@ -247,42 +247,46 @@ atomic<double> local_max_linewidth;
 int steps_n;
 LineSegmentElement line_center[lines][N];
 
-void applyAlgorithm2_convolution_filter(int i) {
+cv::Mat cropped[NUM_CORE];
+cv::Mat vec_avg[NUM_CORE];
+cv::Mat normalized_vec[NUM_CORE];
+cv::Mat1i conv_filter[NUM_CORE];
+cv::Mat conv[NUM_CORE];
+void applyAlgorithm2_convolution_filter(int i, int core_id) {
     cv::Rect myROI(0, i*steps_n, width-1, steps_n);
-    cv::Mat cropped = frame_threshed(myROI);
-    cv::Mat vec_avg;
-    cv::reduce(cropped, vec_avg, 0, CV_REDUCE_AVG, CV_64F);
+    cropped[core_id] = frame_threshed(myROI);
+    cv::reduce(cropped[core_id], vec_avg[core_id], 0, CV_REDUCE_AVG, CV_64F);
     double min = 0, max = 0;
-    cv::minMaxLoc(cropped, &min, &max);
+    cv::minMaxLoc(cropped[core_id], &min, &max);
     if (max == 0) {
         // cannot find frame here -> Continue & Wait
         return;
     }
-    cv::Mat normalized_vec = vec_avg / max * 2. - 1.;
-    double local_estimated_linewidth = (cv::sum(vec_avg) / 255.)[0];
+    normalized_vec[core_id] = vec_avg[core_id] / max * 2. - 1.;
+    double local_estimated_linewidth = (cv::sum(vec_avg[core_id]) / 255.)[0];
     
     // thread-safe implementation updating max value
     double prev_value = local_max_linewidth;
     while(prev_value < local_estimated_linewidth && !local_max_linewidth.compare_exchange_weak(prev_value, local_estimated_linewidth));
     
-    cv::Mat1i conv_filter(1, (int)(local_estimated_linewidth * 1.5), -1);
+    conv_filter[core_id] = cv::Mat1i(1, (int)(local_estimated_linewidth * 1.5), -1);
     for(int j=(int)local_estimated_linewidth / 4; j<(int)(local_estimated_linewidth * 5 / 4); j++) {
-        conv_filter.at<int>(j) = 1;
+        conv_filter[core_id].at<int>(j) = 1;
     }
     
-    cv::Mat conv = cv::Mat::zeros(steps_n, width, CV_64F);
-    cv::filter2D(normalized_vec, conv, -1, conv_filter);
+    conv[core_id] = cv::Mat::zeros(steps_n, width, CV_64F);
+    cv::filter2D(normalized_vec[core_id], conv[core_id], -1, conv_filter[core_id]);
     
     // INFO: compensate to python code : newl = maxloc.x + conv_filter.size().width/2.
     for(int j=0; j<lines; j++) {
         cv::Point minloc, maxloc;
-        cv::minMaxLoc(conv, &min, &max, &minloc, &maxloc);
+        cv::minMaxLoc(conv[core_id], &min, &max, &minloc, &maxloc);
         if (max < CONV_THRESH)
             break;
         double left_line = maxloc.x - local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
         double right_line = maxloc.x + local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
         for(int k=static_cast<int>(left_line); k < static_cast<int>(right_line); k++) {
-            conv.at<double>(k) = 0;
+            conv[core_id].at<double>(k) = 0;
         }
         
         LineSegmentElement lse;
@@ -298,10 +302,11 @@ void applyAlgorithm2_convolution_filter(int i) {
 struct algorithm2_multithread_obj {
     int start;
     int end;
+    int core_id;
 };
 void applyAlgorithm2_convolution_filter_helper(struct algorithm2_multithread_obj *data) {
     for(int i=data->start; i<data->end; i++) {
-        applyAlgorithm2_convolution_filter(i);
+        applyAlgorithm2_convolution_filter(i, data->core_id);
     }
 }
 
@@ -335,6 +340,7 @@ bool applyAlgorithm2(cv::Mat *pim, bool toRotate, string path, string filename, 
         int end = (i + task_per_cpu > N)? N : i + task_per_cpu;
         amo[j].start = i;
         amo[j].end = end;
+        amo[j].core_id = j;
         thds[j] = thread(applyAlgorithm2_convolution_filter_helper, &amo[j]);
     }
     for(int i=0; i<NUM_CORE; i++) {
