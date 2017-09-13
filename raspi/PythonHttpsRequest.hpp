@@ -30,6 +30,6 @@ public:
     PythonHttpsRequest(std::string uri);
     ~PythonHttpsRequest();
     void sendData(json *data);
-    std::string getData();
+   	json getData();
 };
 #endif /* PythonHttpsRequest_hpp */

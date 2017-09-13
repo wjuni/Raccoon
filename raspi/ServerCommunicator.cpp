@@ -75,8 +75,7 @@ void ServerCommunicator::handleTransmission(void* communicator) {
         j["spd"] = scc->bot_speed;
         j["ver"] = scc->bot_version;
         phr->sendData(&j);
-        std::string result = phr->getData();
-        json r = json::parse(result);
+        json r = phr->getData();
         std::cout << "JSON = " << r.dump(4) << std::endl;
         ServerRecvContext *data = sc->scr;
         data->tid = r["tid"];

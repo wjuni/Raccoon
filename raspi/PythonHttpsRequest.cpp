@@ -39,6 +39,6 @@ PyObject* PythonHttpsRequest::GetResponse(json *data){
     return response;
 }
 
-std::string PythonHttpsRequest::getData() {
-    return std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
+json PythonHttpsRequest::getData() {
+    return json::parse(this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL))));
 }
