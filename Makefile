@@ -10,7 +10,7 @@ OBJS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 
 INCLUDES = -I/usr/local/include/opencv -I/usr/local/include -I/usr/include/python2.7
 LFLAGS = -L/usr/local/lib
-LIBS = -lopencv_imgproc -lopencv_videoio -lopencv_imgcodecs -lopencv_core -lpthread -lpython2.7
+LIBS = -lopencv_imgproc -lopencv_videoio -lopencv_imgcodecs -lopencv_core -lopencv_highgui -lpthread -lpython2.7
 
 all: dirs $(TARGET)
 

@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <thread>
+#include <cstring>
 #include <signal.h>
 #include "PktProtocol.h"
 #include "ArduinoCommunicator.hpp"
@@ -48,6 +49,8 @@ int main(int argc, const char * argv[]) {
     server.start(&context);
     
     /* Webcam */
+    if(argc >=2 && strcmp(argv[1], "gui") == 0)
+        wp.setX11Support(true);
     wp.start(webcam::IMAGE, video_feedback_handler);
 
     while(true) {

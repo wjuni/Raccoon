@@ -55,6 +55,7 @@ namespace webcam {
     class WebcamProcessor {
     private:
         std::thread thd;
+        bool X11Support;
         bool isRunning;
         Device type;
         cv::VideoCapture cap;
@@ -65,6 +66,7 @@ namespace webcam {
         WebcamProcessor();
         ~WebcamProcessor();
         bool start(Device type, void (*handler)(VideoFeedbackParam));
+        void setX11Support(bool X11Support);
         void close();
     };
 }

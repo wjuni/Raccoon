@@ -72,7 +72,7 @@ void tilt_estimation(void *paramAddr) {
 
 cv::Mat im_hsv;
 
-bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)(VideoFeedbackParam)){
+bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support){
     
     int64_t e1 = cv::getTickCount();
     cv::Mat im = *pim;
@@ -204,8 +204,10 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
     cv::imwrite(path + "detect_" + filename, im);
-    //    cv::imshow("Demo", im);
-    //    cv::waitKey(15);
+    if(X11Support) {
+        cv::imshow("Algorithm 1", im);
+        cv::waitKey(15);
+    }
     cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
     fps_sum += 1./t;
     proc_count ++;
@@ -307,7 +309,7 @@ void applyAlgorithm2_convolution_filter_helper(struct algorithm2_multithread_obj
     }
 }
 
-bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)(VideoFeedbackParam)) {
+bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     
     int64_t e1 = cv::getTickCount();
     cv::Mat im = *pim;
@@ -412,8 +414,11 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
     cv::imwrite(path + "detect_" + filename, im);
-    //    cv::imshow("Demo", im);
-    //    cv::waitKey(15);
+    
+    if(X11Support) {
+        cv::imshow("Algorithm 2", im);
+        cv::waitKey(15);
+    }
     cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
     fps_sum += 1./t;
     proc_count ++;
@@ -421,7 +426,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
 }
 
 
-bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)(VideoFeedbackParam)) {
+bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cv::Mat frame;
     vc->read(frame);
     if (frame.empty()) {
@@ -429,9 +434,9 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         return false;
     }
     cv::resize(frame, frame, cv::Size(640, 360), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&frame, path, filename, handler);
+    return applyAlgorithm2(&frame, path, filename, handler, X11Support);
 }
-bool process(string path, string filename, void (*handler)(VideoFeedbackParam)) {
+bool process(string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cout << path+filename << endl;
     if (!file_exists(path + filename))
         return false;
@@ -440,12 +445,18 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam)) 
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
     }
     cv::resize(im, im, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&im, path, filename, handler);
+    return applyAlgorithm2(&im, path, filename, handler, X11Support);
 }
 
 
 WebcamProcessor::WebcamProcessor() {
     isRunning = false;
+    X11Support = false;
+}
+
+
+void WebcamProcessor::setX11Support(bool X11Support){
+    this->X11Support = X11Support;
 }
 
 bool WebcamProcessor::start(webcam::Device type, void (*handler)(VideoFeedbackParam)) {
@@ -476,14 +487,14 @@ bool WebcamProcessor::start(webcam::Device type, void (*handler)(VideoFeedbackPa
 void WebcamProcessor::handleWebcamJob(WebcamProcessor *webcamprocessor) {
     if (webcamprocessor->type == WEBCAM) {
         while(true){
-            if (!process(&(webcamprocessor->cap), "", "out.jpg", webcamprocessor->handler)) break;
+            if (!process(&(webcamprocessor->cap), "", "out.jpg", webcamprocessor->handler, webcamprocessor->X11Support)) break;
             if (!webcamprocessor->isRunning) break;
         }
     } else if(webcamprocessor->type==IMAGE) {
         char dst[100] = {};
         for(int i=1;;i++){
             sprintf(dst, "frame%04d.jpg", i);
-            if (!process(TEST_FFMPEG_PATH, dst, webcamprocessor->handler)) break;
+            if (!process(TEST_FFMPEG_PATH, dst, webcamprocessor->handler, webcamprocessor->X11Support)) break;
             if (!webcamprocessor->isRunning) break;
         }
         cout << "Average FPS = " << fps_sum / proc_count << endl;
