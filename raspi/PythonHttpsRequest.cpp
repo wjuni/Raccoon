@@ -25,10 +25,6 @@ void PythonHttpsRequest::sendData(json *data) {
     this->Response = GetResponse(data);
 }
 
-void PythonHttpsRequest::ReceiveData() {
-    this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
-}
-
 PythonHttpsRequest::~PythonHttpsRequest() {
     Py_Finalize();
 }
@@ -40,12 +36,9 @@ PyObject* PythonHttpsRequest::GetResponse(json *data){
     PyObject* urlencode = PyObject_CallObject(PyObject_GetAttrString(this->urllib, (char *)"urlencode"), PyTuple_Pack(1, values));
     PyObject* request = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"Request"), PyTuple_Pack(2, url, urlencode));
     PyObject* response = PyObject_CallObject(PyObject_GetAttrString(this->urllib2, (char *)"urlopen"), PyTuple_Pack(1, request));
-
-    this->ReceivedData = std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(response, (char *)"read"), NULL)));
-
     return response;
 }
 
 std::string PythonHttpsRequest::getData() {
-    return this->ReceivedData;
+    return std::string(PyString_AsString(PyObject_CallObject(PyObject_GetAttrString(this->Response, (char *)"read"), NULL)));
 }
