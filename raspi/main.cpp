@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <thread>
+#include <signal.h>
 #include "PktProtocol.h"
 #include "ArduinoCommunicator.hpp"
 #include "ServerCommunicator.hpp"
@@ -27,8 +28,11 @@ webcam::WebcamProcessor wp;
 
 void arduino_packet_handler(PktRaspi *pkt);
 void video_feedback_handler(webcam::VideoFeedbackParam wfp);
+void finish(int signal);
 
 int main(int argc, const char * argv[]) {
+    
+    signal(SIGINT, finish);
     
     /* Arduino */
     arduino.begin(115200);
@@ -84,4 +88,8 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     
     // TODO
     arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0));
+}
+
+void finish(int signal) {
+    exit(0);
 }
