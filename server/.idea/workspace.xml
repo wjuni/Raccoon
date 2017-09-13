@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b6d11fa-95ca-4663-b33f-c613615e9e69" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../raspi/ArduinoCommunicator.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../raspi/ArduinoCommunicator.hpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../raspi/WebcamProcessor.cpp" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../raspi/WebcamProcessor.hpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" />
@@ -42,23 +38,18 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/varun.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/varun.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../firmware/Adafruit_GPS.h" afterPath="$PROJECT_DIR$/../firmware/Adafruit_GPS.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../firmware/HMC5883L.h" afterPath="$PROJECT_DIR$/../firmware/HMC5883L.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../python/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/candidate_2.py" afterPath="$PROJECT_DIR$/../python/candidate_2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/frames_to_mp4.bat" afterPath="$PROJECT_DIR$/../python/frames_to_mp4.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/frames_to_mp4.sh" afterPath="$PROJECT_DIR$/../python/frames_to_mp4.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/mp4_to_frame.bat" afterPath="$PROJECT_DIR$/../python/mp4_to_frame.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/mp4_to_frame.sh" afterPath="$PROJECT_DIR$/../python/mp4_to_frame.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/PktProtocol.cpp" afterPath="$PROJECT_DIR$/../raspi/PktProtocol.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/PktProtocol.h" afterPath="$PROJECT_DIR$/../raspi/PktProtocol.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/project.pbxproj" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/ServerCommunicator.cpp" afterPath="$PROJECT_DIR$/../raspi/ServerCommunicator.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/ServerCommunicator.hpp" afterPath="$PROJECT_DIR$/../raspi/ServerCommunicator.hpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/json.hpp" afterPath="$PROJECT_DIR$/../raspi/json.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/main.cpp" afterPath="$PROJECT_DIR$/../raspi/main.cpp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/raccoon.iml" afterPath="$PROJECT_DIR$/.idea/raccoon.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/webServers.xml" afterPath="$PROJECT_DIR$/.idea/webServers.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajax/fetch_dashboard.php" afterPath="$PROJECT_DIR$/ajax/fetch_dashboard.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajax/fetch_history.php" afterPath="$PROJECT_DIR$/ajax/fetch_history.php" />
@@ -396,7 +387,7 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="423">
+            <state relative-caret-position="4788">
               <caret line="266" column="36" lean-forward="false" selection-start-line="266" selection-start-column="36" selection-end-line="266" selection-end-column="36" />
               <folding />
             </state>
@@ -407,7 +398,7 @@
         <entry file="file://$PROJECT_DIR$/ajax/report.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="432">
-              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
                 <marker date="1505228716923" expanded="true" signature="391:603" ph="INSERT INTO tbl_status... " />
               </folding>
@@ -420,9 +411,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="612">
               <caret line="39" column="1" lean-forward="false" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-              <folding>
-                <marker date="1504980609000" expanded="true" signature="528:1294" ph="..." />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -509,7 +498,7 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="873" />
@@ -530,6 +519,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -567,7 +557,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -619,6 +608,7 @@
       <workItem from="1502368026812" duration="12403000" />
       <workItem from="1502825637549" duration="8000" />
       <workItem from="1505228050700" duration="1293000" />
+      <workItem from="1505308708566" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="Add Server Source">
       <created>1502210307638</created>
@@ -659,10 +649,10 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37136000" />
+    <option name="totallyTimeSpent" value="37141000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -670,7 +660,6 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32910052" sideWeight="0.5046875" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.118229166" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32958803" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32910052" sideWeight="0.4953125" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958803" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -682,6 +671,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32958803" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32958803" sideWeight="0.49444443" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32958803" sideWeight="0.49722221" order="1" side_tool="false" content_ui="tabs" />
@@ -1023,15 +1013,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="612">
           <caret line="39" column="1" lean-forward="false" selection-start-line="39" selection-start-column="1" selection-end-line="39" selection-end-column="1" />
-          <folding>
-            <marker date="1504980609000" expanded="true" signature="528:1294" ph="..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
+        <state relative-caret-position="4788">
           <caret line="266" column="36" lean-forward="false" selection-start-line="266" selection-start-column="36" selection-end-line="266" selection-end-column="36" />
           <folding />
         </state>
@@ -1040,7 +1028,7 @@
     <entry file="file://$PROJECT_DIR$/ajax/report.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+          <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <marker date="1505228716923" expanded="true" signature="391:603" ph="INSERT INTO tbl_status... " />
           </folding>

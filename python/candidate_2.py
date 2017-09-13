@@ -4,7 +4,7 @@ import numpy as np
 import math
 
 LINEWIDTH_DEFAULT = 0.220 # of screen width
-TARGET_FRAMESIZE = (854, 480)
+TARGET_FRAMESIZE = (240, 136)
 N = 16
 CONV_THRESH = 25  # change according to the screen width (30% of width is appropriate)
 LINE_MARGIN_RATIO = 1.2
@@ -32,6 +32,7 @@ def process(path, filename, rotate, lines):
     # im = cv2.resize(im, TARGET_FRAMESIZE, 0, 0, cv2.INTER_CUBIC)
 
     height, width, channel = im.shape
+    STEPS_N = height / N
 
     im_hsv = cv2.cvtColor(im, cv2.COLOR_BGR2HSV)
 
@@ -62,10 +63,14 @@ def process(path, filename, rotate, lines):
             conv_filter[:] = -1
             conv_filter[int(estimated_linewidth / 4):int(estimated_linewidth * 5 / 4)] = 1
             conv = np.convolve(normalized_vec, conv_filter)
+            # np.set_printoptions(threshold=np.nan)
+
+            # print conv
 
             for l in range(lines):
                 max_v = np.max(conv)
                 max_arg = np.argmax(conv)
+                # print max_v, max_arg, len(vec_avg), len(conv_filter)
                 if max_v < CONV_THRESH:
                     break
                 max_arg -= estimated_linewidth * 0.75
@@ -99,6 +104,8 @@ def process(path, filename, rotate, lines):
             yavg = np.average(ysample, weights=weights)
             xstd = np.sqrt(np.sum(weights * (xsample - xavg) ** 2) / np.sum(weights))
             ystd = np.sqrt(np.sum(weights * (ysample - yavg) ** 2) / np.sum(weights))
+            print center_weights
+            print xavg, yavg, xstd, ystd
             cov = np.sum(weights * (xsample - xavg) * (ysample - yavg)) / np.sum(weights)
             corr = cov / (xstd * ystd)
             betahat = corr * xstd / ystd
@@ -109,7 +116,8 @@ def process(path, filename, rotate, lines):
             t = (m[0] + SPEED_RATIO*height*math.cos(math.atan(1/betahat)), m[1] - SPEED_RATIO*height*math.sin(math.atan(1/betahat)))
             v1 = (t[0] - width/2, t[1]-height/2)
             print 'vdiff', v1
-            print 'alphabet', betahat
+            # print 'alphabet', betahat
+            print alphahat, betahat
             cv2.line(im,
                      (int(alphahat), 0),
                      (int(alphahat + betahat * height), height), (255, 0, 255), 2)
@@ -134,9 +142,9 @@ def process(path, filename, rotate, lines):
 fileId = 0
 while True:
     fileId += 1
-    path = ""
+    path = "/Users/wjuni/ffmpeg/"
     filename = "frame%04d.jpg" % (fileId)
     if not os.path.isfile(path + filename):
         break
     print filename
-    process(path, filename, False, 1)
+    process(path, filename, True, 1)
