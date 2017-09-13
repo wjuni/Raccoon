@@ -26,6 +26,7 @@ ServerCommContext context;
 webcam::WebcamProcessor wp;
 
 void arduino_packet_handler(PktRaspi *pkt);
+void video_feedback_handler(webcam::VideoFeedbackParam wfp);
 
 int main(int argc, const char * argv[]) {
     
@@ -43,7 +44,7 @@ int main(int argc, const char * argv[]) {
     server.start(&context);
     
     /* Webcam */
-    wp.open(webcam::IMAGE);
+    wp.start(webcam::IMAGE, video_feedback_handler);
 
     while(true) {
         arduino.recv(arduino_packet_handler);
@@ -76,4 +77,11 @@ void arduino_packet_handler(PktRaspi *pkt) {
     
     context.bot_speed = pkt->gps_spd;
     context.bot_version = 10;
+}
+
+void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
+    cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+    
+    // TODO
+    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0));
 }

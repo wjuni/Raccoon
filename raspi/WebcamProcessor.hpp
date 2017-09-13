@@ -14,8 +14,19 @@
 
 namespace webcam {
     const int NUM_CORE = 4;
+    const double SPEED_RATIO = 0.3;
+    
+    
+    // Algorithm 1
     const int MAX_DEV_PIX = 150;
     const int DEV_PIX_SENS = 4;
+    
+    // Algorithm 2
+    const int N = 16;
+    const int CONV_THRESH = 25;  // change according to the screen width (30% of width is appropriate)
+    const double LINE_MARGIN_RATIO = 1.2;
+    
+    
     enum Device {WEBCAM, IMAGE};
     
     typedef struct {
@@ -38,7 +49,7 @@ namespace webcam {
     typedef struct {
         double vector_diff_x;
         double vector_diff_y;
-        double alpha_hat;
+        double beta_hat;
     } VideoFeedbackParam;
     
     class WebcamProcessor {
@@ -48,11 +59,12 @@ namespace webcam {
         Device type;
         cv::VideoCapture cap;
         static void handleWebcamJob(WebcamProcessor *webcamprocessor);
+        void (*handler)(VideoFeedbackParam);
         
     public:
         WebcamProcessor();
         ~WebcamProcessor();
-        bool open(Device type);
+        bool start(Device type, void (*handler)(VideoFeedbackParam));
         void close();
     };
 }

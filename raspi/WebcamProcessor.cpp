@@ -21,17 +21,18 @@
 using namespace std;
 using namespace webcam;
 
-
-inline bool file_exists (const std::string& name) {
-    ifstream f(name.c_str());
-    return f.good();
-}
-
 double moment_x, moment_y, estimated_linewidth;
 int height, width, proc_count = 0;
 cv::Mat frame_threshed;
 double fps_sum = 0.0;
 cv::Mat **mask_bank = NULL;
+double global_linewidth_estimation = 0;
+
+
+inline bool file_exists (const std::string& name) {
+    ifstream f(name.c_str());
+    return f.good();
+}
 
 void tilt_estimation(void *paramAddr) {
     int best_fit_area = 0;
@@ -88,11 +89,11 @@ bool applyAlgorithm1(cv::Mat *pim, bool toRotate, string path, string filename, 
     }
     
     cv::cvtColor(im, im_hsv, cv::COLOR_BGR2HSV);
-    //    cv::Scalar orange_min = cv::Scalar(15, 70, 100);
-    //    cv::Scalar orange_max = cv::Scalar(30, 250, 255);
-    cv::Scalar white_min = cv::Scalar(0, 0, 165);
-    cv::Scalar white_max = cv::Scalar(255, 15, 255);
-    cv::inRange(im_hsv, white_min, white_max, frame_threshed);
+    cv::Scalar orange_min = cv::Scalar(15, 70, 100);
+    cv::Scalar orange_max = cv::Scalar(30, 255, 255);
+    //cv::Scalar white_min = cv::Scalar(0, 0, 165);
+    //cv::Scalar white_max = cv::Scalar(255, 15, 255);
+    cv::inRange(im_hsv, orange_min, orange_max, frame_threshed);
     
     cv::Moments mom = cv::moments(frame_threshed, true);
     moment_x = mom.m10 / mom.m00, moment_y = mom.m01/mom.m00;
@@ -169,22 +170,38 @@ bool applyAlgorithm1(cv::Mat *pim, bool toRotate, string path, string filename, 
              cv::Point2d((best_fit_param.est_line_left_btm + best_fit_param.est_line_right_btm)/2, height),
              cv::Scalar(255, 0, 255), 2);
     
-    double act_deg = 0, deviation = width/2. - (best_fit_param.est_line_left + best_fit_param.est_line_right)/2.;
+//    double act_deg = 0, deviation = width/2. - (best_fit_param.est_line_left + best_fit_param.est_line_right)/2.;
     
+    double vdiffx = 0., vdiffy = 0., beta_hat=0.;
     
     if (best_fit_param.est_line_left != best_fit_param.est_line_left_btm) { // if not vertical
-        act_deg = atan(1. / newm) * 180. / M_PI + 90;
-        if (act_deg > 90) act_deg = act_deg - 180;
+//        act_deg = atan(1. / newm) * 180. / M_PI + 90;
+//        if (act_deg > 90) act_deg = act_deg - 180;
         //x - newm*y - newx = 0 , (width/2, height/2)
-        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);
+//        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);
+        double mx = newm*height/2+newx;
+        double my = height/2;
+        double tx = mx+SPEED_RATIO*height*cos(atan(1/newm));
+        double ty = my - SPEED_RATIO*height*sin(atan(1/newm));
+        vdiffx = tx - width/2;
+        vdiffy = ty - height/2;
+        beta_hat = newm;
+    } else {
+        vdiffx = 0;
+        vdiffy = -SPEED_RATIO*height;
+        beta_hat = 0;
     }
     
-    cout <<  "Direction Degree = " << act_deg << " Deviation from Center = " << deviation <<
-    ", (x=" << deviation * cos(act_deg * M_PI / 180) <<
-    ", y=" << - deviation * sin(act_deg * M_PI / 180) << ")" << endl;
-    
+//    cout <<  "Direction Degree = " << act_deg << " Deviation from Center = " << deviation <<
+//    ", (x=" << deviation * cos(act_deg * M_PI / 180) <<
+//    ", y=" << - deviation * sin(act_deg * M_PI / 180) << ")" << endl;
     
     // call VideoFeedbackParam Handler here
+    VideoFeedbackParam vfp;
+    vfp.beta_hat = beta_hat;
+    vfp.vector_diff_x = vdiffx;
+    vfp.vector_diff_y = vdiffy;
+    (*handler)(vfp);
     
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
@@ -197,7 +214,183 @@ bool applyAlgorithm1(cv::Mat *pim, bool toRotate, string path, string filename, 
     return true;
 }
 
-bool process(cv::VideoCapture* vc, string path, string filename) {
+struct LineSegmentElement{
+    double x;
+    double y;
+    double weight;
+    double linewidth;
+    bool valid = false;
+};
+
+void printMat(cv::Mat conv) {
+    for (int k=0;k<conv.size().width; k++) {
+        cout << conv.at<double>(k) << " ";
+    }
+    cout << "D" << endl;
+}
+
+inline double weighted_average(const double *arr, const double *weights, int len) {
+    if (len == 0) return 0;
+    double sum = 0.0;
+    double weightsum = 0.0;
+    for(int i=0; i<len; i++){
+        sum += arr[i]*weights[i];
+        weightsum += weights[i];
+    }
+    if(weightsum == 0.0) return 0.0;
+    return sum / weightsum;
+}
+
+bool applyAlgorithm2(cv::Mat *pim, bool toRotate, string path, string filename, void (*handler)(VideoFeedbackParam)) {
+    const int lines = 1; // can be improved to 2 afterwards
+    
+    int64_t e1 = cv::getTickCount();
+    cv::Mat im = *pim;
+    
+    if (toRotate)
+        cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
+    
+    width = im.size().width;
+    height = im.size().height;
+    
+    cv::cvtColor(im, im_hsv, cv::COLOR_BGR2HSV);
+    cv::Scalar orange_min = cv::Scalar(15, 70, 100);
+    cv::Scalar orange_max = cv::Scalar(30, 255, 255);
+    //cv::Scalar white_min = cv::Scalar(0, 0, 165);
+    //cv::Scalar white_max = cv::Scalar(255, 15, 255);
+    cv::inRange(im_hsv, orange_min, orange_max, frame_threshed);
+    
+    LineSegmentElement line_center[lines][N];
+    double local_max_linewidth = 0;
+    int steps_n = height / N;
+    
+    for(int i=0; i<N; i++) {
+        cv::Rect myROI(0, i*steps_n, width-1, steps_n);
+        cv::Mat cropped = frame_threshed(myROI);
+        cv::Mat vec_avg;
+        cv::reduce(cropped, vec_avg, 0, CV_REDUCE_AVG, CV_64F);
+        double min = 0, max = 0;
+        cv::minMaxLoc(cropped, &min, &max);
+        if (max == 0) {
+            // cannot find frame here -> Continue & Wait
+            continue;
+        }
+        cv::Mat normalized_vec = vec_avg / max * 2. - 1.;
+        estimated_linewidth = (cv::sum(vec_avg) / 255.)[0];
+        if (estimated_linewidth > local_max_linewidth) {
+            local_max_linewidth = estimated_linewidth;
+        }
+    //    conv_filter = np.zeros(shape=(int(estimated_linewidth * 1.5)))
+        cv::Mat1i conv_filter(1, (int)(estimated_linewidth * 1.5), -1);
+        for(int j=(int)estimated_linewidth / 4; j<(int)(estimated_linewidth * 5 / 4); j++) {
+            conv_filter.at<int>(j) = 1;
+        }
+        
+        cv::Mat conv = cv::Mat::zeros(steps_n, width, CV_64F);
+        cv::filter2D(normalized_vec, conv, -1, conv_filter);
+        
+        // INFO: compensate to python code : newl = maxloc.x + conv_filter.size().width/2.
+        for(int j=0; j<lines; j++) {
+            cv::Point minloc, maxloc;
+            cv::minMaxLoc(conv, &min, &max, &minloc, &maxloc);
+            if (max < CONV_THRESH)
+                break;
+            double left_line = maxloc.x - estimated_linewidth / 2. * LINE_MARGIN_RATIO;
+            double right_line = maxloc.x + estimated_linewidth / 2. * LINE_MARGIN_RATIO;
+            for(int k=static_cast<int>(left_line); k < static_cast<int>(right_line); k++) {
+                conv.at<double>(k) = 0;
+            }
+            
+            LineSegmentElement lse;
+            lse.valid = true;
+            lse.x = maxloc.x;
+            lse.y = (i+0.5)*steps_n;
+            lse.weight = (max - CONV_THRESH)/10;
+            lse.linewidth = estimated_linewidth;
+            
+            line_center[j][i] = lse;
+        }
+    }
+    
+    double center_xsample[lines][N] = {0, }, center_ysample[lines][N] = {0, }, center_weights[lines][N] = {0, };
+    int center_samples[lines] = {0, };
+    for(int i=0; i<N; i++) {
+        for(int j=0; j<lines; j++) {
+            if(line_center[j][i].valid){
+                LineSegmentElement lse = line_center[j][i];
+                cv::circle(im, cv::Point2d(lse.x, lse.y), 2, cv::Scalar(0, 0, 255), (int)(lse.weight));
+                center_xsample[j][center_samples[j]] = lse.x;
+                center_ysample[j][center_samples[j]] = lse.y;
+                center_weights[j][center_samples[j]] = lse.weight *
+                (lse.linewidth / local_max_linewidth) * (lse.linewidth / local_max_linewidth);
+                // algorithm mistake fixed (estimated_linewidth should be lse.linewidth)
+                
+                if (global_linewidth_estimation == 0)
+                    global_linewidth_estimation = local_max_linewidth;
+                else
+                    global_linewidth_estimation = 0.9 * global_linewidth_estimation + 0.1 * local_max_linewidth;
+                
+                center_samples[j]++;
+            }
+        }
+    }
+    
+    for(int j=0;j<lines;j++) {
+        double xavg = weighted_average(center_xsample[j], center_weights[j], center_samples[j]);
+        double yavg = weighted_average(center_ysample[j], center_weights[j], center_samples[j]);
+        
+        double _psum1 = 0, _psum2 = 0, _psum3 = 0, _psum4 = 0;
+        for(int k=0; k<center_samples[j]; k++) {
+            _psum1 += center_weights[j][k] * (center_xsample[j][k] - xavg) * (center_xsample[j][k] - xavg);
+            _psum2 += center_weights[j][k];
+            _psum3 += center_weights[j][k] * (center_ysample[j][k] - yavg) * (center_ysample[j][k] - yavg);
+            _psum4 += center_weights[j][k] * (center_xsample[j][k] - xavg) * (center_ysample[j][k] - yavg);
+        }
+        double xstd = sqrt(_psum1 / _psum2);
+        double ystd = sqrt(_psum3 / _psum2);
+        cout << "xavg=" << xavg << "yavg=" << yavg << " xstd=" << xstd << " ystd=" << ystd << endl;
+        double cov = _psum4 / _psum2;
+        double corr = cov / (xstd * ystd);
+        double betahat = corr * xstd / ystd;
+        double alphahat = xavg - yavg * betahat;
+        cout << "Alpha=" << alphahat << " Beta=" << betahat << endl;
+        double mx = betahat * (height/2) + alphahat;
+        double my = height/2;
+        double tx = mx + SPEED_RATIO*height*cos(atan(1/betahat));
+        double ty = my - SPEED_RATIO*height*sin(atan(1/betahat));
+        double vdiffx = tx - width/2;
+        double vdiffy = ty - height/2;
+        
+        cv::line(im,
+                 cv::Point2d(alphahat, 0),
+                 cv::Point2d(alphahat + betahat * height, height), cv::Scalar(255, 0, 255), 2);
+        cv::line(im,
+                 cv::Point2d(alphahat + global_linewidth_estimation / 2, 0),
+                 cv::Point2d(alphahat + betahat * height + global_linewidth_estimation / 2, height), cv::Scalar(0, 255, 0), 2);
+        cv::line(im,
+                 cv::Point2d(alphahat - global_linewidth_estimation / 2, 0),
+                 cv::Point2d(alphahat + betahat * height - global_linewidth_estimation / 2, height), cv::Scalar(0, 255, 0), 2);
+        VideoFeedbackParam vfp;
+        vfp.beta_hat = betahat;
+        vfp.vector_diff_x = vdiffx;
+        vfp.vector_diff_y = vdiffy;
+        (*handler)(vfp);
+    }
+    
+    
+    int64_t e2 = cv::getTickCount();
+    double t = (e2 - e1)/cv::getTickFrequency();
+    cv::imwrite(path + "detect_" + filename, im);
+    //    cv::imshow("Demo", im);
+    //    cv::waitKey(15);
+    cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
+    fps_sum += 1./t;
+    proc_count ++;
+    return true;
+}
+
+
+bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)(VideoFeedbackParam)) {
     cv::Mat frame;
     vc->read(frame);
     if (frame.empty()) {
@@ -205,15 +398,15 @@ bool process(cv::VideoCapture* vc, string path, string filename) {
         return false;
     }
     cv::resize(frame, frame, cv::Size(640, 360), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm1(&frame, false, path, filename, NULL);
+    return applyAlgorithm2(&frame, false, path, filename, handler);
 }
-bool process(string path, string filename, bool toRotate) {
+bool process(string path, string filename, bool toRotate, void (*handler)(VideoFeedbackParam)) {
     cout << path+filename << endl;
     if (!file_exists(path + filename))
         return false;
     cv::Mat im = cv::imread(path + filename);
     cv::resize(im, im, cv::Size(136, 240), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm1(&im, true, path, filename, NULL);
+    return applyAlgorithm2(&im, true, path, filename, handler);
 }
 
 
@@ -221,8 +414,9 @@ WebcamProcessor::WebcamProcessor() {
     isRunning = false;
 }
 
-bool WebcamProcessor::open(webcam::Device type) {
+bool WebcamProcessor::start(webcam::Device type, void (*handler)(VideoFeedbackParam)) {
     this->type = type;
+    this->handler = handler;
     
     if(type == WEBCAM) {
         cap.open(0);
@@ -248,14 +442,14 @@ bool WebcamProcessor::open(webcam::Device type) {
 void WebcamProcessor::handleWebcamJob(WebcamProcessor *webcamprocessor) {
     if (webcamprocessor->type == WEBCAM) {
         while(true){
-            if (!process(&(webcamprocessor->cap), "", "out.jpg")) break;
+            if (!process(&(webcamprocessor->cap), "", "out.jpg", webcamprocessor->handler)) break;
             if (!webcamprocessor->isRunning) break;
         }
     } else if(webcamprocessor->type==IMAGE) {
         char dst[100] = {};
         for(int i=1;i<=302;i++){
             sprintf(dst, "frame%04d.jpg", i);
-            process(TEST_FFMPEG_PATH, dst, true);
+            process(TEST_FFMPEG_PATH, dst, true, webcamprocessor->handler);
             if (!webcamprocessor->isRunning) break;
         }
         cout << "Average FPS = " << fps_sum / proc_count << endl;
