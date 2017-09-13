@@ -72,13 +72,10 @@ void tilt_estimation(void *paramAddr) {
 
 cv::Mat im_hsv;
 
-bool applyAlgorithm1(cv::Mat *pim, bool toRotate, string path, string filename, void (*handler)(VideoFeedbackParam)){
+bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)(VideoFeedbackParam)){
     
     int64_t e1 = cv::getTickCount();
     cv::Mat im = *pim;
-    
-    if (toRotate)
-        cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
     
     width = im.size().width;
     height = im.size().height;
@@ -310,14 +307,12 @@ void applyAlgorithm2_convolution_filter_helper(struct algorithm2_multithread_obj
     }
 }
 
-bool applyAlgorithm2(cv::Mat *pim, bool toRotate, string path, string filename, void (*handler)(VideoFeedbackParam)) {
+bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)(VideoFeedbackParam)) {
     
     int64_t e1 = cv::getTickCount();
     cv::Mat im = *pim;
     
-    if (toRotate)
-        cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
-    
+   
     width = im.size().width;
     height = im.size().height;
     
@@ -403,11 +398,14 @@ bool applyAlgorithm2(cv::Mat *pim, bool toRotate, string path, string filename, 
         cv::line(im,
                  cv::Point2d(alphahat - global_linewidth_estimation / 2, 0),
                  cv::Point2d(alphahat + betahat * height - global_linewidth_estimation / 2, height), cv::Scalar(0, 255, 0), 2);
-        VideoFeedbackParam vfp;
-        vfp.beta_hat = betahat;
-        vfp.vector_diff_x = vdiffx;
-        vfp.vector_diff_y = vdiffy;
-        (*handler)(vfp);
+        
+        if (center_samples[j] >=2 ) {
+            VideoFeedbackParam vfp;
+            vfp.beta_hat = betahat;
+            vfp.vector_diff_x = vdiffx;
+            vfp.vector_diff_y = vdiffy;
+            (*handler)(vfp);
+        }
     }
     
     
@@ -431,15 +429,18 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         return false;
     }
     cv::resize(frame, frame, cv::Size(640, 360), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&frame, false, path, filename, handler);
+    return applyAlgorithm2(&frame, path, filename, handler);
 }
-bool process(string path, string filename, bool toRotate, void (*handler)(VideoFeedbackParam)) {
+bool process(string path, string filename, void (*handler)(VideoFeedbackParam)) {
     cout << path+filename << endl;
     if (!file_exists(path + filename))
         return false;
     cv::Mat im = cv::imread(path + filename);
+    if(im.size().width < im.size().height) {
+        cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
+    }
     cv::resize(im, im, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&im, toRotate, path, filename, handler);
+    return applyAlgorithm2(&im, path, filename, handler);
 }
 
 
@@ -480,9 +481,9 @@ void WebcamProcessor::handleWebcamJob(WebcamProcessor *webcamprocessor) {
         }
     } else if(webcamprocessor->type==IMAGE) {
         char dst[100] = {};
-        for(int i=1;i<=302;i++){
+        for(int i=1;;i++){
             sprintf(dst, "frame%04d.jpg", i);
-            process(TEST_FFMPEG_PATH, dst, false, webcamprocessor->handler);
+            if (!process(TEST_FFMPEG_PATH, dst, webcamprocessor->handler)) break;
             if (!webcamprocessor->isRunning) break;
         }
         cout << "Average FPS = " << fps_sum / proc_count << endl;
