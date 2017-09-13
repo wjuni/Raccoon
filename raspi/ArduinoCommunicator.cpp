@@ -8,7 +8,7 @@
 
 #include "ArduinoCommunicator.hpp"
 #include <iostream>
-
+#include <cstring>
 using namespace std;
 
 ArduinoCommunicator::ArduinoCommunicator(std::string deviceName) {
