@@ -8,7 +8,7 @@
 #ifndef PktProtocol_h
 #define PktProtocol_h
 #define PKTARDUINO_MULTIPLIER 100000
-#define DEG_MULTIPLIER 1000000 // i.e. 127.359942 -> 127359942
+#define DEG_MULTIPLIER 1000 // i.e. 127.359942 -> 127359942
 #define SPD_ALT_MULTIPLIER 100 // i.e. 4.23km/h -> 423, 123.45m -> 12345
 #define PKTARDUINO_PREAMBLE 0x24
 #define PKTRASPI_PREAMBLE 0x31
@@ -39,8 +39,9 @@ typedef struct {
     uint16_t voltage;
     uint16_t crc;
 }  __attribute__((packed)) PktRaspi;
-
-int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *target);
+int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi  *target);
+int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2  *target);
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target);
+void PktRaspi_prepare_packet(PktRaspi *target);
 #endif /* PktArduino_h */
 

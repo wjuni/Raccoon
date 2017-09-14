@@ -85,6 +85,39 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
     memcpy(target, buf, sizeof(PktArduinoV2));
     return 1;
 }
+int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi *target) {
+    PktRaspi *pkt = (PktRaspi *)buf;
+    
+    //length check
+    if(len > sizeof(PktRaspi)) {
+        DEBUG_PRINT_("[FATAL] Packet Length Incorrect, Expected=");
+        DEBUG_PRINT_((int)sizeof(PktRaspi));
+        DEBUG_PRINT_(", Got=");
+        DEBUG_PRINT((int)len);
+        return 0;
+    }
+    
+    //header check
+    if(pkt->preamble != PKTRASPI_PREAMBLE) {
+        DEBUG_PRINT_("[FATAL] Packet PREAMBLE Incorrect, Expected=");
+        DEBUG_PRINT_((int)PKTRASPI_PREAMBLE);
+        DEBUG_PRINT_(", Got=");
+        DEBUG_PRINT((int)pkt->preamble);
+        return 0;
+    }
+    
+    //crc check
+    uint16_t crc_cal = 88; //gen_crc16((uint8_t *)buf, sizeof(PktRaspi)-sizeof(uint16_t));
+    if(crc_cal != pkt->crc) {
+        DEBUG_PRINT_("[FATAL] Packet CRC Incorrect, Expected=");
+        DEBUG_PRINT_((unsigned int)crc_cal);
+        DEBUG_PRINT_(", Got=");
+        DEBUG_PRINT((unsigned int)pkt->crc);
+        return 0;
+    }
+    memcpy(target, buf, sizeof(PktRaspi));
+    return 1;
+}
 
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target) {
     target->preamble = PKTARDUINO_PREAMBLE;
@@ -92,5 +125,9 @@ void PktArduinoV2_prepare_packet(PktArduinoV2 *target) {
     target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
 }
 
-
+void PktRaspi_prepare_packet(PktRaspi *target) {
+    target->preamble = PKTRASPI_PREAMBLE;
+    target->_reserved = 0;
+    target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
+}
 

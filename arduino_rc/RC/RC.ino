@@ -55,8 +55,8 @@ void loop() {
     if (time_pulse[0]<1200){
       //left
       pkt.L1 = vel;
-      pkt.L2 = -vel;
-      pkt.R1 = -vel;
+      pkt.L2 = 0;
+      pkt.R1 = 0;
       pkt.R2 = vel;
       //L1 : vel
       //L2 : -vel
@@ -66,10 +66,10 @@ void loop() {
     }
     else if (time_pulse[0]>1700){
       //right
-      pkt.L1 = -vel;
+      pkt.L1 = 0;
       pkt.L2 = vel;
       pkt.R1 = vel;
-      pkt.R2 = -vel;
+      pkt.R2 = 0;
       //L1 : -vel
       //L2 : vel
       //R1 : vel

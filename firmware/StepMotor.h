@@ -5,8 +5,8 @@
 #define STEP_MOTOR_SPEED_MIN 1000 // Half Period, in us - deprecated
 #define STEP_MOTOR_SPEED_MAX 13  // Half Period, in us - deprecated
 
-#define STEP_MOTOR_FREQ_MAX 9.5 // in kHz
-#define STEP_MOTOR_FREQ_MIN 1.2 // in kHz
+#define STEP_MOTOR_FREQ_MAX 10 // in kHz
+#define STEP_MOTOR_FREQ_MIN 6 // in kHz
 
 
 #define STEP_MOTOR_PRESCALER 64  //set prescaler Clk/64
