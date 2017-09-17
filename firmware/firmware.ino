@@ -15,7 +15,7 @@
 /* GLOBAL */
 SerialComm raspicomm(&Serial1);
 GPS gps(&Serial2);
-Compass compass;
+//Compass compass;
 long epoch = 0;
 
 /* Prototype */
@@ -36,9 +36,9 @@ void setup() {
     gps.begin(); delay(10);
     
     DEBUG_PRINT("Initialize Complete.");
-    
-  DEBUG_PRINT("Compass Module Begin...");
-    compass.begin(); delay(10);
+//    
+//  DEBUG_PRINT("Compass Module Begin...");
+//    compass.begin(); delay(10);
 
 /*   for(int i=0;i<=100;i+=1){
         StepMotor_move(1,i);
@@ -65,19 +65,20 @@ void setup() {
 
     }
 */ 
+digitalWrite(LED_OUT1, HIGH);
 }
 
 void loop() {
    gps.read();
-   compass.read();
+  // compass.read();
     raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
-      Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
-      Serial.println((long)(gps.data.longitude*DEG_MULTIPLIER));
-      Serial.println((long)(gps.data.altitude*SPD_ALT_MULTIPLIER));
-      Serial.println((long)(gps.data.speed*SPD_ALT_MULTIPLIER));
-      Serial.println((int)gps.data.fix);
+//      Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
+//      Serial.println((long)(gps.data.longitude*DEG_MULTIPLIER));
+//      Serial.println((long)(gps.data.altitude*SPD_ALT_MULTIPLIER));
+//      Serial.println((long)(gps.data.speed*SPD_ALT_MULTIPLIER));
+//      Serial.println((int)gps.data.fix);
         epoch = 0;
         PktRaspi p;
         p.gps_lat = (uint32_t) (gps.data.latitude * DEG_MULTIPLIER);
@@ -96,15 +97,17 @@ void loop() {
 }
 
 void packet_handler(PktArduinoV2 *pkt) {
-    if (pkt->mode & (1 << 8)) {
-        // Boot Complete Broadcast
-        DEBUG_PRINT("Detected Boot Complete Broadcast.");
-        digitalWrite(LED_OUT1, HIGH);
-    }
-    if (pkt->mode & (1 << 9)) {
-        // Network Complete Broadcast
-        digitalWrite(LED_OUT2, HIGH);
-    }
+//    if (pkt->mode & (1 << 8)) {
+//        // Boot Complete Broadcast
+//        DEBUG_PRINT("Detected Boot Complete Broadcast.");
+//        digitalWrite(LED_OUT1, HIGH);
+//    }
+//    if (pkt->mode & (1 << 9)) {
+//        // Network Complete Broadcast
+//        digitalWrite(LED_OUT2, HIGH);
+//    }
+
+digitalWrite(LED_OUT2, HIGH);
     DEBUG_PRINT(abs(pkt->motor_2_spd));
     StepMotor_move(1, abs(pkt->motor_1_spd));
     StepMotor_direction(1, pkt->motor_1_spd >= 0);

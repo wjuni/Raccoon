@@ -39,9 +39,12 @@ typedef struct {
     uint16_t voltage;
     uint16_t crc;
 }  __attribute__((packed)) PktRaspi;
-int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi  *target);
+
 int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2  *target);
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target);
+PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd);
+
+int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi  *target);
 void PktRaspi_prepare_packet(PktRaspi *target);
 #endif /* PktArduino_h */
 
