@@ -89,8 +89,22 @@ void arduino_packet_handler(PktRaspi *pkt) {
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
     
-    // TODO
-    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0));
+    /*
+    v_vector = v_multiplier * v_alpha
+    v_alpha is a vector defined by <wtf.vector_diff_x, wtf.vector_diff_y>
+    */
+    double v_multiplier = 0.01, arctan_multiplier = 0.1;
+    double v_x = v_multiplier * wfp.vector_diff_x, v_y = v_multiplier * wfp.vector_diff_y;
+    double omega = arctan_multiplier * atan(wfp.beta_hat);
+    
+    double half_motorwide = 204.1, half_motorlength = 170.0;
+    double v_1 = v_y - v_x + omega * (half_motorwide + half_motorlength);
+    double v_2 = v_y + v_x - omega * (half_motorwide + half_motorlength);
+    double v_3 = v_y - v_x - omega * (half_motorwide + half_motorlength);
+    double v_4 = v_y + v_x + omega * (half_motorwide + half_motorlength);
+
+    arduino.send(buildPktArduinoV2(0, v_4, v_1, v_2, v_3));
+    //arduino.send(buildPktArduinoV2(0, v_1, v_2, v_3, v_4)); for the original robot
 }
 
 void finish(int signal) {
