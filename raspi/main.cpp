@@ -51,7 +51,7 @@ int main(int argc, const char * argv[]) {
     /* Webcam */
     if(argc >=2 && strcmp(argv[1], "gui") == 0)
         wp.setX11Support(true);
-    wp.start(webcam::IMAGE, video_feedback_handler);
+    wp.start(webcam::WEBCAM, video_feedback_handler);
 
     while(true) {
         arduino.recv(arduino_packet_handler);
@@ -66,7 +66,7 @@ void arduino_packet_handler(PktRaspi *pkt) {
     
     cout << "GPS Lat : " << pkt->gps_lat << endl;
     cout << "GPS Lon : " << pkt->gps_lon << endl;
-    cout << "GPS Fix : " << pkt->gps_fix << endl;
+    cout << "GPS Fix : " << (int)pkt->gps_fix << endl;
     context.bot_id = 1;
     context.bot_status = 1;
     //   context.damage_ratio =
