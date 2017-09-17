@@ -434,7 +434,7 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         cerr << "ERROR! blank frame grabbed\n";
         return false;
     }
-    cv::resize(frame, frame, cv::Size(640, 360), 0, 0, cv::INTER_CUBIC);
+    cv::resize(frame, frame, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
     return applyAlgorithm1(&frame, path, filename, handler, X11Support);
 }
 bool process(string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
