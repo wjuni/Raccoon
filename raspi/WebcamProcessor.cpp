@@ -269,6 +269,7 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
     while(prev_value < local_estimated_linewidth && !local_max_linewidth.compare_exchange_weak(prev_value, local_estimated_linewidth));
     
     conv_filter[core_id] = cv::Mat1i(1, (int)(local_estimated_linewidth * 1.5), -1);
+    
     for(int j=(int)local_estimated_linewidth / 4; j<(int)(local_estimated_linewidth * 5 / 4); j++) {
         conv_filter[core_id].at<int>(j) = 1;
     }
@@ -433,8 +434,8 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         cerr << "ERROR! blank frame grabbed\n";
         return false;
     }
-    cv::resize(frame, frame, cv::Size(640, 360), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&frame, path, filename, handler, X11Support);
+    cv::resize(frame, frame, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
+    return applyAlgorithm1(&frame, path, filename, handler, X11Support);
 }
 bool process(string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cout << path+filename << endl;
@@ -445,7 +446,7 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam), 
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
     }
     cv::resize(im, im, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&im, path, filename, handler, X11Support);
+    return applyAlgorithm1(&im, path, filename, handler, X11Support);
 }
 
 
