@@ -268,13 +268,18 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
     double prev_value = local_max_linewidth;
     while(prev_value < local_estimated_linewidth && !local_max_linewidth.compare_exchange_weak(prev_value, local_estimated_linewidth));
     
-    conv_filter[core_id] = cv::Mat1i(1, (int)(local_estimated_linewidth * 1.5), -1);
+    int filter_width = (int)(local_estimated_linewidth * 1.5);
+    if(filter_width <= 1) {
+        // filter width too narrow
+        return;
+    }
+    conv_filter[core_id] = cv::Mat1d(1, filter_width, -1.0);
     
     for(int j=(int)local_estimated_linewidth / 4; j<(int)(local_estimated_linewidth * 5 / 4); j++) {
         conv_filter[core_id].at<int>(j) = 1;
     }
     
-    conv[core_id] = cv::Mat::zeros(steps_n, width, CV_64F);
+    conv[core_id] = cv::Mat();
     cv::filter2D(normalized_vec[core_id], conv[core_id], -1, conv_filter[core_id]);
     
     // INFO: compensate to python code : newl = maxloc.x + conv_filter.size().width/2.
@@ -435,7 +440,7 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         return false;
     }
     cv::resize(frame, frame, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm1(&frame, path, filename, handler, X11Support);
+    return applyAlgorithm2(&frame, path, filename, handler, X11Support);
 }
 bool process(string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cout << path+filename << endl;
@@ -446,7 +451,7 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam), 
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
     }
     cv::resize(im, im, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm1(&im, path, filename, handler, X11Support);
+    return applyAlgorithm2(&im, path, filename, handler, X11Support);
 }
 
 

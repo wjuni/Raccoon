@@ -8,6 +8,7 @@
 #include <iostream>
 #include <thread>
 #include <cstring>
+#include <cmath>
 #include <signal.h>
 #include "PktProtocol.h"
 #include "ArduinoCommunicator.hpp"
@@ -87,7 +88,11 @@ void arduino_packet_handler(PktRaspi *pkt) {
 }
 
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
+    if(isnan(wfp.beta_hat) || isnan(wfp.vector_diff_x) || isnan(wfp.vector_diff_y))
+        return;
+    
     cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+    
     
     /*
     v_vector = v_multiplier * v_alpha
