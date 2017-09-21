@@ -90,6 +90,7 @@ double p=3.1415926535;
 double theta;
 double d=189;
 double r=100;
+double right, left;
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
     if(wfp.x_dev==0){
