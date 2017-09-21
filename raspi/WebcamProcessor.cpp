@@ -170,22 +170,23 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
     
 //    double act_deg = 0, deviation = width/2. - (best_fit_param.est_line_left + best_fit_param.est_line_right)/2.;
     
-    double vdiffx = 0., vdiffy = 0., beta_hat=0.;
-    
+    double vdiffx = 0., vdiffy = 0., x_dev = 0., beta_hat=0.;
+    double mx = newm*height/2+newx;
+    double my = height/2;
     if (best_fit_param.est_line_left != best_fit_param.est_line_left_btm) { // if not vertical
 //        act_deg = atan(1. / newm) * 180. / M_PI + 90;
 //        if (act_deg > 90) act_deg = act_deg - 180;
         //x - newm*y - newx = 0 , (width/2, height/2)
-//        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);
-        double mx = newm*height/2+newx;
-        double my = height/2;
+//        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);   
         double tx = mx+SPEED_RATIO*height*cos(atan(1/newm));
         double ty = my - SPEED_RATIO*height*sin(atan(1/newm));
-        vdiffx = tx - width/2;
-        vdiffy = ty - height/2;
+        vdiffx = abs(tx - width/2);
+        vdiffy = abs(ty - height/2);
         beta_hat = newm;
+        x_dev=abs(mx-width/2);
     } else {
-        vdiffx = 0;
+        vdiffx = abs(mx-width/2);
+        x_dev=vdiffx;
         vdiffy = -SPEED_RATIO*height;
         beta_hat = 0;
     }
@@ -199,6 +200,7 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
     vfp.beta_hat = beta_hat;
     vfp.vector_diff_x = vdiffx;
     vfp.vector_diff_y = vdiffy;
+    vfp.x_dev=x_dev;
     (*handler)(vfp);
     
     int64_t e2 = cv::getTickCount();
@@ -389,8 +391,9 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
         double my = height/2;
         double tx = mx + SPEED_RATIO*height*cos(atan(1/betahat));
         double ty = my - SPEED_RATIO*height*sin(atan(1/betahat));
-        double vdiffx = tx - width/2;
-        double vdiffy = ty - height/2;
+        double vdiffx = abs(tx - width/2);
+        double vdiffy = abs(ty - height/2);
+        double x_dev = abs(width/2-mx);
         
         cv::line(im,
                  cv::Point2d(alphahat, 0),
@@ -407,6 +410,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
             vfp.beta_hat = betahat;
             vfp.vector_diff_x = vdiffx;
             vfp.vector_diff_y = vdiffy;
+            vfp.x_dev=x_dev;
             (*handler)(vfp);
         }
     }

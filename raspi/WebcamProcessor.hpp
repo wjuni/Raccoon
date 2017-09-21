@@ -50,6 +50,7 @@ namespace webcam {
         double vector_diff_x;
         double vector_diff_y;
         double beta_hat;
+        double x_dev;
     } VideoFeedbackParam;
     
     class WebcamProcessor {

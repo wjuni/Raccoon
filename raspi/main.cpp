@@ -9,6 +9,7 @@
 #include <thread>
 #include <cstring>
 #include <signal.h>
+#include <cmath>
 #include "PktProtocol.h"
 #include "ArduinoCommunicator.hpp"
 #include "ServerCommunicator.hpp"
@@ -85,28 +86,62 @@ void arduino_packet_handler(PktRaspi *pkt) {
     context.bot_speed = pkt->gps_spd;
     context.bot_version = 10;
 }
-
+double p=3.1415926535;
+double theta;
+double d=189;
+double r=100;
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
-    cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
-    
-    /*
-    v_vector = v_multiplier * v_alpha
-    v_alpha is a vector defined by <wtf.vector_diff_x, wtf.vector_diff_y>
-    */
-    double v_multiplier = 0.01, arctan_multiplier = 0.1;
-    double v_x = v_multiplier * wfp.vector_diff_x, v_y = v_multiplier * wfp.vector_diff_y;
-    double omega = arctan_multiplier * atan(wfp.beta_hat);
-    
-    double half_motorwide = 204.1, half_motorlength = 170.0;
-    double v_1 = v_y - v_x + omega * (half_motorwide + half_motorlength);
-    double v_2 = v_y + v_x - omega * (half_motorwide + half_motorlength);
-    double v_3 = v_y - v_x - omega * (half_motorwide + half_motorlength);
-    double v_4 = v_y + v_x + omega * (half_motorwide + half_motorlength);
+    cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+    if(wfp.x_dev==0){
+        theta=atan(wfp.beta_hat);
+        if(theta>0){
+            left=d*sin(theta)+r;
+            right=r-d*sin(theta);
+            right=100*right/left;
+            left=100;
+        }
+        else{
+            right=d*sin(theta)+r;
+            left=r-d*sin(theta);      
+            left=100*left/right;
+            right=100;    
+        }
+    }
+    else{
+        theta=p/2-atan(wfp.vector_diff_y/wfp.vector_diff_x);
+        double cof=wfp.vector_diff_x/cos(atan(wfp.vector_diff_y/wfp.vector_diff_x));
+        r=cof*10
+        if(theta>0){
+            left=d*sin(theta)+r;
+            right=r-d*sin(theta);
+            right=100*right/left;
+            left=100;
+        }
+        else{
+            right=d*sin(theta)+r;
+            left=r-d*sin(theta); 
+            left=100*left/right;
+            right=100;            
+        }
 
-    arduino.send(buildPktArduinoV2(0, v_4, v_1, v_2, v_3));
-    //arduino.send(buildPktArduinoV2(0, v_1, v_2, v_3, v_4)); for the original robot
+        r=100;
+        theta=atan(wfp.vector_diff_y/wfp.vector_diff_x)-(p/2-atan(wfp.beta_hat));
+        if(theta>0){
+            left=d*sin(theta)+r;
+            right=r-d*sin(theta);
+            right=100*right/left;
+            left=100;
+        }
+        else{
+            right=d*sin(theta)+r;
+            left=r-d*sin(theta);   
+            left=100*left/right;
+            right=100;          
+        }
+    }
+    arduino.send(buildPktArduinoV2(0, left, left, right, right));
+ 
 }
-
 void finish(int signal) {
     exit(0);
 }
