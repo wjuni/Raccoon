@@ -140,7 +140,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
             right=100;          
         }
     }
-    arduino.send(buildPktArduinoV2(0, left, left, right, right));
+    arduino.send(buildPktArduinoV2(0, (uint8_t)left, (uint8_t)left, (uint8_t)right, (uint8_t)right));
  
 }
 void finish(int signal) {
