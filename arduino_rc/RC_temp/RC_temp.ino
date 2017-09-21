@@ -70,8 +70,8 @@ void loop() {
         //right
         pkt.L1 = vel;
         pkt.L2 = vel;
-        pkt.R1 = vel*(time_pulse[0]-990)/510.0;
-        pkt.R2 = vel*(time_pulse[0]-990)/510.0;
+        pkt.R1 = vel*(2010-time_pulse[0])/510.0;
+        pkt.R2 = vel*(2010-time_pulse[0])/510.0;
         //L1 : -vel
         //L2 : vel
         //R1 : vel
@@ -100,8 +100,8 @@ void loop() {
         //right
         pkt.L1 = -vel;
         pkt.L2 = -vel;
-        pkt.R1 = -vel*(time_pulse[0]-990)/510.0;
-        pkt.R2 = -vel*(time_pulse[0]-990)/510.0;
+        pkt.R1 = -vel*(2010-time_pulse[0])/510.0;
+        pkt.R2 = -vel*(2010-time_pulse[0])/510.0;
         //L1 : -vel
         //L2 : vel
         //R1 : vel
