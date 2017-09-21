@@ -1,11 +1,12 @@
-//    L1       R1
-//
+//    L1  bat  R1
+// 
 //    L2       R2
-// map L1, R1, L2, R2 as motor 1, 2, 3, 4
+// map L1, L2, R2, R1 as motor 1, 2, 3, 4
+
 #define L1 motor_1_spd
-#define R1 motor_2_spd
-#define L2 motor_3_spd
-#define R2 motor_4_spd
+#define R1 motor_4_spd
+#define L2 motor_2_spd
+#define R2 motor_3_spd
 #include "PktProtocol.h"
 
 #define sbi(reg, x) reg |= (0x01 << x)
@@ -51,65 +52,74 @@ void loop() {
     else 
       vel = (time_pulse[1]-1000)/10; //velocity
 //        vel = 10;
-
-    if (time_pulse[0]<1200){
-      //left
-      pkt.L1 = vel;
-      pkt.L2 = 0;
-      pkt.R1 = 0;
-      pkt.R2 = vel;
-      //L1 : vel
-      //L2 : -vel
-      //R1 : -vel
-      //R2 : vel
-
-    }
-    else if (time_pulse[0]>1700){
-      //right
-      pkt.L1 = 0;
-      pkt.L2 = vel;
-      pkt.R1 = vel;
-      pkt.R2 = 0;
-      //L1 : -vel
-      //L2 : vel
-      //R1 : vel
-      //R2 : -vel
-    }
-    else
-      //front or retrieve
-      if (time_pulse[2]<1200){
-        //front 
+    if (time_pulse[2]<1200){
+      if (time_pulse[0]<1450){
+        //left
+        
+        pkt.L1 = vel*(time_pulse[0]-990)/510.0;
+        pkt.L2 = vel*(time_pulse[0]-990)/510.0;
+        pkt.R1 = vel;
+        pkt.R2 = vel;
+        //L1 : vel
+        //L2 : -vel
+        //R1 : -vel
+        //R2 : vel
+  
+      }
+      else if (time_pulse[0]>1550){
+        //right
+        pkt.L1 = vel;
+        pkt.L2 = vel;
+        pkt.R1 = vel*(2010-time_pulse[0])/510.0;
+        pkt.R2 = vel*(2010-time_pulse[0])/510.0;
+        //L1 : -vel
+        //L2 : vel
+        //R1 : vel
+        //R2 : -vel
+      }
+      else{
         pkt.L1 = vel;
         pkt.L2 = vel;
         pkt.R1 = vel;
         pkt.R2 = vel;
+      }
+    }
+    else if (time_pulse[2]>1700){
+      if (time_pulse[0]<1450){
+        //left
+        pkt.L1 = -vel*(time_pulse[0]-990)/510.0;
+        pkt.L2 = -vel*(time_pulse[0]-990)/510.0;
+        pkt.R1 = -vel;
+        pkt.R2 = -vel;
         //L1 : vel
+        //L2 : -vel
+        //R1 : -vel
+        //R2 : vel  
+      }
+      else if (time_pulse[0]>1550){
+        //right
+        pkt.L1 = -vel;
+        pkt.L2 = -vel;
+        pkt.R1 = -vel*(2010-time_pulse[0])/510.0;
+        pkt.R2 = -vel*(2010-time_pulse[0])/510.0;
+        //L1 : -vel
         //L2 : vel
         //R1 : vel
-        //R2 : vel
+        //R2 : -vel
       }
-      else if (time_pulse[2]>1700){
-        //retrieve 
+      else{
         pkt.L1 = -vel;
         pkt.L2 = -vel;
         pkt.R1 = -vel;
         pkt.R2 = -vel;
-        //L1 : -vel
-        //L2 : -vel
-        //R1 : -vel
-        //R2 : -vel
       }
-      else{
-        //neutral
-        pkt.L1 = 0;
-        pkt.L2 = 0;
-        pkt.R1 = 0;
-        pkt.R2 = 0;
-        //L1 : 0
-        //L2 : 0
-        //R1 : 0
-        //R2 : 0
-      }
+    }
+    else{
+      pkt.L1 = 0;
+      pkt.L2 = 0;
+      pkt.R1 = 0;
+      pkt.R2 = 0;
+    }
   }
   else{
     //all stop
