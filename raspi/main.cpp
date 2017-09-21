@@ -90,22 +90,22 @@ double p=3.1415926535;
 double theta;
 double d=189;
 double r=100;
-double right, left;
+double m_right, m_left;
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
     if(wfp.x_dev==0){
         theta=atan(wfp.beta_hat);
         if(theta>0){
-            left=d*sin(theta)+r;
-            right=r-d*sin(theta);
-            right=100*right/left;
-            left=100;
+            m_left=d*sin(theta)+r;
+            m_right=r-d*sin(theta);
+            m_right=100*m_right/m_left;
+            m_left=100;
         }
         else{
-            right=d*sin(theta)+r;
-            left=r-d*sin(theta);      
-            left=100*left/right;
-            right=100;    
+            m_right=d*sin(theta)+r;
+            m_left=r-d*sin(theta);      
+            m_left=100*m_left/m_right;
+            m_right=100;    
         }
     }
     else{
@@ -113,35 +113,34 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
         double cof=wfp.vector_diff_x/cos(atan(wfp.vector_diff_y/wfp.vector_diff_x));
         r=cof*10
         if(theta>0){
-            left=d*sin(theta)+r;
-            right=r-d*sin(theta);
-            right=100*right/left;
-            left=100;
+            m_left=d*sin(theta)+r;
+            m_right=r-d*sin(theta);
+            m_right=100*m_right/m_left;
+            m_left=100;
         }
         else{
-            right=d*sin(theta)+r;
-            left=r-d*sin(theta); 
-            left=100*left/right;
-            right=100;            
+            m_right=d*sin(theta)+r;
+            m_left=r-d*sin(theta);      
+            m_left=100*m_left/m_right;
+            m_right=100;    
         }
 
         r=100;
         theta=atan(wfp.vector_diff_y/wfp.vector_diff_x)-(p/2-atan(wfp.beta_hat));
         if(theta>0){
-            left=d*sin(theta)+r;
-            right=r-d*sin(theta);
-            right=100*right/left;
-            left=100;
+            m_left=d*sin(theta)+r;
+            m_right=r-d*sin(theta);
+            m_right=100*m_right/m_left;
+            m_left=100;
         }
         else{
-            right=d*sin(theta)+r;
-            left=r-d*sin(theta);   
-            left=100*left/right;
-            right=100;          
+            m_right=d*sin(theta)+r;
+            m_left=r-d*sin(theta);      
+            m_left=100*m_left/m_right;
+            m_right=100;    
         }
     }
-    arduino.send(buildPktArduinoV2(0, (uint8_t)left, (uint8_t)left, (uint8_t)right, (uint8_t)right));
- 
+    arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
 }
 void finish(int signal) {
     exit(0);
