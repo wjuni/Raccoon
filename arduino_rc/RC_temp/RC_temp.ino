@@ -56,8 +56,8 @@ void loop() {
       if (time_pulse[0]<1450){
         //left
         
-        pkt.L1 = vel/(1500-990)*(time_pulse[0]-990);
-        pkt.L2 = vel/(1500-990)*(time_pulse[0]-990);
+        pkt.L1 = vel*(time_pulse[0]-990)/510.0;
+        pkt.L2 = vel*(time_pulse[0]-990)/510.0;
         pkt.R1 = vel;
         pkt.R2 = vel;
         //L1 : vel
@@ -70,8 +70,8 @@ void loop() {
         //right
         pkt.L1 = vel;
         pkt.L2 = vel;
-        pkt.R1 = vel/(1500-990)*(time_pulse[0]-990);
-        pkt.R2 = vel/(1500-990)*(time_pulse[0]-990);
+        pkt.R1 = vel*(time_pulse[0]-990)/510.0;
+        pkt.R2 = vel*(time_pulse[0]-990)/510.0;
         //L1 : -vel
         //L2 : vel
         //R1 : vel
@@ -87,8 +87,8 @@ void loop() {
     else if (time_pulse[2]>1700){
       if (time_pulse[0]<1450){
         //left
-        pkt.L1 = -vel/(1500-990)*(time_pulse[0]-990);
-        pkt.L2 = -vel/(1500-990)*(time_pulse[0]-990);
+        pkt.L1 = -vel*(time_pulse[0]-990)/510.0;
+        pkt.L2 = -vel*(time_pulse[0]-990)/510.0;
         pkt.R1 = -vel;
         pkt.R2 = -vel;
         //L1 : vel
@@ -100,8 +100,8 @@ void loop() {
         //right
         pkt.L1 = -vel;
         pkt.L2 = -vel;
-        pkt.R1 = -vel/(1500-990)*(time_pulse[0]-990);
-        pkt.R2 = -vel/(1500-990)*(time_pulse[0]-990);
+        pkt.R1 = -vel*(time_pulse[0]-990)/510.0;
+        pkt.R2 = -vel*(time_pulse[0]-990)/510.0;
         //L1 : -vel
         //L2 : vel
         //R1 : vel
