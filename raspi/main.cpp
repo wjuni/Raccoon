@@ -111,7 +111,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     else{
         theta=p/2-atan(wfp.vector_diff_y/wfp.vector_diff_x);
         double cof=wfp.vector_diff_x/cos(atan(wfp.vector_diff_y/wfp.vector_diff_x));
-        r=cof*10
+        r=cof*10;
         if(theta>0){
             m_left=d*sin(theta)+r;
             m_right=r-d*sin(theta);
