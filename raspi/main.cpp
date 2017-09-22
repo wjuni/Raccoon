@@ -37,7 +37,7 @@ int main(int argc, const char * argv[]) {
     signal(SIGINT, finish);
     
     /* Arduino */
-    arduino.begin(115200);
+    arduino.begin(9600);
     arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0)); // notify boot complete
     
     /* Server */
