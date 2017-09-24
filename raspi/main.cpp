@@ -86,59 +86,39 @@ void arduino_packet_handler(PktRaspi *pkt) {
     context.bot_speed = pkt->gps_spd;
     context.bot_version = 10;
 }
-double p=3.1415926535;
-double theta;
-double d=189;
-double r=100;
+
+double d=189.0;
+double k=20.0;
+double r_threshold=30.0;
 double m_right, m_left;
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
-    if(wfp.x_dev==0){
-        theta=atan(wfp.beta_hat);
-        if(theta>0){
-            m_left=d*sin(theta)+r;
-            m_right=r-d*sin(theta);
-            m_right=100*m_right/m_left;
-            m_left=100;
-        }
-        else{
-            m_right=d*sin(theta)+r;
-            m_left=r-d*sin(theta);      
-            m_left=100*m_left/m_right;
-            m_right=100;    
-        }
+    double vx_line = wfp.vector_diff_x - wfp.x_dev, vy_line = wfp.vector_diff_y;
+    double alpha = abs(atan(vy_line/(vx_line-wfp.x_dev)));
+    double r;
+    if(vx_line * wfp.x_dev < 0)	{
+    	r = abs(wfp.x_dev)/(1/sin(alpha)-1);
+    	if (r < r_threshold) {
+    		if(wfp.x_dev > 0) {
+    			m_right = 100.0;
+    			m_left = 100.0*(r - d/2)/(r + d/2);
+    		}
+    		else {
+    			m_right = 100.0*(r - d/2)/(r + d/2);
+    			m_left = 100.0;
+    		}
+    		arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
+    		return;
+    	}
     }
-    else{
-        theta=p/2-atan(wfp.vector_diff_y/wfp.vector_diff_x);
-        double cof=wfp.vector_diff_x/cos(atan(wfp.vector_diff_y/wfp.vector_diff_x));
-        r=cof*10;
-        if(theta>0){
-            m_left=d*sin(theta)+r;
-            m_right=r-d*sin(theta);
-            m_right=100*m_right/m_left;
-            m_left=100;
-        }
-        else{
-            m_right=d*sin(theta)+r;
-            m_left=r-d*sin(theta);      
-            m_left=100*m_left/m_right;
-            m_right=100;    
-        }
-
-        r=100;
-        theta=atan(wfp.vector_diff_y/wfp.vector_diff_x)-(p/2-atan(wfp.beta_hat));
-        if(theta>0){
-            m_left=d*sin(theta)+r;
-            m_right=r-d*sin(theta);
-            m_right=100*m_right/m_left;
-            m_left=100;
-        }
-        else{
-            m_right=d*sin(theta)+r;
-            m_left=r-d*sin(theta);      
-            m_left=100*m_left/m_right;
-            m_right=100;    
-        }
+   	r = (k*vx_line + wfp.x_dev)/2 + k*k*vy_line*vy_line/(2*(k*vx_line + wfp.x_dev))
+    if(wfp.x_dev > 0) {
+    	m_right = 100.0*(r - d/2)/(r + d/2);
+    	m_left = 100.0;
+    }
+    else {
+    	m_right = 100.0;
+    	m_left = 100.0*(r - d/2)/(r + d/2);
     }
     arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
 }
