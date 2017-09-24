@@ -71,7 +71,7 @@ digitalWrite(LED_OUT1, HIGH);
 void loop() {
    gps.read();
   // compass.read();
-   // raspicomm.read(packet_handler);
+   raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
 //      Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
