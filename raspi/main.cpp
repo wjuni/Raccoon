@@ -22,7 +22,7 @@ using namespace std;
  * The context struct will be sent to the server later.
  */
 
-ArduinoCommunicator arduino("/dev/ttyAMA0");
+ArduinoCommunicator arduino("/dev/serial0"); // To support both raspi2 + raspi3 (ble must be disabled on raspi3)
 const string SERVER_ADDR = "https://raccoon.wjuni.com/ajax/report.php";
 ServerCommunicator server(SERVER_ADDR);
 ServerCommContext context;
@@ -37,7 +37,7 @@ int main(int argc, const char * argv[]) {
     signal(SIGINT, finish);
     
     /* Arduino */
-    arduino.begin(9600);
+    arduino.begin(115200); // Baudrate must be 9600 or 115200
     arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0)); // notify boot complete
     
     /* Server */

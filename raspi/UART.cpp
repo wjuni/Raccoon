@@ -36,7 +36,15 @@ int UART::begin(unsigned long baudrate) {
     //	PARODD - Odd parity (else even)
     struct termios options;
     tcgetattr(uart0_filestream, &options);
-    options.c_cflag = baudrate | CS8 | CLOCAL | CREAD;		//<Set baud rate
+    long targetbaud = 0;
+    if(baudrate == 9600) {
+        targetbaud = B9600;
+    } else if(baudrate == 115200){
+        targetbaud = B115200;
+    } else {
+        targetbaud = B9600;
+    }
+    options.c_cflag = targetbaud | CS8 | CLOCAL | CREAD;		//<Set baud rate
     options.c_iflag = IGNPAR;
     options.c_oflag = 0;
     options.c_lflag = 0;

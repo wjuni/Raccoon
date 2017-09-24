@@ -15,7 +15,7 @@ class UART {
     int uart0_filestream = -1;
 public:
     UART(std::string deviceName);
-    int begin(unsigned long baudrate);
+    int begin(unsigned long baudrate);  // Baudrate must be 9600 or 115200
     long read(void *buf, unsigned long len);
 	int read();
     long write(void *buf, unsigned long len);
