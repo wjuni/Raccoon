@@ -196,12 +196,16 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
 //    ", y=" << - deviation * sin(act_deg * M_PI / 180) << ")" << endl;
     
     // call VideoFeedbackParam Handler here
-    VideoFeedbackParam vfp;
-    vfp.beta_hat = beta_hat;
-    vfp.vector_diff_x = vdiffx;
-    vfp.vector_diff_y = vdiffy;
-    vfp.x_dev=x_dev;
-    (*handler)(vfp);
+    if(abs(best_fit_param.est_line_left - best_fit_param.est_line_right) >= 10){
+        VideoFeedbackParam vfp;
+        vfp.beta_hat = beta_hat;
+        vfp.vector_diff_x = vdiffx;
+        vfp.vector_diff_y = vdiffy;
+        vfp.x_dev=x_dev;
+        (*handler)(vfp);
+    } else {
+        cout << "Line too narrow, Ignoring" << endl;
+    }
     
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
@@ -444,7 +448,7 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         return false;
     }
     cv::resize(frame, frame, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&frame, path, filename, handler, X11Support);
+    return applyAlgorithm1(&frame, path, filename, handler, X11Support);
 }
 bool process(string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cout << path+filename << endl;
@@ -455,7 +459,7 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam), 
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
     }
     cv::resize(im, im, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm2(&im, path, filename, handler, X11Support);
+    return applyAlgorithm1(&im, path, filename, handler, X11Support);
 }
 
 
