@@ -111,7 +111,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     		return;
     	}
     }
-   	r = (k*vx_line + wfp.x_dev)/2 + k*k*vy_line*vy_line/(2*(k*vx_line + wfp.x_dev))
+   	r = (k*vx_line + wfp.x_dev)/2 + k*k*vy_line*vy_line/(2*(k*vx_line + wfp.x_dev));
     if(wfp.x_dev > 0) {
     	m_right = 100.0*(r - d/2)/(r + d/2);
     	m_left = 100.0;
