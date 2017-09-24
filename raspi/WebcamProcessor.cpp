@@ -298,10 +298,11 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
             break;
         double left_line = maxloc.x - local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
         double right_line = maxloc.x + local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
-        for(int k=static_cast<int>(left_line); k < static_cast<int>(right_line); k++) {
+        int start = static_cast<int>(left_line) < 0 ? 0 : static_cast<int>(left_line);
+        for(int k=start; k < static_cast<int>(right_line); k++) {
             if(k >= conv[core_id].size().width)
                 break;
-            assert(k < conv[core_id].size().width);
+            assert(k < conv[core_id].size().width && k >= 0);
             conv[core_id].at<double>(k) = 0;
         }
         
@@ -432,7 +433,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
-    cv::imwrite(path + "detect_" + filename, im);
+//    cv::imwrite(path + "detect_" + filename, im);
     
     if(X11Support) {
         cv::imshow("Algorithm 2", im);
