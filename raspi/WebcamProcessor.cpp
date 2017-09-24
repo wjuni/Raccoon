@@ -88,7 +88,7 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
     
     cv::cvtColor(im, im_hsv, cv::COLOR_BGR2HSV);
     cv::Scalar orange_min = cv::Scalar(15, 70, 100);
-    cv::Scalar orange_max = cv::Scalar(30, 255, 255);
+    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
     //cv::Scalar white_min = cv::Scalar(0, 0, 165);
     //cv::Scalar white_max = cv::Scalar(255, 15, 255);
     cv::inRange(im_hsv, orange_min, orange_max, frame_threshed);
@@ -255,9 +255,10 @@ LineSegmentElement line_center[lines][N];
 cv::Mat cropped[NUM_CORE];
 cv::Mat vec_avg[NUM_CORE];
 cv::Mat normalized_vec[NUM_CORE];
-cv::Mat1i conv_filter[NUM_CORE];
+cv::Mat conv_filter[NUM_CORE];
 cv::Mat conv[NUM_CORE];
 void applyAlgorithm2_convolution_filter(int i, int core_id) {
+    assert(core_id < NUM_CORE);
     cv::Rect myROI(0, i*steps_n, width-1, steps_n);
     cropped[core_id] = frame_threshed(myROI);
     cv::reduce(cropped[core_id], vec_avg[core_id], 0, CV_REDUCE_AVG, CV_64F);
@@ -282,7 +283,8 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
     conv_filter[core_id] = cv::Mat1d(1, filter_width, -1.0);
     
     for(int j=(int)local_estimated_linewidth / 4; j<(int)(local_estimated_linewidth * 5 / 4); j++) {
-        conv_filter[core_id].at<int>(j) = 1;
+        assert(j < conv_filter[core_id].size().width);
+        conv_filter[core_id].at<double>(j) = 1.;
     }
     
     conv[core_id] = cv::Mat();
@@ -297,6 +299,9 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
         double left_line = maxloc.x - local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
         double right_line = maxloc.x + local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
         for(int k=static_cast<int>(left_line); k < static_cast<int>(right_line); k++) {
+            if(k >= conv[core_id].size().width)
+                break;
+            assert(k < conv[core_id].size().width);
             conv[core_id].at<double>(k) = 0;
         }
         
@@ -334,7 +339,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     cv::cvtColor(im, im_hsv, cv::COLOR_BGR2HSV);
     cv::Scalar orange_min = cv::Scalar(15, 70, 100);
-    cv::Scalar orange_max = cv::Scalar(30, 255, 255);
+    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
     //cv::Scalar white_min = cv::Scalar(0, 0, 165);
     //cv::Scalar white_max = cv::Scalar(255, 15, 255);
     cv::inRange(im_hsv, orange_min, orange_max, frame_threshed);
@@ -448,7 +453,7 @@ bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)
         return false;
     }
     cv::resize(frame, frame, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm1(&frame, path, filename, handler, X11Support);
+    return applyAlgorithm2(&frame, path, filename, handler, X11Support);
 }
 bool process(string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cout << path+filename << endl;
@@ -459,7 +464,7 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam), 
         cv::rotate(im, im, cv::ROTATE_90_CLOCKWISE);
     }
     cv::resize(im, im, cv::Size(240, 160), 0, 0, cv::INTER_CUBIC);
-    return applyAlgorithm1(&im, path, filename, handler, X11Support);
+    return applyAlgorithm2(&im, path, filename, handler, X11Support);
 }
 
 
