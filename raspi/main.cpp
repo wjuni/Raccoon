@@ -88,38 +88,45 @@ void arduino_packet_handler(PktRaspi *pkt) {
 }
 
 double d=189.0;
-double k=20.0;
-double r_threshold=30.0;
+double k=0.806431;
+double r_factor=15.0;
+double r_threshold=40.2542;
 double m_right, m_left;
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
-    cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+    //cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
     double vx_line = wfp.vector_diff_x - wfp.x_dev, vy_line = wfp.vector_diff_y;
     double alpha = abs(atan(vy_line/(vx_line-wfp.x_dev)));
     double r;
+    cout << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+    cout << wfp.x_dev << ", " << vx_line << ", " << vy_line << endl;
     if(vx_line * wfp.x_dev < 0)	{
     	r = abs(wfp.x_dev)/(1/sin(alpha)-1);
+	cout << "In the if statement, r is : " << r << endl;
     	if (r < r_threshold) {
     		if(wfp.x_dev > 0) {
     			m_right = 100.0;
-    			m_left = 100.0*(r - d/2)/(r + d/2);
+    			m_left = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
     		}
     		else {
-    			m_right = 100.0*(r - d/2)/(r + d/2);
+    			m_right = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
     			m_left = 100.0;
     		}
+		cout << m_left << ", " << m_right << endl;
     		arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
     		return;
     	}
     }
-   	r = (k*vx_line + wfp.x_dev)/2 + k*k*vy_line*vy_line/(2*(k*vx_line + wfp.x_dev));
+    r = abs((k*vx_line + wfp.x_dev)/2 + k*k*vy_line*vy_line/(2*(k*vx_line + wfp.x_dev)));
+    cout << "Out of if statement, r is : " << r << endl;
     if(wfp.x_dev > 0) {
-    	m_right = 100.0*(r - d/2)/(r + d/2);
+    	m_right = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
     	m_left = 100.0;
     }
     else {
     	m_right = 100.0;
-    	m_left = 100.0*(r - d/2)/(r + d/2);
+    	m_left = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
     }
+    cout << m_left << ", " << m_right << endl;
     arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
 }
 void finish(int signal) {

@@ -179,7 +179,7 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
         //x - newm*y - newx = 0 , (width/2, height/2)
 //        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);   
         double tx = mx+SPEED_RATIO*height*cos(atan(1/newm));
-        double ty = my - SPEED_RATIO*height*sin(atan(1/newm));
+        double ty = my - SPEED_RATIO*height*abs(sin(atan(1/newm)));
         vdiffx = tx - width/2;
         vdiffy = ty - height/2;
         beta_hat = newm;
@@ -404,11 +404,14 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
         double alphahat = xavg - yavg * betahat;
         double mx = betahat * (height/2) + alphahat;
         double my = height/2;
-        double tx = mx + SPEED_RATIO*height*cos(atan(1/betahat));
-        double ty = my - SPEED_RATIO*height*sin(atan(1/betahat));
-        double vdiffx = tx - width/2;
-        double vdiffy = ty - height/2;
-        double x_dev = width/2-mx;
+	double theta = atan(-1/betahat);
+	if(theta < 0.0)	theta += M_PI;
+        double tx = mx + SPEED_RATIO*height*cos(theta);
+        //double ty = my - SPEED_RATIO*height*abs(sin(atan(1/betahat)));
+        double vdiffy = SPEED_RATIO*height*abs(sin(atan(1/betahat)));
+	double vdiffx = tx - width/2;
+        //double vdiffy = ty - height/2;
+        double x_dev = mx-width/2;
         
         cv::line(im,
                  cv::Point2d(alphahat, 0),
