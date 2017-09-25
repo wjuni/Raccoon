@@ -87,11 +87,13 @@ void arduino_packet_handler(PktRaspi *pkt) {
     context.bot_version = 10;
 }
 
-double d=189.0;
-double k=0.806431;
-double r_factor=15.0;
-double r_threshold=40.2542;
+const double d=189.0;
+const double k=0.806431;
+const double r_factor=15.0;
+const double r_threshold=40.2542;
+const double v_factor = 50.0;
 double m_right, m_left;
+ 
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     //cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
     double vx_line = wfp.vector_diff_x - wfp.x_dev, vy_line = wfp.vector_diff_y;
@@ -104,12 +106,12 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 	cout << "In the if statement, r is : " << r << endl;
     	if (r < r_threshold) {
     		if(wfp.x_dev > 0) {
-    			m_right = 100.0;
-    			m_left = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
+    			m_right = v_factor;
+    			m_left = v_factor*(r*r_factor - d/2)/(r*r_factor + d/2);
     		}
     		else {
-    			m_right = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
-    			m_left = 100.0;
+    			m_right = v_factor*(r*r_factor - d/2)/(r*r_factor + d/2);
+    			m_left = v_factor;
     		}
 		cout << m_left << ", " << m_right << endl;
     		arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
@@ -119,12 +121,12 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     r = abs((k*vx_line + wfp.x_dev)/2 + k*k*vy_line*vy_line/(2*(k*vx_line + wfp.x_dev)));
     cout << "Out of if statement, r is : " << r << endl;
     if(wfp.x_dev > 0) {
-    	m_right = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
-    	m_left = 100.0;
+    	m_right = v_factor*(r*r_factor - d/2)/(r*r_factor + d/2);
+    	m_left = v_factor;
     }
     else {
-    	m_right = 100.0;
-    	m_left = 100.0*(r*r_factor - d/2)/(r*r_factor + d/2);
+    	m_right = v_factor;
+    	m_left = v_factor*(r*r_factor - d/2)/(r*r_factor + d/2);
     }
     cout << m_left << ", " << m_right << endl;
     arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
