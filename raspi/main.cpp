@@ -88,14 +88,19 @@ void arduino_packet_handler(PktRaspi *pkt) {
 }
 
 const double d=189.0;
+/* For the previous algorithm.
 const double k=0.806431;
 const double r_factor=15.0;
 const double r_threshold=40.2542;
 const double v_factor = 50.0;
 double m_right, m_left;
+*/
+
+const double v_factor = 30.0;
  
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     //cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+	/* Previous algorithm.
     double vx_line = wfp.vector_diff_x - wfp.x_dev, vy_line = wfp.vector_diff_y;
     double alpha = abs(atan(vy_line/(vx_line-wfp.x_dev)));
     double r;
@@ -130,6 +135,13 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     }
     cout << m_left << ", " << m_right << endl;
     arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
+    */
+	const double theta = atan(wfp.beta_hat);
+	const double dev_coeff = 0.5;
+	const double base = 1.2;
+	double m_left = v_factor * pow(base, dev_coeff * wfp.x_dev + theta);
+	double m_right = v_factor * pow(base, -(dev_coeff * wfp.x_dev + theta));
+	arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
 }
 void finish(int signal) {
     exit(0);
