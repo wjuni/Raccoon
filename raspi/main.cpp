@@ -41,14 +41,14 @@ int main(int argc, const char * argv[]) {
     arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0)); // notify boot complete
     
     /* Server */
-    memset(&context, 0, sizeof(ServerCommContext));
+/*    memset(&context, 0, sizeof(ServerCommContext));
     context.bot_id = 1;
     context.bot_speed = 637;
     context.bot_battery = 95;
     context.acc_distance = 239;
     context.bot_version = 11;
     server.start(&context);
-    
+    */
     /* Webcam */
     if(argc >=2 && strcmp(argv[1], "gui") == 0)
         wp.setX11Support(true);
@@ -62,12 +62,12 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 
-void arduino_packet_handler(PktRaspi *pkt) {
+void arduino_packet_handler(PktRaspi *pkt) {/*
     cout << "[Arduino] Got Packet" << endl;
     
     cout << "GPS Lat : " << pkt->gps_lat << endl;
     cout << "GPS Lon : " << pkt->gps_lon << endl;
-    cout << "GPS Fix : " << (int)pkt->gps_fix << endl;
+    cout << "GPS Fix : " << (int)pkt->gps_fix << endl;*/
     context.bot_id = 1;
     context.bot_status = 1;
     //   context.damage_ratio =
@@ -96,7 +96,7 @@ const double v_factor = 50.0;
 double m_right, m_left;
 */
 
-const double v_factor = 30.0;
+const double v_factor = 20.0;
  
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     //cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
@@ -136,11 +136,12 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     cout << m_left << ", " << m_right << endl;
     arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
     */
-	const double theta = atan(wfp.beta_hat);
-	const double dev_coeff = 0.5;
-	const double base = 1.2;
+	const double theta = -atan(wfp.beta_hat);
+	const double dev_coeff = 0.0001;
+	const double base = 300.0;
 	double m_left = v_factor * pow(base, dev_coeff * wfp.x_dev + theta);
 	double m_right = v_factor * pow(base, -(dev_coeff * wfp.x_dev + theta));
+	cout << theta << " " << m_left << " " << m_right << endl;
 	arduino.send(buildPktArduinoV2(0, (uint8_t)m_left, (uint8_t)m_left, (uint8_t)m_right, (uint8_t)m_right));
 }
 void finish(int signal) {
