@@ -205,6 +205,12 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
         (*handler)(vfp);
     } else {
         cout << "Line too narrow, Ignoring" << endl;
+    	VideoFeedbackParam vfp;
+	vfp.beta_hat = std::nan("");
+	vfp.vector_diff_x = std::nan("");
+	vfp.vector_diff_y = std::nan("");
+	vfp.x_dev = std::nan("");
+	(*handler)(vfp);
     }
     
     int64_t e2 = cv::getTickCount();
@@ -350,7 +356,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     int task_per_cpu = (N+NUM_CORE-1) / NUM_CORE;
     thread thds[NUM_CORE];
     algorithm2_multithread_obj amo[NUM_CORE];
-    
+    memset(line_center, 0, sizeof(line_center)); 
     for(int i=0, j=0; i<N; j++, i+=task_per_cpu) {
         int end = (i + task_per_cpu > N)? N : i + task_per_cpu;
         amo[j].start = i;
@@ -364,7 +370,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     double center_xsample[lines][N] = {0, }, center_ysample[lines][N] = {0, }, center_weights[lines][N] = {0, };
     int center_samples[lines] = {0, };
-    for(int i=0; i<N; i++) {
+    for(int i=3; i<N-3; i++) {
         for(int j=0; j<lines; j++) {
             if(line_center[j][i].valid){
                 LineSegmentElement lse = line_center[j][i];
@@ -430,7 +436,15 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
             vfp.vector_diff_y = vdiffy;
             vfp.x_dev=x_dev;
             (*handler)(vfp);
-        }
+	} else {
+		VideoFeedbackParam vfp;
+		vfp.beta_hat = std::nan("");
+		vfp.vector_diff_x = std::nan("");
+		vfp.vector_diff_y = std::nan("");
+		vfp.x_dev = std::nan("");
+		(*handler)(vfp);
+
+	}
     }
     
     
@@ -440,6 +454,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     if(X11Support) {
         cv::imshow("Algorithm 2", im);
+	cv::imshow("Algorithm 2_threshed", frame_threshed);
         cv::waitKey(15);
     }
     cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
