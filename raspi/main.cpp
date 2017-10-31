@@ -63,17 +63,16 @@ int main(int argc, const char * argv[]) {
     arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0)); // notify boot complete
     
     /* Server */
-/*    memset(&context, 0, sizeof(ServerCommContext));
+    memset(&context, 0, sizeof(ServerCommContext));
     context.bot_id = 1;
     context.bot_speed = 637;
     context.bot_battery = 95;
     context.acc_distance = 239;
     context.bot_version = 11;
     server.start(&context);
-    */
-
+    
     /* Temporal part : parameter input */
-    FILE *parStream = fopen("parameters.txt", "r");
+    FILE *parStream = fopen("/usr/local/etc/Raccoon/parameters.txt", "r");
 /*
     char buffer[1024] = "";
     fgets(buffer, 1024, parStream);
@@ -146,8 +145,9 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
     gettimeofday(&end_point, NULL);
     operating_time = (double)(end_point.tv_sec) + (double)(end_point.tv_usec)/1000000.0-(double)(start_point.tv_sec)-(double)(start_point.tv_usec)/1000000.0;
     start_point = end_point;
-    cout << "GapTime : " << operating_time << endl;*/
-    /* Previous algorithm.
+    cout << "GapTime : " << operating_time << endl;
+    
+Previous algorithm.
     double vx_line = wfp.vector_diff_x - wfp.x_dev, vy_line = wfp.vector_diff_y;
     double alpha = abs(atan(vy_line/(vx_line-wfp.x_dev)));
     double r;
@@ -210,12 +210,14 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 	double m_left = (1 + extra_term) * v_factor * pow(base, dev_coeff * wfp.x_dev + theta);
 	double m_right = (1 - extra_term) * v_factor * pow(base, -(dev_coeff * wfp.x_dev + theta));
 	*/
-	
-//	cout << "theta : " <<  theta << endl << "beta_hat : " <<  wfp.beta_hat << endl;
-//	cout << "extra : " << wfp.x_dev-x_prev << endl;
-//	cout << m_left << endl;
-//	cout << m_right << endl;
+/*	
+	cout << "theta : " <<  theta << endl << "beta_hat : " <<  wfp.beta_hat << endl;
+	cout << "extra : " << wfp.x_dev-x_prev << endl;
+	cout << m_left << endl;
+	cout << m_right << endl;
+*/
 	x_prev = wfp.x_dev;
+
 	/*
 	const double alpha = -1.0;
 	const double gamma = 0.001;
@@ -302,7 +304,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 	}
 //	cout << m_left << ", " << m_right << endl;
 	
-//	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left));
+	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left));
 
 	if (wasNan)	usleep(setSleep);
 
