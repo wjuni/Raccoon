@@ -39,6 +39,7 @@ double base = 250.0;
 double extra_factor = 0.5;
 double divide1, divide2;
 double beta_creterion;
+double servoVal;
 /* ---------- */
 
 double bias, tangentVal;
@@ -60,7 +61,7 @@ int main(int argc, const char * argv[]) {
     
     /* Arduino */
     arduino.begin(115200); // Baudrate must be 9600 or 115200
-    arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0)); // notify boot complete
+    arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0, 0)); // notify boot complete
     
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
@@ -84,8 +85,8 @@ int main(int argc, const char * argv[]) {
     fgets(buffer, 1024, parStream);
     base = atof(buffer);
 */
-    fscanf(parStream, "%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf",
-&v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion);
+    fscanf(parStream, "%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf",
+&v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &servoVal);
     fclose(parStream);
     bias = (max_v + min_v)/2;
     tangentVal = (max_v - min_v)/2;
@@ -304,14 +305,14 @@ Previous algorithm.
 	}
 //	cout << m_left << ", " << m_right << endl;
 	
-	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left));
+	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint16_t)servoVal));
 
 	if (wasNan)	usleep(setSleep);
 
 	//arduino.send(buildPktArduinoV2(0, (uint8_t)120.0, (uint8_t)120.0, (uint8_t)1.0, (uint8_t)1.0));
 }
 void finish(int signal) {
-    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0));
+    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0));
     //arduino.send(buildPktArduinoV2(0, (int8_t)-15.0, (int8_t)-15.0, (int8_t)-15.0, (int8_t)-15.0));
     exit(0);
 }
