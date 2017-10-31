@@ -457,7 +457,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
 	cv::imshow("Algorithm 2_threshed", frame_threshed);
         cv::waitKey(15);
     }
-    cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
+//    cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
     fps_sum += 1./t;
     proc_count ++;
     return true;
