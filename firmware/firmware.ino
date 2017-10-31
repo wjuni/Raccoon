@@ -3,7 +3,7 @@
 #include "GpsModule.h"
 #include "Compass.h"
 #include "StepMotor.h"
-#include "SerialComm.h"
+#include "SerialComm.h" 
 
 #define RASPI_REPORT_PERIOD 500
 #define READ_PERIOD 1
