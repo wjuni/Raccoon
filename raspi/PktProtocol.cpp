@@ -66,36 +66,36 @@ uint16_t gen_crc16(const uint8_t *data, uint16_t size)
 
 uint16_t crc16(char *data_p, uint16_t length)
 {
-      unsigned char i;
-      unsigned int data;
-      unsigned int crc = 0xffff;
+    unsigned char i;
+    unsigned int data;
+    unsigned int crc = 0xffff;
 
-      if (length == 0)
-            return (~crc);
+    if (length == 0)
+        return (~crc);
 
-      do
-      {
-            for (i=0, data=(unsigned int)0xff & *data_p++;
-                 i < 8; 
-                 i++, data >>= 1)
-            {
-                  if ((crc & 0x0001) ^ (data & 0x0001))
-                        crc = (crc >> 1) ^ CRC16;
-                  else  crc >>= 1;
-            }
-      } while (--length);
+    do
+    {
+        for (i=0, data=(unsigned int)0xff & *data_p++;
+             i < 8;
+             i++, data >>= 1)
+        {
+            if ((crc & 0x0001) ^ (data & 0x0001))
+                crc = (crc >> 1) ^ CRC16;
+            else  crc >>= 1;
+        }
+    } while (--length);
 
-      crc = ~crc;
-      data = crc;
-      crc = (crc << 8) | (data >> 8 & 0xff);
+    crc = ~crc;
+    data = crc;
+    crc = (crc << 8) | (data >> 8 & 0xff);
 
-      return (crc);
+    return (crc);
 }
 
 
 int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *target) {
     PktArduinoV2 *pkt = (PktArduinoV2 *)buf;
-    
+
     //length check
     if(len > sizeof(PktArduinoV2)) {
         DEBUG_PRINT_("[FATAL] Packet Length Incorrect, Expected=");
@@ -104,7 +104,7 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
         DEBUG_PRINT((int)len);
         return 0;
     }
-    
+
     //header check
     if(pkt->preamble != PKTARDUINO_PREAMBLE) {
         DEBUG_PRINT_("[FATAL] Packet PREAMBLE Incorrect, Expected=");
@@ -113,7 +113,7 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
         DEBUG_PRINT((int)pkt->preamble);
         return 0;
     }
-    
+
     //crc check
     uint16_t crc_cal = 88; //gen_crc16((uint8_t *)buf, sizeof(PktArduinoV2)-sizeof(uint16_t));
     if(crc_cal != pkt->crc) {
@@ -128,7 +128,7 @@ int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2 *
 }
 int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi *target) {
     PktRaspi *pkt = (PktRaspi *)buf;
-    
+
     //length check
     if(len > sizeof(PktRaspi)) {
         DEBUG_PRINT_("[FATAL] Packet Length Incorrect, Expected=");
@@ -137,7 +137,7 @@ int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi *target) 
         DEBUG_PRINT((int)len);
         return 0;
     }
-    
+
     //header check
     if(pkt->preamble != PKTRASPI_PREAMBLE) {
         DEBUG_PRINT_("[FATAL] Packet PREAMBLE Incorrect, Expected=");
@@ -146,7 +146,7 @@ int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi *target) 
         DEBUG_PRINT((int)pkt->preamble);
         return 0;
     }
-    
+
     //crc check
     uint16_t crc_cal = 88; //gen_crc16((uint8_t *)buf, sizeof(PktRaspi)-sizeof(uint16_t));
     if(crc_cal != pkt->crc) {
@@ -172,8 +172,8 @@ void PktRaspi_prepare_packet(PktRaspi *target) {
     target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
 }
 
-PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd) {
-    PktArduinoV2 obj = {0, 0, mode, motor_1_spd, motor_2_spd, motor_3_spd, motor_4_spd, 0};
+PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd, uint16_t servo) {
+    PktArduinoV2 obj = {0, 0, mode, motor_1_spd, motor_2_spd, motor_3_spd, motor_4_spd, servo, 0};
     return obj;
 }
 

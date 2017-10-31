@@ -22,6 +22,7 @@ typedef struct {
     int8_t motor_2_spd;
     int8_t motor_3_spd;
     int8_t motor_4_spd;
+    uint16_t servo;
     uint16_t crc;
 }  __attribute__((packed)) PktArduinoV2;
 

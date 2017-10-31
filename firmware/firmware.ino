@@ -65,6 +65,7 @@ void setup() {
 
     }
 */ 
+Serial3.begin(115200);
 digitalWrite(LED_OUT1, HIGH);
 }
 
@@ -118,5 +119,6 @@ digitalWrite(LED_OUT2, HIGH);
     StepMotor_direction(3, pkt->motor_3_spd >= 0);
     StepMotor_move(4, abs(pkt->motor_4_spd));
     StepMotor_direction(4, pkt->motor_4_spd >= 0);
+    Serial3.write((char *)pkt, sizeof(PktArduinoV2));
 }
 
