@@ -26,7 +26,7 @@ void setup() {
     Serial.begin(115200);
 #endif
     DEBUG_PRINT("Firmware Boot Start...");
-   StepMotor_initialize();
+    StepMotor_initialize();
 
     pinMode(LED_OUT1, OUTPUT);
     pinMode(LED_OUT2, OUTPUT);
@@ -71,7 +71,7 @@ digitalWrite(LED_OUT1, HIGH);
 void loop() {
    gps.read();
   // compass.read();
-    raspicomm.read(packet_handler);
+   raspicomm.read(packet_handler);
 
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
 //      Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
@@ -89,6 +89,7 @@ void loop() {
         p.voltage = (uint16_t) (((uint32_t) analogRead(A0) * 57) / 2.048);
         PktRaspi_prepare_packet(&p);
         raspicomm.write(&p, sizeof(PktRaspi));
+        DEBUG_PRINT("Sending Command.");
  
     }
 

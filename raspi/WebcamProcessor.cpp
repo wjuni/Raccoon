@@ -88,7 +88,7 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
     
     cv::cvtColor(im, im_hsv, cv::COLOR_BGR2HSV);
     cv::Scalar orange_min = cv::Scalar(15, 70, 100);
-    cv::Scalar orange_max = cv::Scalar(30, 255, 255);
+    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
     //cv::Scalar white_min = cv::Scalar(0, 0, 165);
     //cv::Scalar white_max = cv::Scalar(255, 15, 255);
     cv::inRange(im_hsv, orange_min, orange_max, frame_threshed);
@@ -170,22 +170,23 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
     
 //    double act_deg = 0, deviation = width/2. - (best_fit_param.est_line_left + best_fit_param.est_line_right)/2.;
     
-    double vdiffx = 0., vdiffy = 0., beta_hat=0.;
-    
+    double vdiffx = 0., vdiffy = 0., x_dev = 0., beta_hat=0.;
+    double mx = newm*height/2+newx;
+    double my = height/2;
     if (best_fit_param.est_line_left != best_fit_param.est_line_left_btm) { // if not vertical
 //        act_deg = atan(1. / newm) * 180. / M_PI + 90;
 //        if (act_deg > 90) act_deg = act_deg - 180;
         //x - newm*y - newx = 0 , (width/2, height/2)
-//        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);
-        double mx = newm*height/2+newx;
-        double my = height/2;
+//        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);   
         double tx = mx+SPEED_RATIO*height*cos(atan(1/newm));
-        double ty = my - SPEED_RATIO*height*sin(atan(1/newm));
+        double ty = my - SPEED_RATIO*height*abs(sin(atan(1/newm)));
         vdiffx = tx - width/2;
         vdiffy = ty - height/2;
         beta_hat = newm;
+        x_dev=mx-width/2;
     } else {
-        vdiffx = 0;
+        vdiffx = mx-width/2;
+        x_dev=vdiffx;
         vdiffy = -SPEED_RATIO*height;
         beta_hat = 0;
     }
@@ -195,11 +196,22 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
 //    ", y=" << - deviation * sin(act_deg * M_PI / 180) << ")" << endl;
     
     // call VideoFeedbackParam Handler here
-    VideoFeedbackParam vfp;
-    vfp.beta_hat = beta_hat;
-    vfp.vector_diff_x = vdiffx;
-    vfp.vector_diff_y = vdiffy;
-    (*handler)(vfp);
+    if(abs(best_fit_param.est_line_left - best_fit_param.est_line_right) >= 10){
+        VideoFeedbackParam vfp;
+        vfp.beta_hat = beta_hat;
+        vfp.vector_diff_x = vdiffx;
+        vfp.vector_diff_y = vdiffy;
+        vfp.x_dev=x_dev;
+        (*handler)(vfp);
+    } else {
+        cout << "Line too narrow, Ignoring" << endl;
+    	VideoFeedbackParam vfp;
+	vfp.beta_hat = std::nan("");
+	vfp.vector_diff_x = std::nan("");
+	vfp.vector_diff_y = std::nan("");
+	vfp.x_dev = std::nan("");
+	(*handler)(vfp);
+    }
     
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
@@ -249,9 +261,10 @@ LineSegmentElement line_center[lines][N];
 cv::Mat cropped[NUM_CORE];
 cv::Mat vec_avg[NUM_CORE];
 cv::Mat normalized_vec[NUM_CORE];
-cv::Mat1i conv_filter[NUM_CORE];
+cv::Mat conv_filter[NUM_CORE];
 cv::Mat conv[NUM_CORE];
 void applyAlgorithm2_convolution_filter(int i, int core_id) {
+    assert(core_id < NUM_CORE);
     cv::Rect myROI(0, i*steps_n, width-1, steps_n);
     cropped[core_id] = frame_threshed(myROI);
     cv::reduce(cropped[core_id], vec_avg[core_id], 0, CV_REDUCE_AVG, CV_64F);
@@ -276,7 +289,8 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
     conv_filter[core_id] = cv::Mat1d(1, filter_width, -1.0);
     
     for(int j=(int)local_estimated_linewidth / 4; j<(int)(local_estimated_linewidth * 5 / 4); j++) {
-        conv_filter[core_id].at<int>(j) = 1;
+        assert(j < conv_filter[core_id].size().width);
+        conv_filter[core_id].at<double>(j) = 1.;
     }
     
     conv[core_id] = cv::Mat();
@@ -290,7 +304,11 @@ void applyAlgorithm2_convolution_filter(int i, int core_id) {
             break;
         double left_line = maxloc.x - local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
         double right_line = maxloc.x + local_estimated_linewidth / 2. * LINE_MARGIN_RATIO;
-        for(int k=static_cast<int>(left_line); k < static_cast<int>(right_line); k++) {
+        int start = static_cast<int>(left_line) < 0 ? 0 : static_cast<int>(left_line);
+        for(int k=start; k < static_cast<int>(right_line); k++) {
+            if(k >= conv[core_id].size().width)
+                break;
+            assert(k < conv[core_id].size().width && k >= 0);
             conv[core_id].at<double>(k) = 0;
         }
         
@@ -328,7 +346,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     cv::cvtColor(im, im_hsv, cv::COLOR_BGR2HSV);
     cv::Scalar orange_min = cv::Scalar(15, 70, 100);
-    cv::Scalar orange_max = cv::Scalar(30, 255, 255);
+    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
     //cv::Scalar white_min = cv::Scalar(0, 0, 165);
     //cv::Scalar white_max = cv::Scalar(255, 15, 255);
     cv::inRange(im_hsv, orange_min, orange_max, frame_threshed);
@@ -338,7 +356,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     int task_per_cpu = (N+NUM_CORE-1) / NUM_CORE;
     thread thds[NUM_CORE];
     algorithm2_multithread_obj amo[NUM_CORE];
-    
+    memset(line_center, 0, sizeof(line_center)); 
     for(int i=0, j=0; i<N; j++, i+=task_per_cpu) {
         int end = (i + task_per_cpu > N)? N : i + task_per_cpu;
         amo[j].start = i;
@@ -352,7 +370,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     double center_xsample[lines][N] = {0, }, center_ysample[lines][N] = {0, }, center_weights[lines][N] = {0, };
     int center_samples[lines] = {0, };
-    for(int i=0; i<N; i++) {
+    for(int i=3; i<N-3; i++) {
         for(int j=0; j<lines; j++) {
             if(line_center[j][i].valid){
                 LineSegmentElement lse = line_center[j][i];
@@ -392,10 +410,14 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
         double alphahat = xavg - yavg * betahat;
         double mx = betahat * (height/2) + alphahat;
         double my = height/2;
-        double tx = mx + SPEED_RATIO*height*cos(atan(1/betahat));
-        double ty = my - SPEED_RATIO*height*sin(atan(1/betahat));
-        double vdiffx = tx - width/2;
-        double vdiffy = ty - height/2;
+	double theta = atan(-1/betahat);
+	if(theta < 0.0)	theta += M_PI;
+        double tx = mx + SPEED_RATIO*height*cos(theta);
+        //double ty = my - SPEED_RATIO*height*abs(sin(atan(1/betahat)));
+        double vdiffy = SPEED_RATIO*height*abs(sin(atan(1/betahat)));
+	double vdiffx = tx - width/2;
+        //double vdiffy = ty - height/2;
+        double x_dev = mx-width/2;
         
         cv::line(im,
                  cv::Point2d(alphahat, 0),
@@ -412,17 +434,27 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
             vfp.beta_hat = betahat;
             vfp.vector_diff_x = vdiffx;
             vfp.vector_diff_y = vdiffy;
+            vfp.x_dev=x_dev;
             (*handler)(vfp);
-        }
+	} else {
+		VideoFeedbackParam vfp;
+		vfp.beta_hat = std::nan("");
+		vfp.vector_diff_x = std::nan("");
+		vfp.vector_diff_y = std::nan("");
+		vfp.x_dev = std::nan("");
+		(*handler)(vfp);
+
+	}
     }
     
     
     int64_t e2 = cv::getTickCount();
     double t = (e2 - e1)/cv::getTickFrequency();
-    cv::imwrite(path + "detect_" + filename, im);
+//    cv::imwrite(path + "detect_" + filename, im);
     
     if(X11Support) {
         cv::imshow("Algorithm 2", im);
+	cv::imshow("Algorithm 2_threshed", frame_threshed);
         cv::waitKey(15);
     }
     cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
