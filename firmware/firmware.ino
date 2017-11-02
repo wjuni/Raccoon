@@ -30,6 +30,12 @@ void setup() {
 
     pinMode(LED_OUT1, OUTPUT);
     pinMode(LED_OUT2, OUTPUT);
+
+    // init beep
+    digitalWrite(LED_OUT2, HIGH);
+    delay(500);
+    digitalWrite(LED_OUT2, LOW);
+    
     DEBUG_PRINT("RaspberryPi Comm Begin...");
     raspicomm.begin(115200); delay(10);
     DEBUG_PRINT("GPS Module Begin...");
@@ -73,6 +79,12 @@ void loop() {
   // compass.read();
    raspicomm.read(packet_handler);
 
+   if ((((uint32_t) analogRead(A0) * 57) / 2.048) < 19000) {
+    digitalWrite(LED_OUT2, HIGH);
+   } else {
+    digitalWrite(LED_OUT2, LOW);
+   }
+
     if (epoch >= RASPI_REPORT_PERIOD / READ_PERIOD) {
 //      Serial.println((long)(gps.data.latitude*DEG_MULTIPLIER));
 //      Serial.println((long)(gps.data.longitude*DEG_MULTIPLIER));
@@ -108,7 +120,6 @@ void packet_handler(PktArduinoV2 *pkt) {
 //        digitalWrite(LED_OUT2, HIGH);
 //    }
 
-digitalWrite(LED_OUT2, HIGH);
     DEBUG_PRINT(abs(pkt->motor_2_spd));
     StepMotor_move(1, abs(pkt->motor_1_spd));
     StepMotor_direction(1, pkt->motor_1_spd >= 0);
