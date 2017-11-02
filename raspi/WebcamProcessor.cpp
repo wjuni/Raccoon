@@ -179,7 +179,7 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
         //x - newm*y - newx = 0 , (width/2, height/2)
 //        deviation = (width / 2 - newm * height / 2 - newx) / sqrt(1 + newm * newm);   
         double tx = mx+SPEED_RATIO*height*cos(atan(1/newm));
-        double ty = my - SPEED_RATIO*height*sin(atan(1/newm));
+        double ty = my - SPEED_RATIO*height*abs(sin(atan(1/newm)));
         vdiffx = tx - width/2;
         vdiffy = ty - height/2;
         beta_hat = newm;
@@ -205,6 +205,12 @@ bool applyAlgorithm1(cv::Mat *pim, string path, string filename, void (*handler)
         (*handler)(vfp);
     } else {
         cout << "Line too narrow, Ignoring" << endl;
+    	VideoFeedbackParam vfp;
+	vfp.beta_hat = std::nan("");
+	vfp.vector_diff_x = std::nan("");
+	vfp.vector_diff_y = std::nan("");
+	vfp.x_dev = std::nan("");
+	(*handler)(vfp);
     }
     
     int64_t e2 = cv::getTickCount();
@@ -350,7 +356,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     int task_per_cpu = (N+NUM_CORE-1) / NUM_CORE;
     thread thds[NUM_CORE];
     algorithm2_multithread_obj amo[NUM_CORE];
-    
+    memset(line_center, 0, sizeof(line_center)); 
     for(int i=0, j=0; i<N; j++, i+=task_per_cpu) {
         int end = (i + task_per_cpu > N)? N : i + task_per_cpu;
         amo[j].start = i;
@@ -364,7 +370,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     double center_xsample[lines][N] = {0, }, center_ysample[lines][N] = {0, }, center_weights[lines][N] = {0, };
     int center_samples[lines] = {0, };
-    for(int i=0; i<N; i++) {
+    for(int i=3; i<N-3; i++) {
         for(int j=0; j<lines; j++) {
             if(line_center[j][i].valid){
                 LineSegmentElement lse = line_center[j][i];
@@ -404,11 +410,14 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
         double alphahat = xavg - yavg * betahat;
         double mx = betahat * (height/2) + alphahat;
         double my = height/2;
-        double tx = mx + SPEED_RATIO*height*cos(atan(1/betahat));
-        double ty = my - SPEED_RATIO*height*sin(atan(1/betahat));
-        double vdiffx = tx - width/2;
-        double vdiffy = ty - height/2;
-        double x_dev = width/2-mx;
+	double theta = atan(-1/betahat);
+	if(theta < 0.0)	theta += M_PI;
+        double tx = mx + SPEED_RATIO*height*cos(theta);
+        //double ty = my - SPEED_RATIO*height*abs(sin(atan(1/betahat)));
+        double vdiffy = SPEED_RATIO*height*abs(sin(atan(1/betahat)));
+	double vdiffx = tx - width/2;
+        //double vdiffy = ty - height/2;
+        double x_dev = mx-width/2;
         
         cv::line(im,
                  cv::Point2d(alphahat, 0),
@@ -427,7 +436,15 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
             vfp.vector_diff_y = vdiffy;
             vfp.x_dev=x_dev;
             (*handler)(vfp);
-        }
+	} else {
+		VideoFeedbackParam vfp;
+		vfp.beta_hat = std::nan("");
+		vfp.vector_diff_x = std::nan("");
+		vfp.vector_diff_y = std::nan("");
+		vfp.x_dev = std::nan("");
+		(*handler)(vfp);
+
+	}
     }
     
     
@@ -437,9 +454,10 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     if(X11Support) {
         cv::imshow("Algorithm 2", im);
+	cv::imshow("Algorithm 2_threshed", frame_threshed);
         cv::waitKey(15);
     }
-    cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
+//    cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
     fps_sum += 1./t;
     proc_count ++;
     return true;

@@ -3,10 +3,10 @@
 #include "GpsModule.h"
 #include "Compass.h"
 #include "StepMotor.h"
-#include "SerialComm.h"
+#include "SerialComm.h" 
 
 #define RASPI_REPORT_PERIOD 500
-#define READ_PERIOD 15
+#define READ_PERIOD 1
 #define LED_OUT1 32
 #define LED_OUT2 33
 
@@ -71,6 +71,7 @@ void setup() {
 
     }
 */ 
+Serial3.begin(115200);
 digitalWrite(LED_OUT1, HIGH);
 }
 
@@ -129,5 +130,6 @@ void packet_handler(PktArduinoV2 *pkt) {
     StepMotor_direction(3, pkt->motor_3_spd >= 0);
     StepMotor_move(4, abs(pkt->motor_4_spd));
     StepMotor_direction(4, pkt->motor_4_spd >= 0);
+    Serial3.write((char *)pkt, sizeof(PktArduinoV2));
 }
 
