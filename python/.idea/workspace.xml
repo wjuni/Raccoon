@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3654165b-c465-4905-99cf-b26534467f1c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/candidate_2.py" afterPath="$PROJECT_DIR$/candidate_2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/WebcamProcessor.cpp" afterPath="$PROJECT_DIR$/../raspi/WebcamProcessor.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/WebcamProcessor.hpp" afterPath="$PROJECT_DIR$/../raspi/WebcamProcessor.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/main.cpp" afterPath="$PROJECT_DIR$/../raspi/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../server/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../server/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/project.pbxproj" afterPath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/project.pbxproj" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/xcuserdata/wjuni.xcuserdatad/xcschemes/Makerbot-Lanepainter.xcscheme" afterPath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/xcuserdata/wjuni.xcuserdatad/xcschemes/Makerbot-Lanepainter.xcscheme" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/xcuserdata/wjuni.xcuserdatad/xcschemes/Racoon_Raspi.xcscheme" afterPath="$PROJECT_DIR$/../raspi/Raccoon_Raspi.xcodeproj/xcuserdata/wjuni.xcuserdatad/xcschemes/Racoon_Raspi.xcscheme" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,20 +28,7 @@
     <favorites_list name="opencvtest" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="candidate_2.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/candidate_2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="106" column="32" lean-forward="false" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -535,7 +519,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24305555" sideWeight="0.4935065" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -585,13 +568,20 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/candidate_1.py">
+    <entry file="file://$PROJECT_DIR$/candidate_2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="false" />
+            <element signature="e#0#10#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/candidate_1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -812,15 +802,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
           <caret line="163" column="15" lean-forward="true" selection-start-line="163" selection-start-column="15" selection-end-line="163" selection-end-column="15" />
-          <folding>
-            <element signature="e#0#10#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/candidate_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="15">
           <caret line="106" column="32" lean-forward="false" selection-start-line="106" selection-start-column="32" selection-end-line="106" selection-end-column="32" />
           <folding>
             <element signature="e#0#10#0" expanded="true" />
