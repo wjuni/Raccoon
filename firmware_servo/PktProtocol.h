@@ -22,6 +22,8 @@ typedef struct {
     int8_t motor_2_spd;
     int8_t motor_3_spd;
     int8_t motor_4_spd;
+    uint8_t linear_servo1;
+    uint8_t linear_servo2;
     uint16_t servo;
     uint16_t crc;
 }  __attribute__((packed)) PktArduinoV2;
@@ -43,7 +45,7 @@ typedef struct {
 
 int PktArduinoV2_parse_packet(const char* buf, unsigned long len, PktArduinoV2  *target);
 void PktArduinoV2_prepare_packet(PktArduinoV2 *target);
-PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd);
+PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd, uint16_t servo);
 
 int PktRaspi_parse_packet(const char* buf, unsigned long len, PktRaspi  *target);
 void PktRaspi_prepare_packet(PktRaspi *target);

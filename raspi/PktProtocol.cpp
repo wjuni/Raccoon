@@ -172,7 +172,7 @@ void PktRaspi_prepare_packet(PktRaspi *target) {
     target->crc = 88; //gen_crc16((uint8_t *)target, sizeof(PktArduinoV2)-sizeof(uint16_t));
 }
 
-PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd, uint16_t servo) {
+PktArduinoV2 buildPktArduinoV2 (uint16_t mode, int8_t motor_1_spd, int8_t motor_2_spd, int8_t motor_3_spd, int8_t motor_4_spd, uint8_t linear_servo1, uint8_t linear_servo2, uint16_t servo) {
     PktArduinoV2 obj = {0, 0, mode, motor_1_spd, motor_2_spd, motor_3_spd, motor_4_spd, servo, 0};
     return obj;
 }
