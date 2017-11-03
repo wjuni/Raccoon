@@ -73,7 +73,7 @@ int main(int argc, const char * argv[]) {
     server.start(&context);
     
     /* Temporal part : parameter input */
-    FILE *parStream = fopen("/usr/local/etc/Raccoon/parameters.txt", "r");
+    FILE *parStream = fopen("/usr/local/etc/raccoon/Raccoon/parameters.txt", "r");
 /*
     char buffer[1024] = "";
     fgets(buffer, 1024, parStream);

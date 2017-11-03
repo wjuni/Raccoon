@@ -21,7 +21,7 @@ void packet_handler(PktArduinoV2 *pkt);
 void setup() {
     
     raspicomm.begin(115200); delay(10);
-    linear.attach(14);
+    linear.attach(3);
 }
 
 void loop() {
