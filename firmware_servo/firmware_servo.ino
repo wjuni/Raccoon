@@ -2,17 +2,14 @@
 #include "PktProtocol.h"
 #include "SerialComm.h"
 #include <Servo.h>
-#define RASPI_REPORT_PERIOD 500
 #define READ_PERIOD 1
-#define LED_OUT1 32
-#define LED_OUT2 33
 
-#define abs(x) ((x)>0 ? (x) : -(x))
 
+ 
 /* GLOBAL */
 SerialComm raspicomm(&Serial);
 //Compass compass;
-Servo linear;
+Servo linear1, linear2, servo;
 long epoch = 0;
 
 /* Prototype */
@@ -21,7 +18,9 @@ void packet_handler(PktArduinoV2 *pkt);
 void setup() {
     
     raspicomm.begin(115200); delay(10);
-    linear.attach(3);
+    linear1.attach(3);
+    linear2.attach(4);
+    servo.attach(5);
 }
 
 void loop() {
@@ -32,7 +31,8 @@ void loop() {
 }
 
 void packet_handler(PktArduinoV2 *pkt) {
-
-    linear.write(pkt->servo);
+  linear1.writeMicroseconds(pkt->linear_servo1 ? pkt->linear_servo1*10 : 1000);
+  linear2.writeMicroseconds(pkt->linear_servo2 ? pkt->linear_servo2*10 : 1000);
+  servo.write(pkt->servo);
 }
 
