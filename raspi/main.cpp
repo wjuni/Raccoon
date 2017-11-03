@@ -60,7 +60,7 @@ int main(int argc, const char * argv[]) {
     
     /* Arduino */
     arduino.begin(115200); // Baudrate must be 9600 or 115200
-    arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0, 0)); // notify boot complete
+    arduino.send(buildPktArduinoV2(1<<8, 0, 0, 0, 0, 0, 0, 0)); // notify boot complete
     
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
@@ -159,12 +159,12 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		r_previous[0] = m_right;
 	}
 	
-	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint16_t)servoVal));
+	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint8_t)servoVal, 0, 0));
 
 	if (wasNan)	usleep(setSleep);
 
 }
 void finish(int signal) {
-    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0));
+  arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
     exit(0);
 }
