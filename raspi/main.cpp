@@ -38,7 +38,7 @@ double base;
 double extra_factor;
 double divide1, divide2;
 double beta_creterion;
-double servoVal;
+double servoVal, lservo1, lservo2;
 /* ---------- */
 
 double bias, tangentVal;
@@ -73,8 +73,8 @@ int main(int argc, const char * argv[]) {
     
     /* Temporal part : parameter input */
     FILE *parStream = fopen("/usr/local/etc/raccoon/Raccoon/parameters.txt", "r");
-    fscanf(parStream, "%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf",
-&v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &servoVal);
+    fscanf(parStream, "%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf",
+	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &lservo1, &lservo2, &servoVal);
     fclose(parStream);
     bias = (max_v + min_v)/2;
     tangentVal = (max_v - min_v)/2;
@@ -159,7 +159,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		r_previous[0] = m_right;
 	}
 	
-	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint8_t)servoVal, 0, 0));
+	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint8_t)lservo1, (uint8_t)lservo2, (uint16_t)servoVal));
 
 	if (wasNan)	usleep(setSleep);
 
