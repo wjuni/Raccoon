@@ -72,9 +72,10 @@ int main(int argc, const char * argv[]) {
     server.start(&context);
     
     /* Temporal part : parameter input */
-    FILE *parStream = fopen("/usr/local/etc/raccoon/Raccoon/parameters.txt", "r");
+    FILE *parStream = fopen("parameters.txt", "r");
     fscanf(parStream, "%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf",
 	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &lservo1, &lservo2, &servoVal);
+    cout << "reading complete" << endl;
     fclose(parStream);
     bias = (max_v + min_v)/2;
     tangentVal = (max_v - min_v)/2;
