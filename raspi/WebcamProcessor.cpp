@@ -368,6 +368,8 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
         thds[i].join();
     }
     
+    uint8_t emptyCnt = 0, startP = -1, maxEmptyCnt = 0, maxStartP = 0;
+
     double center_xsample[lines][N] = {0, }, center_ysample[lines][N] = {0, }, center_weights[lines][N] = {0, };
     int center_samples[lines] = {0, };
     for(int i=3; i<N-3; i++) {
@@ -387,10 +389,24 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
                     global_linewidth_estimation = 0.9 * global_linewidth_estimation + 0.1 * local_max_linewidth;
                 
                 center_samples[j]++;
+
+                emptyCnt = 0;
+            }
+            else {
+                if (emptyCnt == 0)  startP = i;
+                emptyCnt++;
+                if (emptyCnt > maxEmptyCnt) {
+                    maxStartP = startP;
+                    maxEmptyCnt = emptyCnt;
+                }
             }
         }
     }
     
+    VideoFeedbackParam vfp;
+    vfp.startP = maxStartP;
+    vfp.emptyCnt = maxEmptyCnt;
+
     for(int j=0;j<lines;j++) {
         double xavg = weighted_average(center_xsample[j], center_weights[j], center_samples[j]);
         double yavg = weighted_average(center_ysample[j], center_weights[j], center_samples[j]);
@@ -430,18 +446,18 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
                  cv::Point2d(alphahat + betahat * height - global_linewidth_estimation / 2, height), cv::Scalar(0, 255, 0), 2);
         
         if (center_samples[j] >=2 ) {
-            VideoFeedbackParam vfp;
             vfp.beta_hat = betahat;
             vfp.vector_diff_x = vdiffx;
             vfp.vector_diff_y = vdiffy;
-            vfp.x_dev=x_dev;
+            vfp.x_dev = x_dev;
+            vfp.x_f = mx;
             (*handler)(vfp);
 	} else {
-		VideoFeedbackParam vfp;
 		vfp.beta_hat = std::nan("");
 		vfp.vector_diff_x = std::nan("");
 		vfp.vector_diff_y = std::nan("");
 		vfp.x_dev = std::nan("");
+        vfp.x_f = std::nan("");
 		(*handler)(vfp);
 
 	}
@@ -454,7 +470,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     
     if(X11Support) {
         cv::imshow("Algorithm 2", im);
-	cv::imshow("Algorithm 2_threshed", frame_threshed);
+        cv::imshow("Algorithm 2_threshed", frame_threshed);
         cv::waitKey(15);
     }
 //    cout << "Task complete in " << t << " secs (" << 1./t << " fps)" << endl;
@@ -462,7 +478,6 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     proc_count ++;
     return true;
 }
-
 
 bool process(cv::VideoCapture* vc, string path, string filename, void (*handler)(VideoFeedbackParam), bool X11Support) {
     cv::Mat frame;
@@ -486,7 +501,6 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam), 
     return applyAlgorithm2(&im, path, filename, handler, X11Support);
 }
 
-
 WebcamProcessor::WebcamProcessor() {
     isRunning = false;
     X11Support = false;
@@ -497,13 +511,12 @@ void WebcamProcessor::setX11Support(bool X11Support){
     this->X11Support = X11Support;
 }
 
-bool WebcamProcessor::start(webcam::Device type, void (*handler)(VideoFeedbackParam)) {
+bool WebcamProcessor::start(webcam::Device type, int deviceID, void (*handler)(VideoFeedbackParam)) {
     this->type = type;
     this->handler = handler;
     
     if(type == WEBCAM) {
         cap.open(0);
-        int deviceID = 0;             // 0 = open default camera
         int apiID = cv::CAP_ANY;      // 0 = autodetect default API
         cap.open(deviceID + apiID);
         if (!cap.isOpened()) {
@@ -513,7 +526,7 @@ bool WebcamProcessor::start(webcam::Device type, void (*handler)(VideoFeedbackPa
         isRunning = true;
         thd = thread(handleWebcamJob, this);
         return true;
-    } else if(type==IMAGE) {
+    } else if(type == IMAGE) {
         isRunning = true;
         thd = thread(handleWebcamJob, this);
         return true;

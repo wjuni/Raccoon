@@ -12,6 +12,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/core/core.hpp>
 
+
 namespace webcam {
     const int NUM_CORE = 4;
     const double SPEED_RATIO = 0.3;
@@ -51,6 +52,9 @@ namespace webcam {
         double vector_diff_y;
         double beta_hat;
         double x_dev;
+        double x_f;
+        uint8_t startP, emptyCnt
+
     } VideoFeedbackParam;
     
     class WebcamProcessor {
@@ -66,7 +70,7 @@ namespace webcam {
     public:
         WebcamProcessor();
         ~WebcamProcessor();
-        bool start(Device type, void (*handler)(VideoFeedbackParam));
+        bool start(Device type, int deviceID, void (*handler)(VideoFeedbackParam));
         void setX11Support(bool X11Support);
         void close();
     };

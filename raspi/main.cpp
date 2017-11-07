@@ -23,10 +23,12 @@ ArduinoCommunicator arduino("/dev/serial0"); // To support both raspi2 + raspi3 
 const string SERVER_ADDR = "https://raccoon.wjuni.com/ajax/report.php";
 ServerCommunicator server(SERVER_ADDR);
 ServerCommContext context;
-webcam::WebcamProcessor wp;
+webcam::WebcamProcessor wp, wp_rear;
 
 void arduino_packet_handler(PktRaspi *pkt);
 void video_feedback_handler(webcam::VideoFeedbackParam wfp);
+void rear_feedback_handler(webcam::VideoFeedbackParam wfp);
+uint8_t lservoMap(int, int, int, int, double);
 void finish(int signal);
 
 /* Parameters */
@@ -40,6 +42,13 @@ double divide1, divide2;
 double beta_creterion;
 double servoVal, lservo1, lservo2;
 /* ---------- */
+
+/* Variables for linear servo ctrl */
+double v21_ratio = 0.98/1.3;
+bool sprayOper = false;
+int servoWait = 10000000;
+int spreadTime = 750000;
+/* ------------------------------- */
 
 double bias, tangentVal;
 
@@ -84,7 +93,8 @@ int main(int argc, const char * argv[]) {
     /* Webcam */
     if(argc >=2 && strcmp(argv[1], "gui") == 0)
         wp.setX11Support(true);
-    wp.start(webcam::WEBCAM, video_feedback_handler);
+    wp.start(webcam::WEBCAM, 0, video_feedback_handler);
+    wp_rear.start(webcam::REARCAM, 1, rear_feedback_handler);
 
     gettimeofday(&start_point, NULL);
 	
@@ -159,12 +169,42 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		l_previous[0] = m_left;
 		r_previous[0] = m_right;
 	}
-	
-	arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint8_t)lservo1, (uint8_t)lservo2, (uint16_t)servoVal));
+	if (SprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(, , 0, 180, lservo1), lservoMap(, , 0, 180, lservo2), servoVal));
+	else arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, 0, 0, 0);
 
 	if (wasNan)	usleep(setSleep);
 
 }
+
+void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
+	/*
+     * Determine whether the empty part of line is on the center of the rear camera
+     * Get the y_f
+     */
+    if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(vfp.x_f)) {
+    	cout << "Spray system starts to operate" << endl;
+    	sprayOper = true;
+    	lservo1 = wfp.x_f / (1 + v21_ratio);
+    	lservo2 = wfp.x_f * v21_ratio / (1 + v21_ratio);
+    	servoVal = 0;
+    	usleep(servoWait);
+    	cout << "Linear servo operation complete" << endl;
+    	servoVal = 80;
+    	usleep(spreadTime);
+    	servoVal = 0;
+    	usleep(spreadTime);
+    	cout << "Spray operation complete" << endl;
+    	lservo1 = lservo2 = 0.0;
+    	cout << "Spray system operation ends" << endl;
+    	sprayOper = false;
+    }
+
+}
+
+uint8_t lservoMap(int prevMin, int prevMax, int mappedMin, int mappedMax, double value) {
+    return (uint8_t) value * (prevMax - prevMin)/(mappedMax - mappedMin);
+}
+
 void finish(int signal) {
   arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
     exit(0);
