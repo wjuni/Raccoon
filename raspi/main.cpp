@@ -48,6 +48,7 @@ double v21_ratio = 0.98/1.3;
 bool sprayOper = false;
 int servoWait = 10000000;
 int spreadTime = 750000;
+int lowest = 5, highest = 15;
 /* ------------------------------- */
 
 double bias, tangentVal;
@@ -169,7 +170,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		l_previous[0] = m_left;
 		r_previous[0] = m_right;
 	}
-	if (SprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(, , 0, 180, lservo1), lservoMap(, , 0, 180, lservo2), servoVal));
+	if (sprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(0, 240, 0, 180, lservo1), lservoMap(0, 240, 0, 180, lservo2), servoVal));
 	else arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, 0, 0, 0);
 
 	if (wasNan)	usleep(setSleep);
@@ -181,7 +182,7 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
      * Determine whether the empty part of line is on the center of the rear camera
      * Get the y_f
      */
-    if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(vfp.x_f)) {
+    if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
     	cout << "Spray system starts to operate" << endl;
     	sprayOper = true;
     	lservo1 = wfp.x_f / (1 + v21_ratio);

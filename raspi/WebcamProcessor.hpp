@@ -53,7 +53,7 @@ namespace webcam {
         double beta_hat;
         double x_dev;
         double x_f;
-        uint8_t startP, emptyCnt
+        uint8_t startP, emptyCnt;
 
     } VideoFeedbackParam;
     
