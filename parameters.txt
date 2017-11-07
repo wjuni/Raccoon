@@ -1,12 +1,17 @@
-130.0
-78.0
-2.0
-0.1
-2.5
-3.5
-2420889.0
-247700000.0
-0.4
-100.0
-200.0
-100.0
+v_factor 130.0
+max_v 78.0
+min_v 2.0
+dev_coeff 0.1
+base 2.5
+extra_factor 3.5
+divide1 2420889.0
+divide2 247700000.0
+beta_creterion 0.4
+lservo1 100.0
+lservo2 200.0
+sprayOff 0
+sprayOn 60
+servoMin 100
+servoMax 200
+lowest 5
+hightest 15
