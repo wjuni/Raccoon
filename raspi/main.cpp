@@ -40,7 +40,7 @@ double base;
 double extra_factor;
 double divide1, divide2;
 double beta_creterion;
-double servoVal, lservo1, lservo2;
+double lservo1, lservo2;
 /* ---------- */
 
 /* Variables for linear servo ctrl */
@@ -49,20 +49,16 @@ bool sprayOper = false;
 int servoWait = 10000000;
 int spreadTime = 750000;
 int lowest = 5, highest = 15;
+int servoMin, servoMax;
+int sprayOn, sprayOff;
+uint16_t servoVal;
 /* ------------------------------- */
 
 double bias, tangentVal;
 
-double r_previous[3];
-double l_previous[3];
-const double m_coeff[3] = {1.0, 0.0, 0.0};
+double r_previous, l_previous;
 double x_prev = 0;
 double extra_term = 0;
-
-struct timeval start_point, end_point;
-double operating_time;
-
-int callCnt, setSleep, wasNan;
 
 int main(int argc, const char * argv[]) {
     
@@ -83,8 +79,8 @@ int main(int argc, const char * argv[]) {
     
     /* Temporal part : parameter input */
     FILE *parStream = fopen("parameters.txt", "r");
-    fscanf(parStream, "%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf\n%lf",
-	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &lservo1, &lservo2, &servoVal);
+    fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nlservo1 %lf\nlservo2 %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d",
+	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &lservo1, &lservo2, &sprayOff, &sprayOn, &servoMin, &servoMax, &lowest, &highest);
     cout << "reading complete" << endl;
     fclose(parStream);
     bias = (max_v + min_v)/2;
@@ -163,17 +159,15 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 	if(m_right > max_v)	m_right = max_v;
 
 	if (std::isnan(m_right) || std::isnan(m_left))	{
-		m_left = l_previous[0];
-		m_right = r_previous[0];
+		m_left = l_previous;
+		m_right = r_previous;
 	}
 	else	{
-		l_previous[0] = m_left;
-		r_previous[0] = m_right;
+		l_previous = m_left;
+		r_previous = m_right;
 	}
-	if (sprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(0, 240, 0, 180, lservo1), lservoMap(0, 240, 0, 180, lservo2), servoVal));
+	if (sprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo1), lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo2), servoVal));
 	else arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, 0, 0, 0));
-
-	if (wasNan)	usleep(setSleep);
 
 }
 
@@ -191,12 +185,12 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
     	sprayOper = true;
     	lservo1 = wfp.x_f / (1 + v21_ratio);
     	lservo2 = wfp.x_f * v21_ratio / (1 + v21_ratio);
-    	servoVal = 0;
+    	servoVal = (uint16_t)sprayOff;
     	usleep(servoWait);
     	cout << "Linear servo operation complete" << endl;
-    	servoVal = 80;
+    	servoVal = (uint16_t)sprayOn;
     	usleep(spreadTime);
-    	servoVal = 0;
+    	servoVal = (uint16_t)sprayOff;
     	usleep(spreadTime);
     	cout << "Spray operation complete" << endl;
     	lservo1 = lservo2 = 0.0;
@@ -206,7 +200,7 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
 
 }
 
-uint8_t lservoMap(int prevMin, int prevMax, int mappedMin, int mappedMax, double value) {
+uint8_t lservoMap(uint8_t prevMin, uint8_t prevMax, uint8_t mappedMin, uint8_t mappedMax, double value) {
     return (uint8_t) value * (prevMax - prevMin)/(mappedMax - mappedMin);
 }
 
