@@ -171,7 +171,7 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		r_previous[0] = m_right;
 	}
 	if (sprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(0, 240, 0, 180, lservo1), lservoMap(0, 240, 0, 180, lservo2), servoVal));
-	else arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, 0, 0, 0);
+	else arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, 0, 0, 0));
 
 	if (wasNan)	usleep(setSleep);
 
