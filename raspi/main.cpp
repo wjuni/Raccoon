@@ -182,7 +182,11 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
      * Determine whether the empty part of line is on the center of the rear camera
      * Get the y_f
      */
-    if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
+//	cout << "Rear feedback handler called" << endl; 
+	cout << "Rear Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+
+
+	if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
     	cout << "Spray system starts to operate" << endl;
     	sprayOper = true;
     	lservo1 = wfp.x_f / (1 + v21_ratio);
