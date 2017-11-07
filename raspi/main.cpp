@@ -94,7 +94,7 @@ int main(int argc, const char * argv[]) {
     if(argc >=2 && strcmp(argv[1], "gui") == 0)
         wp.setX11Support(true);
     wp.start(webcam::WEBCAM, 0, video_feedback_handler);
-    wp_rear.start(webcam::REARCAM, 1, rear_feedback_handler);
+    wp_rear.start(webcam::WEBCAM, 1, rear_feedback_handler);
 
     gettimeofday(&start_point, NULL);
 	
