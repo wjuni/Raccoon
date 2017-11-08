@@ -2,40 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b6d11fa-95ca-4663-b33f-c613615e9e69" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.eot" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.ttf" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.woff" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.woff2" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.woff2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.eot" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.ttf" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.woff" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.woff2" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.woff2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/favicon.png" afterPath="$PROJECT_DIR$/favicon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/current_location.png" afterPath="$PROJECT_DIR$/images/current_location.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/raccoon-logo.png" afterPath="$PROJECT_DIR$/images/raccoon-logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/images/spr_trff_v6.png" afterPath="$PROJECT_DIR$/images/spr_trff_v6.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/area0.png" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/area0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/bar0.png" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/bar0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/line0.png" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/line0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/stacked_bar0.png" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/exemplary/stacked_bar0.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/admin-logo-dark.png" afterPath="$PROJECT_DIR$/plugins/images/admin-logo-dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/admin-logo.png" afterPath="$PROJECT_DIR$/plugins/images/admin-logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/admin-text-dark.png" afterPath="$PROJECT_DIR$/plugins/images/admin-text-dark.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/admin-text.png" afterPath="$PROJECT_DIR$/plugins/images/admin-text.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/favicon.png" afterPath="$PROJECT_DIR$/plugins/images/favicon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/large/img1.jpg" afterPath="$PROJECT_DIR$/plugins/images/large/img1.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/arijit.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/arijit.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/genu.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/genu.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/govinda.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/govinda.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/hritik.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/hritik.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/pawandeep.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/pawandeep.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/ritesh.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/ritesh.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/sonu.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/sonu.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/images/users/varun.jpg" afterPath="$PROJECT_DIR$/plugins/images/users/varun.jpg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../firmware/Adafruit_GPS.h" afterPath="$PROJECT_DIR$/../firmware/Adafruit_GPS.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../firmware/HMC5883L.h" afterPath="$PROJECT_DIR$/../firmware/HMC5883L.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/frames_to_mp4.bat" afterPath="$PROJECT_DIR$/../python/frames_to_mp4.bat" />
@@ -43,292 +9,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/mp4_to_frame.bat" afterPath="$PROJECT_DIR$/../python/mp4_to_frame.bat" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../python/mp4_to_frame.sh" afterPath="$PROJECT_DIR$/../python/mp4_to_frame.sh" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../raspi/json.hpp" afterPath="$PROJECT_DIR$/../raspi/json.hpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Generated_files.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/raccoon.iml" afterPath="$PROJECT_DIR$/.idea/raccoon.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajax/fetch_dashboard.php" afterPath="$PROJECT_DIR$/ajax/fetch_dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajax/fetch_history.php" afterPath="$PROJECT_DIR$/ajax/fetch_history.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ajax/report.php" afterPath="$PROJECT_DIR$/ajax/report.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/LICENSE" afterPath="$PROJECT_DIR$/bootstrap/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/README.md" afterPath="$PROJECT_DIR$/bootstrap/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap-theme.min.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.css" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/bootstrap/dist/css/bootstrap.min.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/bootstrap/dist/fonts/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/js/bootstrap.js" afterPath="$PROJECT_DIR$/bootstrap/dist/js/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bootstrap/dist/js/npm.js" afterPath="$PROJECT_DIR$/bootstrap/dist/js/npm.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/animate.css" afterPath="$PROJECT_DIR$/css/animate.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/colors/default.css" afterPath="$PROJECT_DIR$/css/colors/default.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/linea-icons/linea.css" afterPath="$PROJECT_DIR$/css/icons/linea-icons/linea.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/css/material-design-iconic-font.css" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/css/material-design-iconic-font.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/css/material-design-iconic-font.min.css" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/css/material-design-iconic-font.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/css/materialdesignicons.min.css" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/css/materialdesignicons.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.svg" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/Material-Design-Iconic-Font.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.svg" afterPath="$PROJECT_DIR$/css/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/spinners.css" afterPath="$PROJECT_DIR$/css/spinners.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/style.css" afterPath="$PROJECT_DIR$/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/custom.js" afterPath="$PROJECT_DIR$/js/custom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/custom.min.js" afterPath="$PROJECT_DIR$/js/custom.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/dashboard1.js" afterPath="$PROJECT_DIR$/js/dashboard1.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/jquery.slimscroll.js" afterPath="$PROJECT_DIR$/js/jquery.slimscroll.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.js" afterPath="$PROJECT_DIR$/js/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/main.min.js" afterPath="$PROJECT_DIR$/js/main.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/morris-data.js" afterPath="$PROJECT_DIR$/js/morris-data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/toastr.js" afterPath="$PROJECT_DIR$/js/toastr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/waves.js" afterPath="$PROJECT_DIR$/js/waves.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist-init.css" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist-init.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist-init.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist-init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.css" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.css.map" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.min.css" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.min.js.map" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/chartist.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/scss/chartist.scss" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/scss/chartist.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/scss/settings/_chartist-settings.scss" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-js/dist/scss/settings/_chartist-settings.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/.gitignore" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/CHANGELOG.md" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/CHANGELOG.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/Gruntfile.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/LICENSE" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/README.md" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/LICENSE" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css.map" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js.map" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/package.json" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/css/chartist-plugin-tooltip.css" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/css/chartist-plugin-tooltip.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/css/chartist-plugin-tooltip.css.map" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/css/chartist-plugin-tooltip.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scripts/chartist-plugin-tooltip.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scripts/chartist-plugin-tooltip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scss/chartist-plugin-tooltip.scss" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/src/scss/chartist-plugin-tooltip.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/aliases.yml" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/aliases.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/clean.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/clean.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/copy.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/copy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/jasmine.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/jasmine.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/jshint.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/jshint.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/sass.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/sass.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/uglify.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/uglify.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/umd.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/tasks/umd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/.jshintrc" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/.jshintrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/runner.html" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/runner.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/spec/spec-tooltip.js" afterPath="$PROJECT_DIR$/plugins/bower_components/chartist-plugin-tooltip-master/test/spec/spec-tooltip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/counterup/jquery.counterup.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/counterup/jquery.counterup.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/gmaps.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/gmaps.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/gmaps.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/gmaps.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/gmaps.min.js.map" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/gmaps.min.js.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/jquery.gmaps.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/jquery.gmaps.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.controls.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.controls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.core.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.events.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.events.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.geofences.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.geofences.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.geometry.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.geometry.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.layers.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.layers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.map_types.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.map_types.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.markers.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.markers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.native_extensions.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.native_extensions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.overlays.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.overlays.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.routes.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.static.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.static.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.streetview.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.streetview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.styles.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.styles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.utils.js" afterPath="$PROJECT_DIR$/plugins/bower_components/gmaps/lib/gmaps.utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.charts-sparkline.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/.bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/dist/jquery.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/dist/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/dist/jquery.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/dist/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/dist/jquery.min.map" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/dist/jquery.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/jsonp.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/jsonp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/load.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/load.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/parseJSON.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/parseJSON.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/parseXML.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/parseXML.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/script.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/script.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/var/nonce.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/var/nonce.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/var/rquery.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/var/rquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/xhr.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/ajax/xhr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/attr.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/attr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/classes.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/classes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/prop.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/prop.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/support.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/val.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/attributes/val.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/callbacks.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/callbacks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/access.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/access.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/init.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/parseHTML.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/parseHTML.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/ready.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/ready.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/var/rsingleTag.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/core/var/rsingleTag.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/addGetHookIf.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/addGetHookIf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/curCSS.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/curCSS.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/defaultDisplay.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/defaultDisplay.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/hiddenVisibleSelectors.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/hiddenVisibleSelectors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/support.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/swap.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/swap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/cssExpand.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/cssExpand.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/getStyles.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/getStyles.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/isHidden.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/isHidden.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/rmargin.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/rmargin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/rnumnonpx.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/css/var/rnumnonpx.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/Data.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/Data.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/accepts.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/accepts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/var/data_priv.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/var/data_priv.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/var/data_user.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/data/var/data_user.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/deferred.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/deferred.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/deprecated.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/deprecated.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/dimensions.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/dimensions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/effects.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/effects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/effects/Tween.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/effects/Tween.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/effects/animatedSelector.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/effects/animatedSelector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event/ajax.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event/ajax.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event/alias.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event/alias.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event/support.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/event/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/exports/amd.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/exports/amd.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/exports/global.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/exports/global.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/intro.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/intro.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/jquery.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation/_evalUrl.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation/_evalUrl.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation/support.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation/var/rcheckableType.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/manipulation/var/rcheckableType.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/offset.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/offset.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/outro.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/outro.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/queue.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/queue.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/queue/delay.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/queue/delay.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/selector-native.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/selector-native.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/selector-sizzle.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/selector-sizzle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/selector.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/selector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/serialize.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/serialize.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/sizzle/dist/sizzle.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/sizzle/dist/sizzle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/sizzle/dist/sizzle.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/sizzle/dist/sizzle.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/sizzle/dist/sizzle.min.map" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/sizzle/dist/sizzle.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/traversing.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/traversing.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/traversing/findFilter.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/traversing/findFilter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/traversing/var/rneedsContext.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/traversing/var/rneedsContext.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/arr.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/arr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/class2type.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/class2type.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/concat.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/concat.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/hasOwn.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/hasOwn.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/indexOf.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/indexOf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/pnum.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/pnum.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/push.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/push.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/rnotwhite.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/rnotwhite.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/slice.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/slice.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/strundefined.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/strundefined.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/support.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/support.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/toString.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/var/toString.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/jquery/src/wrap.js" afterPath="$PROJECT_DIR$/plugins/bower_components/jquery/src/wrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/.bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/.gitignore" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/.travis.yml" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/Gruntfile.js" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/README.md" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/bower.travis.json" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/bower.travis.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/_template.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/_template.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/area-as-line.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/area-as-line.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/area.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/area.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/bar-colors.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/bar-colors.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/bar-no-axes.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/bar-no-axes.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/bar.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/bar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/days.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/days.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/decimal-custom-hover.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/decimal-custom-hover.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/diagonal-xlabels-bar.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/diagonal-xlabels-bar.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/diagonal-xlabels.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/diagonal-xlabels.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/donut-colors.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/donut-colors.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/donut-formatter.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/donut-formatter.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/donut.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/donut.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/dst.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/dst.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/events.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/events.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/goals.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/goals.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/lib/example.css" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/lib/example.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/lib/example.js" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/lib/example.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/months-no-smooth.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/months-no-smooth.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/negative.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/negative.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/no-grid.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/no-grid.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/non-continuous.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/non-continuous.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/non-date.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/non-date.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/quarters.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/quarters.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/resize.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/resize.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/stacked_bars.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/stacked_bars.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/timestamps.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/timestamps.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/updating.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/updating.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/weeks.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/weeks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/years.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/examples/years.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/less/morris.core.less" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/less/morris.core.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.area.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.area.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.bar.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.bar.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.donut.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.donut.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.grid.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.grid.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.hover.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.hover.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.line.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/lib/morris.line.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/morris.css" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/morris.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/morris.js" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/morris.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/morris.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/morris.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/package.json" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/area/area_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/area/area_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/bar/bar_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/bar/bar_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/bar/colours.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/bar/colours.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/commas_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/commas_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/donut/donut_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/donut/donut_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/grid/auto_grid_lines_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/grid/auto_grid_lines_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/grid/set_data_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/grid/set_data_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/grid/y_label_format_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/grid/y_label_format_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/hover_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/hover_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/label_series_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/label_series_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/line/line_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/line/line_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/pad_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/pad_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/parse_time_spec.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/lib/parse_time_spec.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/specs.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/specs.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/support/placeholder.coffee" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/support/placeholder.coffee" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/examples.js" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/examples.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/run.sh" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/run.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/test.html" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/test.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/visual_specs.js" afterPath="$PROJECT_DIR$/plugins/bower_components/morrisjs/spec/viz/visual_specs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/.bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/.bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/Gruntfile.js" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/LICENSE" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/LICENSE" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/README.md" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/bower.json" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.css" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.js" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/package.json" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/src/metisMenu.css" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/src/metisMenu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/src/metisMenu.js" afterPath="$PROJECT_DIR$/plugins/bower_components/sidebar-nav/src/metisMenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/toast-master/css/jquery.toast.css" afterPath="$PROJECT_DIR$/plugins/bower_components/toast-master/css/jquery.toast.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/toast-master/js/jquery.toast.js" afterPath="$PROJECT_DIR$/plugins/bower_components/toast-master/js/jquery.toast.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/jquery.waypoints.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/jquery.waypoints.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/jquery.waypoints.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/jquery.waypoints.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/noframework.waypoints.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/noframework.waypoints.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/noframework.waypoints.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/noframework.waypoints.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/infinite.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/infinite.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/infinite.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/infinite.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/inview.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/inview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/inview.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/inview.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/sticky.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/sticky.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/sticky.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/shortcuts/sticky.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/waypoints.debug.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/waypoints.debug.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/zepto.waypoints.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/zepto.waypoints.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/zepto.waypoints.min.js" afterPath="$PROJECT_DIR$/plugins/bower_components/waypoints/lib/zepto.waypoints.min.js" />
     </list>
     <ignored path="php/config.php" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -637,7 +318,7 @@
       <workItem from="1502825637549" duration="8000" />
       <workItem from="1505228050700" duration="1293000" />
       <workItem from="1505308708566" duration="5000" />
-      <workItem from="1510113079918" duration="10585000" />
+      <workItem from="1510113079918" duration="10704000" />
     </task>
     <task id="LOCAL-00001" summary="Add Server Source">
       <created>1502210307638</created>
@@ -674,11 +355,18 @@
       <option name="project" value="LOCAL" />
       <updated>1505228742801</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Server function update">
+      <created>1510127256554</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1510127256554</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47726000" />
+    <option name="totallyTimeSpent" value="47845000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -756,7 +444,8 @@
     <MESSAGE value="Remove Unnecessary Files" />
     <MESSAGE value="Implement Raspberry Pi - Server communication with PHP + Python" />
     <MESSAGE value="Server output modification" />
-    <option name="LAST_COMMIT_MESSAGE" value="Server output modification" />
+    <MESSAGE value="Server function update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Server function update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
