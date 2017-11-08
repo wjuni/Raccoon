@@ -17,3 +17,4 @@ ldefault 152
 skipFrame 5
 servoWait 10000000
 spreadTime 600000
+reverseTime 1000000
