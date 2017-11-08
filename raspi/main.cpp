@@ -62,6 +62,8 @@ double extra_term = 0;
 int skipFrame;
 int8_t skipCnt;
 
+bool hasDetected = false;
+
 int main(int argc, const char * argv[]) {
     
     signal(SIGINT, finish);
@@ -72,13 +74,13 @@ int main(int argc, const char * argv[]) {
     
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
-    context.bot_id = 1;
+/*    context.bot_id = 1;
     context.bot_speed = 637;
     context.bot_battery = 95;
     context.acc_distance = 239;
     context.bot_version = 11;
     server.start(&context);
-    
+*/
     /* Temporal part : parameter input */
     FILE *parStream = fopen("parameters.txt", "r");
     fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d",
@@ -97,7 +99,13 @@ int main(int argc, const char * argv[]) {
 //        wp.setX11Support(true);
 	wp_rear.setX11Support(true);
     }
-    wp.start(webcam::WEBCAM, 0, video_feedback_handler);
+//    wp_rear.hMin = 15;
+	wp_rear.sMin = 40;
+//	wp_rear.bMin = 100;
+//	wp_rear.hMax = 40;
+//	wp_rear.sMax = 255;
+//	wp_rear.bMax = 255;
+	wp.start(webcam::WEBCAM, 0, video_feedback_handler);
     wp_rear.start(webcam::WEBCAM, 1, rear_feedback_handler);
     
     // Test Code
@@ -205,12 +213,12 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
 //	cout << "Rear feedback handler called" << endl; 
 //	cout << "Rear Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
 
-
-	if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
-    		if (skipCnt > 0) {
-			skipCnt--;
-			return;
-		}
+	if (skipCnt > 0) {
+		skipCnt--;
+		return;
+	}
+	
+	if (!hasDetected && wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
 	cout << "Spray system starts to operate" << endl;
 	cout << "x_f : " << wfp.x_f << endl;
     	sprayOper = true;
@@ -231,6 +239,7 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
     	cout << "Spray system operation ends" << endl;
     	skipCnt = (int8_t)skipFrame;
 	sprayOper = false;
+	hasDetected = true;
     }
 
 }

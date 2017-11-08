@@ -79,6 +79,7 @@ namespace webcam {
         void (*handler)(VideoFeedbackParam);
         
     public:
+		int deviceID;
 		double moment_x, moment_y, estimated_linewidth;
 		std::atomic<double> local_max_linewidth;
 		int steps_n;
@@ -97,7 +98,12 @@ namespace webcam {
 		double global_linewidth_estimation = 0;
 		cv::Mat im_hsv;
 
-
+		int hMax;
+		int sMax;
+		int bMax;
+		int hMin;
+		int sMin;
+		int bMin;
 
 		WebcamProcessor();
         ~WebcamProcessor();

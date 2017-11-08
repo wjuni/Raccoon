@@ -130,8 +130,10 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
     wp->local_max_linewidth.store(0);
     
     cv::cvtColor(im, wp->im_hsv, cv::COLOR_BGR2HSV);
-    cv::Scalar orange_min = cv::Scalar(15, 70, 100);
-    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
+//    cv::Scalar orange_min = cv::Scalar(15, 70, 100);
+//    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
+    cv::Scalar orange_min = cv::Scalar(wp->hMin, wp->sMin, wp->bMin);
+    cv::Scalar orange_max = cv::Scalar(wp->hMax, wp->sMax, wp->bMax);
     //cv::Scalar white_min = cv::Scalar(0, 0, 165);
     //cv::Scalar white_max = cv::Scalar(255, 15, 255);
     cv::inRange(wp->im_hsv, orange_min, orange_max, wp->frame_threshed);
@@ -255,7 +257,7 @@ bool applyAlgorithm2(cv::Mat *pim, string path, string filename, void (*handler)
 //    cv::imwrite(path + "detect_" + filename, im);
     
     if(X11Support) {
-        cv::imshow("Algorithm 2", im);
+        cv::imshow(std::to_string(wp->deviceID), im);
  //       cv::imshow("Algorithm 2_threshed", wp->frame_threshed);
         cv::waitKey(15);
     }
@@ -290,6 +292,15 @@ bool process(string path, string filename, void (*handler)(VideoFeedbackParam), 
 WebcamProcessor::WebcamProcessor() {
     isRunning = false;
     X11Support = false;
+
+//    cv::Scalar orange_min = cv::Scalar(15, 70, 100);
+//    cv::Scalar orange_max = cv::Scalar(40, 255, 255);
+	hMin = 15;
+   	sMin = 70;
+	bMin = 100;
+ 	hMax = 45;
+	sMax = 255;
+	bMax = 255;	
 }
 
 
@@ -300,7 +311,8 @@ void WebcamProcessor::setX11Support(bool X11Support){
 bool WebcamProcessor::start(webcam::Device type, int deviceID, void (*handler)(VideoFeedbackParam)) {
     this->type = type;
     this->handler = handler;
-    
+    this->deviceID = deviceID;
+
     if(type == WEBCAM) {
         //cap.open(0);
         int apiID = cv::CAP_ANY;      // 0 = autodetect default API

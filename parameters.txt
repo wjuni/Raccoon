@@ -14,6 +14,6 @@ servoMax 200
 lowest 5
 highest 15
 ldefault 152
-skipFrame 10
+skipFrame 5
 servoWait 10000000
 spreadTime 600000
