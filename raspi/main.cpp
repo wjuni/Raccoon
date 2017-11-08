@@ -25,6 +25,7 @@ ServerCommunicator server(SERVER_ADDR);
 ServerCommContext context;
 webcam::WebcamProcessor wp;
 
+void server_packet_handler(ServerRecvContext *cx);
 void arduino_packet_handler(PktRaspi *pkt);
 void video_feedback_handler(webcam::VideoFeedbackParam wfp);
 void finish(int signal);
@@ -69,7 +70,11 @@ int main(int argc, const char * argv[]) {
     context.bot_battery = 95;
     context.acc_distance = 239;
     context.bot_version = 11;
-    server.start(&context);
+    context.bot_status = 0;
+    context.damage_ratio = 0;
+    strcpy(context.repair_module, "YELLOW");
+    
+    server.start(&context, server_packet_handler);
     
     /* Temporal part : parameter input */
     FILE *parStream = fopen("parameters.txt", "r");
@@ -165,7 +170,21 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 	if (wasNan)	usleep(setSleep);
 
 }
+
+void server_packet_handler(ServerRecvContext *rc) {
+    if (context.task_id == 0 && rc->tid != 0) {
+        cout << "New Task id=" << rc->tid << endl;
+    }
+    if (context.task_id != 0 && rc->tid == 0) {
+        cout << "Task Stop id=" << rc->tid << endl;
+    }
+    context.task_id = rc->tid;
+    
+    context.bot_status = (rc->tid > 0) ? 1 : 0;
+    
+}
 void finish(int signal) {
   arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
     exit(0);
 }
+

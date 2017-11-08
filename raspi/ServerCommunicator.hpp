@@ -51,11 +51,11 @@ private:
     PythonHttpsRequest *phr;
     ServerCommContext *scc;
     ServerRecvContext *scr;
-
+    void (*callback)(ServerRecvContext *);
 public:
     ServerCommunicator(std::string uri);
     ~ServerCommunicator();
-    void start(ServerCommContext *sco);
+    void start(ServerCommContext *sco, void (*handler)(ServerRecvContext *));
     void stop();
     inline bool isRunning();
     inline PythonHttpsRequest *getPhr();

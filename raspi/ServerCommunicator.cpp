@@ -23,10 +23,11 @@ ServerCommunicator::~ServerCommunicator() {
     delete scr;
 }
 
-void ServerCommunicator::start(ServerCommContext *scc) {
+void ServerCommunicator::start(ServerCommContext *scc, void (*cb)(ServerRecvContext *)) {
     this->scc = scc;
     this->scr = new ServerRecvContext;
     this->_running = true;
+    this->callback = cb;
     nw_thd = std::thread(handleTransmission, this);
 }
 
@@ -85,7 +86,7 @@ void ServerCommunicator::handleTransmission(void* communicator) {
         data->recovery = r["recovery"];
         data->cond = r["cond"];
         data->param = r["param"];
-        
+        sc->callback(data);
         usleep(750*1000);
         
     }
