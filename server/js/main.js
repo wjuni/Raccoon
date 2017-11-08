@@ -167,7 +167,7 @@ jQuery(function($){
                 li.show();
                 li.html('Stopping Task...');
                 $.post("ajax/task_control.php",
-                    {mode: 0},
+                    {mode: 2},
                     function(data) {
                         li.html('Waiting Response of Robot...');
                         var rid = setInterval(function() {

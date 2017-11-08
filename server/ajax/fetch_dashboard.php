@@ -31,7 +31,7 @@ if($obj !== null) {
     $result['dist'] = $obj->acc_distance;
     $result['batt'] = $obj->bot_battery;
     $result['gps'] = ($obj->gps_lat != 0 && $obj->gps_lat != 0) ? "On" : "Off";
-    $result['time_h'] = $obj->acc_time/60;
+    $result['time_h'] = ($obj->acc_time-(($obj->acc_time)%60))/60;
     $result['time_m'] = ($obj->acc_time)%60;
     $result['repair_status'] = strlen($obj->repair_module) > 0 ? "On" : "Off";
     $result['repair_info'] = strlen($obj->repair_module) > 0 ? $obj->repair_module: "n/a";
