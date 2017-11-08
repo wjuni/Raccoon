@@ -5,6 +5,7 @@ jQuery(function($){
     var termination_mode = 'Nonstop';
     var started = false;
     var KAIST_N13 = new naver.maps.LatLng(36.373465, 127.359998);
+    var Pohang = new naver.maps.LatLng(36.008615, 129.360925);
     var current_location = null;
     var termination_marker = null;
     var range_circle = null;
@@ -116,6 +117,12 @@ jQuery(function($){
         sparklineLogin();
     }
 
+    var opt_multi = 0;
+    var opt_yellow = 1;
+    var opt_recovery = 1;
+
+    var global_tid = 0;
+
     function loadControlPanel() {
         $('#item_control').show();
 
@@ -125,28 +132,55 @@ jQuery(function($){
             if (bt.html() === "Start") {
                 li.show();
                 li.html('Starting Task...');
+                var opt_cond;
+                var opt_condparam;
+                if (termination_mode === 'Nonstop') {
+                    opt_cond = 0;
+                    opt_condparam = '';
+                } else if (termination_mode === 'Distance') {
+                    opt_cond = 1;
+                    opt_condparam = $("#opt_dist_num").val();
+                } else if (termination_mode === 'Time'){
+                    opt_cond = 2;
+                    opt_condparam = $("#opt_time_num").val();
+                } else {
+                    opt_cond = 3;
+                    opt_condparam = termination_marker.position.x + ", " + termination_marker.position.y;
+                }
+
+                $.post("ajax/task_control.php",
+                    {mode: 1, multi:opt_multi , yellow:opt_yellow, recovery:opt_recovery, cond:opt_cond, param:opt_condparam},
+                    function(data) {
+                        li.html('Waiting Response of Robot...');
+                        var rid = setInterval(function() {
+                            console.log(global_tid);
+                            if(global_tid !== 0) {
+                                $(".preloader").fadeOut();
+                                clearInterval(rid);
+                            }
+                        }, 500);
+                    });
                 $('.preloader').show();
-                setTimeout(function() {
-                    $(".preloader").fadeOut();
-                }, 1000);
-                bt.html("Stop");
-                bt.removeClass('btn-success');
-                bt.addClass('btn-danger');
-                started = true;
+
+
             } else {
                 li.show();
                 li.html('Stopping Task...');
-                $('.preloader').show();
-                setTimeout(function() {
-                    $(".preloader").fadeOut();
-                }, 1000);
+                $.post("ajax/task_control.php",
+                    {mode: 0},
+                    function(data) {
+                        li.html('Waiting Response of Robot...');
+                        var rid = setInterval(function() {
+                            console.log(global_tid);
+                            if(global_tid === 0) {
+                                $(".preloader").fadeOut();
+                                clearInterval(rid);
+                            }
+                        }, 500);
+                    });
 
-                bt.html("Start");
-                bt.removeClass('btn-danger');
-                bt.addClass('btn-success');
-                started = false;
+                $('.preloader').show();
             }
-            $('.btn_options').prop("disabled",started);
 
         });
 
@@ -154,8 +188,10 @@ jQuery(function($){
             var bt = $(this);
             if (bt.html() === "1 Line") {
                 bt.html("2 Lines");
+                opt_multi = 1;
             } else {
                 bt.html("1 Line");
+                opt_multi = 0;
             }
         });
         $('#btn_color').click(function(e){
@@ -163,17 +199,21 @@ jQuery(function($){
             if (bt.html() === "Yellow") {
                 bt.html("White");
                 bt.removeClass('btn-warning');
+                opt_yellow = 0;
             } else {
                 bt.html("Yellow");
                 bt.addClass('btn-warning');
+                opt_yellow = 1;
             }
         });
         $('#btn_recovery').click(function(e){
             var bt = $(this);
             if (bt.html() === "Recovery") {
                 bt.html("Inspection");
+                opt_recovery = 0;
             } else {
                 bt.html("Recovery");
+                opt_recovery = 1
             }
         });
         $('.btn_term_cond').click(function(e){
@@ -228,7 +268,21 @@ jQuery(function($){
         $("#opt_dist_num").on("change", showTerminateDistance);
 
         onDataReceived = function (parsed) {
-            $('#btn_status').html(parsed['status'] + ' (Ver '+ parsed['ver'] + ' / GPS:' + parsed['gps'] +')')
+            $('#btn_status').html(parsed['status'] + ' (Ver '+ parsed['ver'] + ' / GPS:' + parsed['gps'] +')');
+            var bt = $('#btn_start');
+            if(parseInt(parsed['tid']) === 0) {
+                bt.html("Start");
+                bt.removeClass('btn-danger');
+                bt.addClass('btn-success');
+                started = false;
+            } else {
+                bt.html("Stop");
+                bt.removeClass('btn-success');
+                bt.addClass('btn-danger');
+                started = true;
+            }
+            bt.prop("disabled", false);
+            $('.btn_options').prop("disabled",started);
         };
     }
 
@@ -239,7 +293,7 @@ jQuery(function($){
         prepareMaps('naver-map');
 
         function hashChanged(e) {
-            console.log(e);
+            //console.log(e);
             location.reload();
         }
 
@@ -333,6 +387,7 @@ jQuery(function($){
             $.post("ajax/fetch_dashboard.php", function(data) {
                 var parsed = JSON.parse(data);
                 onDataReceived(parsed);
+                global_tid = parsed['tid'];
                 if (parsed['lat'] > 0 && parsed['lng'] > 0){
                     current_location = new naver.maps.LatLng(parsed['lat'], parsed['lng']);
                     if(centering)

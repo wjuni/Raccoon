@@ -120,9 +120,8 @@ var getElementById = function(id, context) {
     element = $('#' + id, context)[0];
   } else {
     element = document.getElementById(id);
-  };
-
-  return element;
+  }
+    return element;
 };
 
 var findAbsolutePosition = function(obj)  {
@@ -350,7 +349,7 @@ var GMaps = (function(global) {
 
       doc.body.appendChild(ul);
 
-      var context_menu_element = getElementById('gmaps_context_menu')
+      var context_menu_element = getElementById('gmaps_context_menu');
 
       google.maps.event.addDomListener(context_menu_element, 'mouseout', function(ev) {
         if (!ev.relatedTarget || !this.contains(ev.relatedTarget)) {

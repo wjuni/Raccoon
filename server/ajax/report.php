@@ -22,8 +22,25 @@ VALUES (?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 $stmt->bind_param("iiiiiiiisii", $data->bid, $data->sta, $data->dam, $data->dis, $data->tid, $data->lat, $data->lon, $data->bat, $data->rep, $data->spd, $data->ver);
 $stmt->execute();
 $stmt->close();
+
+$stmt = $mysqli->prepare("SELECT * from tbl_task WHERE `task_status`=1 ORDER BY `tid` DESC LIMIT 1;");
+$stmt->execute();
+$res = $stmt->get_result();
+if($res->num_rows > 0) {
+    $obj = $res->fetch_object();
+    echo json_encode(array(
+        'tid' => $obj->tid,
+        'multi' => $obj->line_multi,
+        'yellow' => $obj->line_yellow,
+        'recovery' => $obj->recovery_mode,
+        'cond' => $obj->terminate_cond,
+        'param' => $obj->terminate_param));
+    $stmt->close();
+} else {
+    echo json_encode(array('tid' => 0, 'multi' => 0, 'yellow' => 0, 'recovery' => 0, 'cond' => 0, 'param' => ''));
+    $stmt->close();
+}
 $mysqli->close();
 
-echo json_encode(array('tid' => 0, 'multi' => 0, 'yellow' => 0, 'recovery' => 0, 'cond' => 0, 'param' => ''))
 
 ?>

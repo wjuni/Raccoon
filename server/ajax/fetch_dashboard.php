@@ -21,6 +21,7 @@ $result['repair_info'] = "n/a";
 $result['lat'] = 0; //36.373465;
 $result['lng'] = 0; //127.359998;
 $result['ver'] = '?';
+$result['tid'] = 0;
 $obj = fetch_current(1);
 if($obj !== null) {
     if($obj->bot_status == 1) $result['status'] = "Running";
@@ -37,6 +38,7 @@ if($obj !== null) {
     $result['lat'] = $obj->gps_lat; //36.373465;
     $result['lng'] = $obj->gps_lon; //127.359998;
     $result['ver'] = intval($obj->bot_version)/10.;
+    $result['tid'] = $obj->task_id;
 }
 echo json_encode($result);
 
