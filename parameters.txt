@@ -7,11 +7,13 @@ extra_factor 3.5
 divide1 2420889.0
 divide2 247700000.0
 beta_creterion 0.4
-lservo1 100.0
-lservo2 200.0
 sprayOff 0
-sprayOn 60
+sprayOn 25
 servoMin 100
 servoMax 200
 lowest 5
-hightest 15
+highest 15
+ldefault 152
+skipFrame 10
+servoWait 10000000
+spreadTime 600000

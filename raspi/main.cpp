@@ -28,7 +28,7 @@ webcam::WebcamProcessor wp, wp_rear;
 void arduino_packet_handler(PktRaspi *pkt);
 void video_feedback_handler(webcam::VideoFeedbackParam wfp);
 void rear_feedback_handler(webcam::VideoFeedbackParam wfp);
-uint8_t lservoMap(int, int, int, int, double);
+uint8_t lservoMap(uint16_t, uint16_t, uint16_t, uint16_t, double);
 void finish(int signal);
 
 /* Parameters */
@@ -40,25 +40,27 @@ double base;
 double extra_factor;
 double divide1, divide2;
 double beta_creterion;
-double lservo1, lservo2;
+double lservo1 = 0.0, lservo2 = 0.0;
 /* ---------- */
 
 /* Variables for linear servo ctrl */
 double v21_ratio = 0.98/1.3;
 bool sprayOper = false;
-int servoWait = 10000000;
-int spreadTime = 750000;
+int servoWait;
+int spreadTime;
 int lowest = 5, highest = 15;
-int servoMin, servoMax;
+int servoMin, servoMax, ldefault;
 int sprayOn, sprayOff;
 uint16_t servoVal;
+uint8_t lservo1Val, lservo2Val;
 /* ------------------------------- */
 
 double bias, tangentVal;
-
 double r_previous, l_previous;
 double x_prev = 0;
 double extra_term = 0;
+int skipFrame;
+int8_t skipCnt;
 
 int main(int argc, const char * argv[]) {
     
@@ -79,22 +81,38 @@ int main(int argc, const char * argv[]) {
     
     /* Temporal part : parameter input */
     FILE *parStream = fopen("parameters.txt", "r");
-    fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nlservo1 %lf\nlservo2 %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d",
-	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &lservo1, &lservo2, &sprayOff, &sprayOn, &servoMin, &servoMax, &lowest, &highest);
+    fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d",
+	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &sprayOff, &sprayOn, &servoMin, &servoMax, &lowest, &highest, &ldefault, &skipFrame, &servoWait, &spreadTime);
+    printf("v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d\n",
+	   v_factor, max_v, min_v, dev_coeff, base, extra_factor, divide1, divide2, beta_creterion, sprayOff, sprayOn, servoMin, servoMax, lowest, highest, ldefault, skipFrame, servoWait, spreadTime);
     cout << "reading complete" << endl;
     fclose(parStream);
     bias = (max_v + min_v)/2;
     tangentVal = (max_v - min_v)/2;
+    skipCnt = (int8_t)skipFrame;
     /* ------------------------------- */
 
     /* Webcam */
-    if(argc >=2 && strcmp(argv[1], "gui") == 0)
-        wp.setX11Support(true);
+    if(argc >=2 && strcmp(argv[1], "gui") == 0) {
+//        wp.setX11Support(true);
+	wp_rear.setX11Support(true);
+    }
     wp.start(webcam::WEBCAM, 0, video_feedback_handler);
     wp_rear.start(webcam::WEBCAM, 1, rear_feedback_handler);
+    
+    // Test Code
+/*
+    cout << "start to test" << endl;
+    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, (uint16_t)servoMin));
+    usleep(servoWait/4);
+    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, (uint16_t)servoMax));
+    usleep(spreadTime);
+    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, (uint16_t)servoMin));
+    usleep(spreadTime);
+    cout << "end test" << endl;
+*/
+    // end Test Code
 
-    gettimeofday(&start_point, NULL);
-	
     while(true) {
         arduino.recv(arduino_packet_handler);
         this_thread::sleep_for(chrono::milliseconds(10));
@@ -104,11 +122,11 @@ int main(int argc, const char * argv[]) {
 }
 
 void arduino_packet_handler(PktRaspi *pkt) {
-    cout << "[Arduino] Got Packet" << endl;
+//    cout << "[Arduino] Got Packet" << endl;
     
-    cout << "GPS Lat : " << pkt->gps_lat << endl;
-    cout << "GPS Lon : " << pkt->gps_lon << endl;
-    cout << "GPS Fix : " << (int)pkt->gps_fix << endl;
+//    cout << "GPS Lat : " << pkt->gps_lat << endl;
+//    cout << "GPS Lon : " << pkt->gps_lon << endl;
+//    cout << "GPS Fix : " << (int)pkt->gps_fix << endl;
 
     context.bot_id = 1;
     context.bot_status = 1;
@@ -129,10 +147,8 @@ void arduino_packet_handler(PktRaspi *pkt) {
     context.bot_version = 10;
 }
 
-const double d=189.0;
-
 void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
-	cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+	//cout << "Video Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
 
 	const double theta = -atan(wfp.beta_hat);
 	if(wfp.x_dev*(wfp.x_dev-x_prev)>0) {
@@ -166,9 +182,19 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		l_previous = m_left;
 		r_previous = m_right;
 	}
-	if (sprayOper)	arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo1), lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo2), servoVal));
-	else arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, 0, 0, 0));
-
+//	cout << "Before : "<< lservo1 << " " << lservo2 << endl;
+	if (sprayOper)	{
+//		lservo1Val = lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo1);
+//		lservo2Val = lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo2);
+//		cout << "Converted : " << (int)lservo1Val << " " << (int)lservo2Val << " " << (int)servoVal << endl;
+		arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservo1Val, lservo2Val, servoVal));
+//		cout << "Spray is Operating" << endl;
+	}
+	else {
+//		cout << "Default : " << ldefault << endl;
+//		cout << "Default : " << (int) (ldefault / (1 + v21_ratio) + servoMin) <<" " <<  (int)(ldefault * v21_ratio / (1 + v21_ratio) + servoMin) << endl;
+		arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, (uint8_t) (ldefault / (1 + v21_ratio) + servoMin), (uint8_t)(ldefault * v21_ratio / (1 + v21_ratio) + servoMin), servoVal));
+	}
 }
 
 void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
@@ -177,15 +203,23 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
      * Get the y_f
      */
 //	cout << "Rear feedback handler called" << endl; 
-	cout << "Rear Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
+//	cout << "Rear Handler Called, wfp = " << wfp.beta_hat << ", " << wfp.x_dev << ", " << wfp.vector_diff_x << ", " << wfp.vector_diff_y << endl;
 
 
 	if (wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
-    	cout << "Spray system starts to operate" << endl;
+    		if (skipCnt > 0) {
+			skipCnt--;
+			return;
+		}
+	cout << "Spray system starts to operate" << endl;
+	cout << "x_f : " << wfp.x_f << endl;
     	sprayOper = true;
-    	lservo1 = wfp.x_f / (1 + v21_ratio);
-    	lservo2 = wfp.x_f * v21_ratio / (1 + v21_ratio);
-    	servoVal = (uint16_t)sprayOff;
+	lservo1 = wfp.x_f / (1 + v21_ratio);
+	lservo2 = wfp.x_f * v21_ratio / (1 + v21_ratio);
+	lservo1Val = lservoMap(0, ldefault, (uint16_t)servoMin, (uint16_t)servoMax, lservo1);
+    	lservo2Val = lservoMap(0, ldefault, (uint16_t)servoMin, (uint16_t)servoMax, lservo2);
+	cout << "Converted : " << (int)lservo1Val << " " << (int)lservo2Val << endl;
+	servoVal = (uint16_t)sprayOff;
     	usleep(servoWait);
     	cout << "Linear servo operation complete" << endl;
     	servoVal = (uint16_t)sprayOn;
@@ -195,13 +229,14 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
     	cout << "Spray operation complete" << endl;
     	lservo1 = lservo2 = 0.0;
     	cout << "Spray system operation ends" << endl;
-    	sprayOper = false;
+    	skipCnt = (int8_t)skipFrame;
+	sprayOper = false;
     }
 
 }
 
-uint8_t lservoMap(uint8_t prevMin, uint8_t prevMax, uint8_t mappedMin, uint8_t mappedMax, double value) {
-    return (uint8_t) value * (prevMax - prevMin)/(mappedMax - mappedMin);
+uint8_t lservoMap(uint16_t prevMin, uint16_t prevMax, uint16_t mappedMin, uint16_t mappedMax, double value) {
+    return (uint8_t) ((uint16_t) value * (mappedMax - mappedMin)/(prevMax - prevMin) + mappedMin);
 }
 
 void finish(int signal) {
