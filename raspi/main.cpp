@@ -77,7 +77,7 @@ int main(int argc, const char * argv[]) {
     context.bot_id = 1;
     context.bot_speed = 637;
     context.bot_battery = 95;
-    context.acc_distance = 239;
+    context.acc_distance = 0;
     context.bot_version = 11;
     context.bot_status = 0;
     context.damage_ratio = 0;
@@ -194,7 +194,11 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		l_previous = m_left;
 		r_previous = m_right;
 	}
-//	cout << "Before : "<< lservo1 << " " << lservo2 << endl;
+	if(context.bot_status == 0){
+			arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0,0,0,0)); 
+		return;
+	}
+	//	cout << "Before : "<< lservo1 << " " << lservo2 << endl;
 	if (sprayOper)	{
 //		lservo1Val = lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo1);
 //		lservo2Val = lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo2);
