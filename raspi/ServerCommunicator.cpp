@@ -77,7 +77,7 @@ void ServerCommunicator::handleTransmission(void* communicator) {
         phr->sendData(&j);
         std::string result = phr->getData();
         json r = json::parse(result);
-        std::cout << "JSON = " << r.dump(4) << std::endl;
+//        std::cout << "JSON = " << r.dump(4) << std::endl;
         ServerRecvContext *data = sc->scr;
         data->tid = r["tid"];
         data->multi = r["multi"];

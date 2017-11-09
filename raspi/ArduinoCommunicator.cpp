@@ -35,25 +35,25 @@ void ArduinoCommunicator::recv(void (*handler)(PktRaspi *)) {
         //        buffer_len += this->serial->readBytes(this->serial_buffer + this->buffer_len, BUFFER_SIZE - this->buffer_len);
         long read_byte = uart->read(serial_buffer + buffer_len, BUFFER_SIZE - buffer_len);
         if(read_byte >= 0) {
-            cout << "Read Byte = " << read_byte << endl;
+//            cout << "Read Byte = " << read_byte << endl;
             buffer_len += read_byte;
             
-            cout << "Packet Read, Acclen=";
+//            cout << "Packet Read, Acclen=";
             cout << buffer_len << endl;
             
         }
     }
     
     if(buffer_len >= BUFFER_SIZE) {
-        cout << "New Packet Detected Starting With ";
-        cout << ((unsigned int) serial_buffer[0]);
-        cout << " ";
-        cout << ((unsigned int) serial_buffer[1]);
-        cout << " ";
-        cout << ((unsigned int) serial_buffer[2]) << endl;
+//        cout << "New Packet Detected Starting With ";
+//        cout << ((unsigned int) serial_buffer[0]);
+//        cout << " ";
+//        cout << ((unsigned int) serial_buffer[1]);
+//        cout << " ";
+//        cout << ((unsigned int) serial_buffer[2]) << endl;
         
         if (PktRaspi_parse_packet(serial_buffer, buffer_len, &received_packet) > 0) {
-            cout << "Packet Read Successful" << endl;
+//            cout << "Packet Read Successful" << endl;
             (*handler)(&received_packet);
         }
         buffer_len = 0; //clear buffer
