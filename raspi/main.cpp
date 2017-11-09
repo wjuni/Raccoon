@@ -25,6 +25,7 @@ ServerCommunicator server(SERVER_ADDR);
 ServerCommContext context;
 webcam::WebcamProcessor wp, wp_rear;
 
+void server_packet_handler(ServerRecvContext *cx);
 void arduino_packet_handler(PktRaspi *pkt);
 void video_feedback_handler(webcam::VideoFeedbackParam wfp);
 void rear_feedback_handler(webcam::VideoFeedbackParam wfp);
@@ -73,13 +74,17 @@ int main(int argc, const char * argv[]) {
     
     /* Server */
     memset(&context, 0, sizeof(ServerCommContext));
-/*    context.bot_id = 1;
+    context.bot_id = 1;
     context.bot_speed = 637;
     context.bot_battery = 95;
     context.acc_distance = 239;
     context.bot_version = 11;
-    server.start(&context);
-*/
+    context.bot_status = 0;
+    context.damage_ratio = 0;
+    strcpy(context.repair_module, "YELLOW");
+    
+    server.start(&context, server_packet_handler);
+    
     /* Temporal part : parameter input */
     FILE *parStream = fopen("parameters.txt", "r");
     fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d\nreverseTime %d",
@@ -254,8 +259,24 @@ uint8_t lservoMap(uint16_t prevMin, uint16_t prevMax, uint16_t mappedMin, uint16
     return (uint8_t) ((uint16_t) value * (mappedMax - mappedMin)/(prevMax - prevMin) + mappedMin);
 }
 
+<<<<<<< HEAD
+=======
+void server_packet_handler(ServerRecvContext *rc) {
+    if (context.task_id == 0 && rc->tid != 0) {
+        cout << "New Task id=" << rc->tid << endl;
+    }
+    if (context.task_id != 0 && rc->tid == 0) {
+        cout << "Task Stop id=" << rc->tid << endl;
+    }
+    context.task_id = rc->tid;
+    
+    context.bot_status = (rc->tid > 0) ? 1 : 0;
+    
+}
+>>>>>>> f96b00eec767828a9cbf9479bbb5278bf027417a
 void finish(int signal) {
     arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
     usleep(500000);
     exit(0);
 }
+
