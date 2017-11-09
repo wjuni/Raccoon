@@ -259,8 +259,6 @@ uint8_t lservoMap(uint16_t prevMin, uint16_t prevMax, uint16_t mappedMin, uint16
     return (uint8_t) ((uint16_t) value * (mappedMax - mappedMin)/(prevMax - prevMin) + mappedMin);
 }
 
-<<<<<<< HEAD
-=======
 void server_packet_handler(ServerRecvContext *rc) {
     if (context.task_id == 0 && rc->tid != 0) {
         cout << "New Task id=" << rc->tid << endl;
@@ -273,7 +271,6 @@ void server_packet_handler(ServerRecvContext *rc) {
     context.bot_status = (rc->tid > 0) ? 1 : 0;
     
 }
->>>>>>> f96b00eec767828a9cbf9479bbb5278bf027417a
 void finish(int signal) {
     arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
     usleep(500000);
