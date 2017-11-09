@@ -44,10 +44,9 @@ double lservo1 = 0.0, lservo2 = 0.0;
 /* ---------- */
 
 /* Variables for linear servo ctrl */
-double v21_ratio = 0.98/1.3;
-bool sprayOper = false;
-int servoWait;
-int spreadTime;
+double v21_ratio = 0.98/(1.3*1.857);
+bool sprayOper = false, isReversing = false;
+int servoWait, spreadTime, reverseTime;
 int lowest = 5, highest = 15;
 int servoMin, servoMax, ldefault;
 int sprayOn, sprayOff;
@@ -62,7 +61,7 @@ double extra_term = 0;
 int skipFrame;
 int8_t skipCnt;
 
-bool hasDetected = false;
+bool hasDetected = false, forwardGoing = false;
 
 int main(int argc, const char * argv[]) {
     
@@ -83,10 +82,10 @@ int main(int argc, const char * argv[]) {
 */
     /* Temporal part : parameter input */
     FILE *parStream = fopen("parameters.txt", "r");
-    fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d",
-	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &sprayOff, &sprayOn, &servoMin, &servoMax, &lowest, &highest, &ldefault, &skipFrame, &servoWait, &spreadTime);
-    printf("v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d\n",
-	   v_factor, max_v, min_v, dev_coeff, base, extra_factor, divide1, divide2, beta_creterion, sprayOff, sprayOn, servoMin, servoMax, lowest, highest, ldefault, skipFrame, servoWait, spreadTime);
+    fscanf(parStream, "v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d\nreverseTime %d",
+	   &v_factor, &max_v, &min_v, &dev_coeff, &base, &extra_factor, &divide1, &divide2, &beta_creterion, &sprayOff, &sprayOn, &servoMin, &servoMax, &lowest, &highest, &ldefault, &skipFrame, &servoWait, &spreadTime, &reverseTime);
+    printf("v_factor %lf\nmax_v %lf\nmin_v %lf\ndev_coeff %lf\nbase %lf\nextra_factor %lf\ndivide1 %lf\ndivide2 %lf\nbeta_creterion %lf\nsprayOff %d\nsprayOn %d\nservoMin %d\nservoMax %d\nlowest %d\nhighest %d\nldefault %d\nskipFrame %d\nservoWait %d\nspreadTime %d\nreverseTime %d\n",
+	   v_factor, max_v, min_v, dev_coeff, base, extra_factor, divide1, divide2, beta_creterion, sprayOff, sprayOn, servoMin, servoMax, lowest, highest, ldefault, skipFrame, servoWait, spreadTime, reverseTime);
     cout << "reading complete" << endl;
     fclose(parStream);
     bias = (max_v + min_v)/2;
@@ -195,7 +194,9 @@ void video_feedback_handler(webcam::VideoFeedbackParam wfp) {
 //		lservo1Val = lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo1);
 //		lservo2Val = lservoMap(0, 240, (uint8_t)servoMin, (uint8_t)servoMax, lservo2);
 //		cout << "Converted : " << (int)lservo1Val << " " << (int)lservo2Val << " " << (int)servoVal << endl;
-		arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservo1Val, lservo2Val, servoVal));
+		if (isReversing) arduino.send(buildPktArduinoV2(0, (int8_t)(-10), (int8_t)(-10), (int8_t)(-10), (int8_t)(-10), lservo1Val, lservo2Val, servoVal));
+		else if (forwardGoing) arduino.send(buildPktArduinoV2(0, (int8_t)m_right, (int8_t)m_right, (int8_t)m_left, (int8_t)m_left, lservo1Val, lservo2Val, servoVal));
+		else  arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, lservo1Val, lservo2Val, servoVal));
 //		cout << "Spray is Operating" << endl;
 	}
 	else {
@@ -218,7 +219,7 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
 		return;
 	}
 	
-	if (!hasDetected && wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f)) {
+	if (!hasDetected && wfp.startP > lowest && wfp.startP < highest && wfp.emptyCnt > 3 && !std::isnan(wfp.x_f) && abs(wfp.x_dev) < 105) {
 	cout << "Spray system starts to operate" << endl;
 	cout << "x_f : " << wfp.x_f << endl;
     	sprayOper = true;
@@ -228,12 +229,17 @@ void rear_feedback_handler(webcam::VideoFeedbackParam wfp) {
     	lservo2Val = lservoMap(0, ldefault, (uint16_t)servoMin, (uint16_t)servoMax, lservo2);
 	cout << "Converted : " << (int)lservo1Val << " " << (int)lservo2Val << endl;
 	servoVal = (uint16_t)sprayOff;
-    	usleep(servoWait);
+	isReversing = true;
+    	usleep(reverseTime);
+	isReversing = false;
+	usleep(servoWait);
+	forwardGoing = true;
     	cout << "Linear servo operation complete" << endl;
     	servoVal = (uint16_t)sprayOn;
     	usleep(spreadTime);
     	servoVal = (uint16_t)sprayOff;
-    	usleep(spreadTime);
+    	usleep(spreadTime/2);
+	forwardGoing = false;
     	cout << "Spray operation complete" << endl;
     	lservo1 = lservo2 = 0.0;
     	cout << "Spray system operation ends" << endl;
@@ -249,6 +255,7 @@ uint8_t lservoMap(uint16_t prevMin, uint16_t prevMax, uint16_t mappedMin, uint16
 }
 
 void finish(int signal) {
-  arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
+    arduino.send(buildPktArduinoV2(0, 0, 0, 0, 0, 0, 0, 0));
+    usleep(500000);
     exit(0);
 }
